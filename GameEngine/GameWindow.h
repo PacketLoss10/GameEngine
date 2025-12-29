@@ -6,6 +6,7 @@ class InputHandler;
 class Renderer;
 class BoxCollision;
 class CircleCollision;
+class SimulationChunk;
 
 #define GAME_WINDOW GameWindow::instance()
 
@@ -25,4 +26,5 @@ private:
 	friend class Renderer;
 	friend class BoxCollision;
 	friend class CircleCollision;
+	friend class SimulationChunk;
 };

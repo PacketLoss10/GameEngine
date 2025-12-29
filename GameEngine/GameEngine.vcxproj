@@ -131,9 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationPlayer.cpp" />
     <ClCompile Include="BoxCollision.cpp" />
+    <ClCompile Include="ChunkMap.cpp" />
     <ClCompile Include="CircleCollision.cpp" />
     <ClCompile Include="CollisionArea.cpp" />
     <ClCompile Include="GameWindow.cpp" />
@@ -141,15 +143,19 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="SimulationChunk.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TickClock.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="WorldSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationPlayer.h" />
     <ClInclude Include="BoxCollision.h" />
+    <ClInclude Include="ChunkMap.h" />
     <ClInclude Include="CircleCollision.h" />
     <ClInclude Include="CollisionArea.h" />
     <ClInclude Include="GameWindow.h" />
@@ -157,10 +163,12 @@
     <ClInclude Include="EngineUtils.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="SimulationChunk.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TickClock.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="WorldSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="NULLTEXTURE.png" />

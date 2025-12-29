@@ -30,10 +30,7 @@ void Timer::restart()
 
 bool Timer::timeout()
 {
-	bool result = time_elapsed() >= duration;
-	if (result && !oneShot)
-		restart();
-	return result;
+	return time_elapsed() >= duration;
 }
 
 float Timer::get_duration() const

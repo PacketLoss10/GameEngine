@@ -1,4 +1,5 @@
 #include "CollisionArea.h"
+#include "Actor.h"
 
 CollisionArea::CollisionArea() {}
 

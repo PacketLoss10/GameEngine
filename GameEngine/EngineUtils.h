@@ -4,6 +4,7 @@
 #include "unordered_map"
 #include "concepts"
 #include "functional"
+#include "memory.h"
 #include "iostream"
 #include "fstream"
 #include "vector"
@@ -27,9 +28,24 @@ public:
 		return sf::Vector2<T>(x, y);
 	}
 
+	operator Vector<float>() const
+	{
+		return Vector<float>(static_cast<float>(x), static_cast<float>(y));
+	}
+
+	operator Vector<int>() const
+	{
+		return Vector<int>(static_cast<int>(x), static_cast<int>(y));
+	}
+
 	operator std::string() const
 	{
 		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+	}
+
+	bool operator==(const Vector<T>& other) const
+	{
+		return x == other.x && y == other.y;
 	}
 
 	Vector<T> operator+(const Vector<T>& other) const

@@ -39,6 +39,7 @@ void CircleCollision::render() const
 	shape.setPosition(position - FVector(radius, radius));
 	shape.setFillColor(fillColor);
 	shape.setOutlineThickness(5);
+	shape.setOutlineColor(outlineColor);
 
 	GAME_WINDOW.render(shape);
 }

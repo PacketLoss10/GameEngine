@@ -39,6 +39,7 @@ void BoxCollision::render() const
 	shape.setPosition(position - size / 2.f);
 	shape.setFillColor(fillColor);
 	shape.setOutlineThickness(5);
+	shape.setOutlineColor(outlineColor);
 
 	GAME_WINDOW.render(shape);
 }
