@@ -6,6 +6,7 @@
 #include "functional"
 #include "memory.h"
 #include "iostream"
+#include "utility"
 #include "fstream"
 #include "vector"
 #include "math.h"
@@ -176,5 +177,24 @@ public:
 	operator sf::Color() const
 	{
 		return sf::Color(r, g, b, a);
+	}
+};
+
+template<typename T, typename... Args>
+class Delegate
+{
+private:
+	T* object = nullptr;
+	void(T::* function)(Args...) = nullptr;
+public:
+	void bind(T* obj, void(T::* func)(Args...))
+	{
+		object = obj;
+		function = func;
+	}
+	void invoke(Args... args)
+	{
+		if (object && function)
+			(object->*function)(args...);
 	}
 };

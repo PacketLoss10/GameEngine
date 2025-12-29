@@ -29,6 +29,16 @@ void Actor::set_scale(const FVector& new_scale)
 	transform.scale = new_scale;
 }
 
+CollisionArea* Actor::get_collision() const
+{
+	return collision;
+}
+
+void Actor::set_collision(CollisionArea* new_collision)
+{
+	collision = new_collision;
+}
+
 bool Actor::is_toCull() const
 {
 	return toCull;
