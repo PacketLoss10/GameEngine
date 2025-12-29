@@ -24,13 +24,5 @@ public:
 
 int main()
 {
-	AAA a;
-	AAA b;
-
-	if(a.get_collision()->is_overlapping(b.get_collision()))
-	{
-		a.on_overlap.invoke(&a, &b);
-	}
-
 	return 0;
 }

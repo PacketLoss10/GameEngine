@@ -6,6 +6,7 @@
 #include "functional"
 #include "memory.h"
 #include "iostream"
+#include "queue"
 #include "utility"
 #include "fstream"
 #include "vector"
@@ -198,3 +199,9 @@ public:
 			(object->*function)(args...);
 	}
 };
+
+template<typename From, typename Target>
+Target* cast(From* from)
+{
+	return dynamic_cast<Target*>(from);
+}
