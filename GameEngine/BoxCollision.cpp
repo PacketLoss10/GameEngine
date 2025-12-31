@@ -41,7 +41,7 @@ void BoxCollision::render() const
 	shape.setOutlineThickness(5);
 	shape.setOutlineColor(outlineColor);
 
-	GAME_WINDOW.render(shape);
+	GAME_WINDOW.render(shape, nullptr);
 }
 
 const FVector& BoxCollision::get_size() const 

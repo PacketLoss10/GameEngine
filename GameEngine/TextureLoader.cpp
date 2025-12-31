@@ -3,7 +3,10 @@
 TextureLoader::TextureLoader() 
 {
 	if (!nulltexture.loadFromFile("NULLTEXTURE.png"))
-		std::cerr << "ERROR: failed to load nulltexture for TextureLoader" << std::endl;
+	{
+		std::cerr << "Failed to load NULLTEXTURE" << std::endl;
+		return;
+	}
 }
 
 TextureLoader& TextureLoader::instance() 

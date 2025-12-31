@@ -41,7 +41,7 @@ void CircleCollision::render() const
 	shape.setOutlineThickness(5);
 	shape.setOutlineColor(outlineColor);
 
-	GAME_WINDOW.render(shape);
+	GAME_WINDOW.render(shape, nullptr);
 }
 
 float CircleCollision::get_radius() const 

@@ -18,6 +18,7 @@ private:
 public:
 	static WorldSystem& instance();
 	void update();
+	void render();
 	void spawn_entity(std::unique_ptr<Actor> entity);
 	const ChunkMap& get_chunkMap() const;
 	void set_cameraPosition(FVector new_cameraPosition);

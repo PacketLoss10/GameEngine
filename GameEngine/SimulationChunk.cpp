@@ -17,7 +17,7 @@ void SimulationChunk::render() const
 	shape.setOutlineThickness(5);
 	shape.setOutlineColor(outlineColor);
 
-	GAME_WINDOW.render(shape);
+	GAME_WINDOW.render(shape, nullptr);
 }
 
 IVector SimulationChunk::map_point_to_chunk_coords(const FVector& point) 

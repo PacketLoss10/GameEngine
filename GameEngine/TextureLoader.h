@@ -2,6 +2,8 @@
 
 #include "EngineUtils.h"
 
+#define TEXTURE_LOADER TextureLoader::instance()
+
 class TextureLoader 
 {
 private:

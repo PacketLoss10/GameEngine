@@ -19,129 +19,141 @@
     <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{55de1878-bea5-4dad-bafc-0862c351be21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Graphics">
+      <UniqueIdentifier>{077df0ce-9a5c-4c2e-8125-ca5c9a138681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Simulation">
+      <UniqueIdentifier>{3b33d33f-3737-4804-b562-09f449e5c42c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Graphics">
+      <UniqueIdentifier>{3abfc2f7-e879-4cb3-a1eb-374d4f6ec7b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Simulation">
+      <UniqueIdentifier>{2c2146f8-d3c6-4a65-8bbe-1cecc504f365}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationPlayer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollision.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollision.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionArea.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="GameWindow.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderObject.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="TextureLoader.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="TickClock.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="WorldSystem.cpp">
-      <Filter>Source Files\Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="ChunkMap.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationPlayer.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollision.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="ChunkMap.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollision.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionArea.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
     <ClCompile Include="SimulationChunk.cpp">
-      <Filter>Source Files\Engine</Filter>
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="TickClock.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldSystem.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
+    </ClCompile>
+    <ClCompile Include="LightSource.cpp">
+      <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationPlayer.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollision.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollision.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionArea.h">
-      <Filter>Header Files\Engine</Filter>
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="GameWindow.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineUtils.h">
-      <Filter>Header Files\Engine</Filter>
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderObject.h">
-      <Filter>Header Files\Engine</Filter>
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Header Files\Engine</Filter>
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="TextureLoader.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="TickClock.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="WorldSystem.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="ChunkMap.h">
-      <Filter>Header Files\Engine</Filter>
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
-      <Filter>Header Files\Engine</Filter>
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationPlayer.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollision.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkMap.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollision.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionArea.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineUtils.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
     <ClInclude Include="SimulationChunk.h">
-      <Filter>Header Files\Engine</Filter>
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="TickClock.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldSystem.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="LightSource.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="NULLTEXTURE.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="NULLNORMAL.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.frag">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="shader.vert">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

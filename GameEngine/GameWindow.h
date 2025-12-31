@@ -17,14 +17,17 @@ private:
 	GameWindow() = default;
 	GameWindow(const GameWindow&) = delete;
 	GameWindow& operator=(const GameWindow&) = delete;
-	static GameWindow& instance();
 	FVector get_mouse_pos() const;
 	void start_render();
-	void render(const sf::Drawable& renderObject);
+	void render(const sf::Drawable& renderObject, sf::Shader* shader);
 	void end_render();
 	friend class InputHandler;
 	friend class Renderer;
 	friend class BoxCollision;
 	friend class CircleCollision;
 	friend class SimulationChunk;
+public:
+	static GameWindow& instance();
+	bool is_open() const;
+	void update();
 };

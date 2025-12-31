@@ -140,9 +140,9 @@
     <ClCompile Include="CollisionArea.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="LightSource.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="SimulationChunk.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
@@ -161,8 +161,8 @@
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="EngineUtils.h" />
+    <ClInclude Include="LightSource.h" />
     <ClInclude Include="Renderer.h" />
-    <ClInclude Include="RenderObject.h" />
     <ClInclude Include="SimulationChunk.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextureLoader.h" />
@@ -171,11 +171,11 @@
     <ClInclude Include="WorldSystem.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="NULLNORMAL.png" />
     <Image Include="NULLTEXTURE.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="shader.frag" />
-    <None Include="shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

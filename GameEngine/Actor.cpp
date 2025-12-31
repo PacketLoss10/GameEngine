@@ -1,8 +1,22 @@
 #include "Actor.h"
 
-Actor::Actor(Transform transform) : transform(transform) {}
+Actor::Actor(Transform transform, Sprite* sprite) : transform(transform), sprite(sprite) {}
 
-Actor::~Actor() {}
+Actor::~Actor() 
+{
+	delete sprite;
+	delete collision;
+}
+
+void Actor::render()
+{
+	if (!sprite)
+		return;
+
+	RENDERER.get_shader()->setUniform("u_texture", TEXTURE_LOADER.load_texture(sprite->get_texture()));
+	RENDERER.get_shader()->setUniform("u_texture", TEXTURE_LOADER.load_texture(sprite->get_normalMap()));
+	RENDERER.render(*sprite, transform);
+}
 
 const Transform& Actor::get_transform() const
 {
@@ -32,6 +46,11 @@ void Actor::set_scale(const FVector& new_scale)
 CollisionArea* Actor::get_collision() const
 {
 	return collision;
+}
+
+Sprite* Actor::get_sprite() const
+{
+	return sprite;
 }
 
 void Actor::set_collision(CollisionArea* new_collision)

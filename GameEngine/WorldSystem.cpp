@@ -23,6 +23,13 @@ void WorldSystem::update()
 			entity->update();
 }
 
+void WorldSystem::render()
+{
+	for (auto& entity : chunkMap.actors_to_render(cameraPosition))
+		if (entity)
+			entity->render();
+}
+
 void WorldSystem::spawn_entity(std::unique_ptr<Actor> entity) 
 {
 	entities.push_back(std::move(entity)); 
