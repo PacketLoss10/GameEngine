@@ -1,7 +1,6 @@
 #include "BoxCollision.h"
 #include "CircleCollision.h"
 
-
 BoxCollision::BoxCollision() {}
 
 BoxCollision::BoxCollision(FVector size, FVector position, Color fillColor, Color outlineColor, bool visible) :size(size), CollisionArea(position, fillColor, outlineColor, visible) {}

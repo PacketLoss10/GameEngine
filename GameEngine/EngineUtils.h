@@ -200,9 +200,3 @@ public:
 			(object->*function)(args...);
 	}
 };
-
-template<typename From, typename Target>
-Target* cast(From* from)
-{
-	return dynamic_cast<Target*>(from);
-}

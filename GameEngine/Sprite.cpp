@@ -61,21 +61,24 @@ void Sprite::generate_normalMap(float value)
 }
 
 Sprite::Sprite()
-	:texture("NULLTEXTURE.png"),
+	:Renderable(Transform()),
+	texture("NULLTEXTURE.png"),
 	rect(IRect(IVector(0, 0), IVector(420, 420))),
 	normalMap("NULLNORMAL.png") 
 {
 }
 
 Sprite::Sprite(std::string texture, IRect rect, std::string normalMap)
-	:texture(texture),
+	:Renderable(Transform()),
+	texture(texture),
 	rect(IRect(IVector(std::max(0, rect.position.x), std::max(0, rect.position.y)), IVector(std::max(1, rect.size.x), std::max(1, rect.size.y)))),
 	normalMap(normalMap)
 {
 }
 
 Sprite::Sprite(std::string texture, std::string normalMap)
-	:texture(texture),
+	:Renderable(Transform()),
+	texture(texture),
 	rect(IRect(IVector(0, 0), IVector(1, 1))),
 	normalMap(normalMap)
 {
@@ -84,22 +87,24 @@ Sprite::Sprite(std::string texture, std::string normalMap)
 }
 
 Sprite::Sprite(std::string texture, IRect rect)
-	:texture(texture),
+	:Renderable(Transform()),
+	texture(texture),
 	rect(IRect(IVector(std::max(0, rect.position.x), std::max(0, rect.position.y)), IVector(std::max(1, rect.size.x), std::max(1, rect.size.y)))),
 	normalMap("NULLNORMAL.png")
 {
-	generate_normalMap();
+	generate_normalMap(1.f);
 }
 
 Sprite::Sprite(std::string texture)
-	:texture(texture),
+	:Renderable(Transform()),
+	texture(texture),
 	rect(IRect(IVector(0, 0), IVector(1, 1))),
 	normalMap("NULLNORMAL.png")
 {
 	auto textureSize = TEXTURE_LOADER.load_texture(texture).getSize();
 	rect = IRect(IVector(0, 0), IVector(textureSize.x, textureSize.y));
 
-	generate_normalMap();
+	generate_normalMap(1.f);
 }
 
 const std::string& Sprite::get_texture() const

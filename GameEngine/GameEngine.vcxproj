@@ -140,8 +140,9 @@
     <ClCompile Include="CollisionArea.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="LightSource.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Renderable.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SimulationChunk.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -161,7 +162,8 @@
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="EngineUtils.h" />
-    <ClInclude Include="LightSource.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Renderable.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SimulationChunk.h" />
     <ClInclude Include="Sprite.h" />

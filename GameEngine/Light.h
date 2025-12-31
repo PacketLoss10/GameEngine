@@ -1,17 +1,16 @@
 #pragma once
 
-#include "Actor.h"
+#include "Renderable.h"
 #include "EngineUtils.h"
 
-class LightSource: public Actor
+class Light: public Renderable
 {
 private:
 	float radius;
 	float brightness;
 	Color color;
 public:
-	LightSource(FVector position, float radius, float brightness, Color color) :Actor(Transform(position, FVector(1.f, 0.f), FVector(0.f, 0.f))), radius(radius), brightness(brightness), color(color) {}
-	void update() override;
+	Light(float radius, float brightness, Color color);
 	float get_radius() const;
 	void set_radius(float new_radius);
 	float get_brightness() const;

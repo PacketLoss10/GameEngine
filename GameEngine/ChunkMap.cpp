@@ -30,7 +30,7 @@ void ChunkMap::add_actor(Actor* actor)
 	map[SimulationChunk::map_point_to_chunk_coords(actor->get_transform().position)].push_back(actor);
 }
 
-std::vector<Actor*> ChunkMap::actors_to_update(FVector view) const
+std::vector<Actor*> ChunkMap::find_actors_to_update(FVector view) const
 {
 	std::vector<Actor*> actors;
 
@@ -40,7 +40,7 @@ std::vector<Actor*> ChunkMap::actors_to_update(FVector view) const
 		{
 			if (auto it = map.find(SimulationChunk::map_point_to_chunk_coords(view) + IVector(dx, dy)); it != map.end())
 			{
-				for (auto actor : it->second)
+				for (Actor* actor : it->second)
 				{
 					actors.push_back(actor);
 				}
@@ -51,7 +51,7 @@ std::vector<Actor*> ChunkMap::actors_to_update(FVector view) const
 	return actors;
 }
 
-std::vector<Actor*> ChunkMap::actors_to_render(FVector view) const 
+std::vector<Actor*> ChunkMap::find_actors_to_render(FVector view) const 
 {
 	std::vector<Actor*> actors;
 
@@ -61,7 +61,7 @@ std::vector<Actor*> ChunkMap::actors_to_render(FVector view) const
 		{
 			if (auto it = map.find(SimulationChunk::map_point_to_chunk_coords(view) + IVector(dx, dy)); it != map.end())
 			{
-				for (auto actor : it->second)
+				for (Actor* actor : it->second)
 				{
 					actors.push_back(actor);
 				}
@@ -76,9 +76,9 @@ std::vector<Actor*> ChunkMap::find_actors_in_radius(Actor* actor, float radius) 
 {
 	std::vector<Actor*> actors;
 
-	for (auto chunk : find_chunks_in_radius(actor->get_transform().position, radius))
+	for (const SimulationChunk& chunk : find_chunks_in_radius(actor->get_transform().position, radius))
 	{
-		for(auto candidate:map.at(chunk))
+		for(Actor* candidate:map.at(chunk))
 		{
 			if (candidate == actor || (candidate->get_transform().position - actor->get_transform().position).size_squared() > radius * radius) continue;
 
@@ -93,9 +93,9 @@ std::vector<Actor*> ChunkMap::find_actors_in_radius(FVector origin, float radius
 {
 	std::vector<Actor*> actors;
 
-	for(auto chunk: find_chunks_in_radius(origin, radius))
+	for(const SimulationChunk& chunk: find_chunks_in_radius(origin, radius))
 	{
-		for(auto candidate:map.at(chunk))
+		for(Actor* candidate:map.at(chunk))
 		{
 			if ((candidate->get_transform().position - origin).size_squared() > radius * radius) continue;
 			
@@ -112,7 +112,7 @@ std::vector<Actor*> ChunkMap::find_all_actors() const
 
 	for (auto& [chunk, entities] : map)
 	{
-		for (auto entity : entities)
+		for (Actor* entity : entities)
 		{
 			objects.push_back(entity);
 		}

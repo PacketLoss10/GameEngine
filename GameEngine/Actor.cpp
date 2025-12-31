@@ -1,19 +1,18 @@
 #include "Actor.h"
 
-Actor::Actor(Transform transform, Sprite* sprite) : transform(transform), sprite(sprite) {}
+Actor::Actor(Transform transform, Renderable* renderable) 
+	:transform(transform),
+	renderable(renderable) {}
 
 Actor::~Actor() 
 {
-	delete sprite;
+	delete renderable;
 	delete collision;
 }
 
-void Actor::render()
+void Actor::update()
 {
-	if (!sprite)
-		return;
-
-	RENDERER.render(*sprite, transform);
+	renderable->set_transform(transform);
 }
 
 const Transform& Actor::get_transform() const
@@ -46,9 +45,9 @@ CollisionArea* Actor::get_collision() const
 	return collision;
 }
 
-Sprite* Actor::get_sprite() const
+Renderable* Actor::get_renderable() const
 {
-	return sprite;
+	return renderable;
 }
 
 void Actor::set_collision(CollisionArea* new_collision)

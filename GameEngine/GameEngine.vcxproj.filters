@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Engine\Simulation">
       <UniqueIdentifier>{2c2146f8-d3c6-4a65-8bbe-1cecc504f365}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Simulation\Collision">
+      <UniqueIdentifier>{e0ade49e-8adc-4cb5-85d3-267aa66a1225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Simulation\Collision">
+      <UniqueIdentifier>{9d99c45d-c4c6-4df7-8c6b-989a47720bac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,16 +63,7 @@
     <ClCompile Include="AnimationPlayer.cpp">
       <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
-    <ClCompile Include="BoxCollision.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
     <ClCompile Include="ChunkMap.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollision.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionArea.cpp">
       <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
     <ClCompile Include="InputHandler.cpp">
@@ -84,8 +81,20 @@
     <ClCompile Include="WorldSystem.cpp">
       <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
-    <ClCompile Include="LightSource.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
+    <ClCompile Include="Renderable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files\Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollision.cpp">
+      <Filter>Source Files\Engine\Simulation\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollision.cpp">
+      <Filter>Source Files\Engine\Simulation\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionArea.cpp">
+      <Filter>Source Files\Engine\Simulation\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,16 +119,7 @@
     <ClInclude Include="AnimationPlayer.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
-    <ClInclude Include="BoxCollision.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
     <ClInclude Include="ChunkMap.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollision.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionArea.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
     <ClInclude Include="EngineUtils.h">
@@ -140,8 +140,20 @@
     <ClInclude Include="WorldSystem.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
-    <ClInclude Include="LightSource.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
+    <ClInclude Include="Renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollision.h">
+      <Filter>Header Files\Engine\Simulation\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollision.h">
+      <Filter>Header Files\Engine\Simulation\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionArea.h">
+      <Filter>Header Files\Engine\Simulation\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

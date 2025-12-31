@@ -17,25 +17,34 @@ private:
 	WorldSystem& operator=(const WorldSystem&) = delete;
 public:
 	static WorldSystem& instance();
+	
 	void update();
-	void render();
-	void spawn_entity(std::unique_ptr<Actor> entity);
+
+	template<IsActor T, typename... Args>
+	void spawn_actor(Args&&... actorArgs) 
+	{
+		static_assert(std::is_constructible_v<T, Args...>, "spawn_actor parameters do not match actor constructor");
+
+		entities.push_back(std::make_unique<T>(std::forward<Args>(actorArgs)...));
+	}
+
+	std::vector<Renderable*> get_renderData() const;
+
 	const ChunkMap& get_chunkMap() const;
 	void set_cameraPosition(FVector new_cameraPosition);
 
-	std::vector<Actor*> actors_to_update(FVector view) const { return chunkMap.actors_to_update(view); }
-	std::vector<Actor*> actors_to_render(FVector view) const { return chunkMap.actors_to_render(view); }
+	std::vector<Actor*> actors_to_update(FVector view) const { return chunkMap.find_actors_to_update(view); }
+	std::vector<Actor*> actors_to_render(FVector view) const { return chunkMap.find_actors_to_render(view); }
 
 	std::vector<Actor*> find_actors_in_radius(Actor* actor, float radius) const { return chunkMap.find_actors_in_radius(actor, radius); }
+	template<IsActor T>
+	std::vector<T*> find_actors_in_radius_of_type(Actor* actor, float radius) const { return chunkMap.find_actors_in_radius_of_type<T>(actor, radius); }
+
 	std::vector<Actor*> find_actors_in_radius(FVector origin, float radius) const { return chunkMap.find_actors_in_radius(origin, radius); }
+	template<IsActor T>
+	std::vector<T*> find_actors_in_radius_of_type(FVector origin, float radius) const { return chunkMap.find_actors_in_radius_of_type<T>(origin, radius); }
 
 	std::vector<Actor*> find_all_actors() const { return chunkMap.find_all_actors(); }
-
-	template<typename... T>
-	std::vector<Actor*> find_actors_of_type_in_radius(Actor* actor, float radius) const { return chunkMap.find_actors_of_type_in_radius<T...>(actor, radius); }
-	template<typename... T>
-	std::vector<Actor*> find_actors_of_type_in_radius(FVector origin, float radius) const { return chunkMap.find_actors_of_type_in_radius<T...>(origin, radius); }
-
-	template<typename... T>
-	std::vector<Actor*> find_all_actors_of_type() const { return chunkMap.find_all_actors_of_type<T...>(); }
+	template<IsActor T>
+	std::vector<T*> find_all_actors_of_type() const { return chunkMap.find_all_actors_of_type<T>(); }
 };

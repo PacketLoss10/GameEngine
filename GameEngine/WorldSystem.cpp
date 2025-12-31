@@ -18,26 +18,26 @@ void WorldSystem::update()
 		if (entity.get())
 			chunkMap.add_actor(entity.get());
 
-	for (auto& entity : chunkMap.actors_to_update(cameraPosition))
+	for (auto& entity : chunkMap.find_actors_to_update(cameraPosition))
 		if (entity)
 		{
 			entity->update();
 		}
 }
 
-void WorldSystem::render()
+std::vector<Renderable*> WorldSystem::get_renderData() const
 {
-	for (auto& entity : chunkMap.actors_to_render(cameraPosition))
-		if (entity)
-			entity->render();
+	std::vector<Renderable*> renderData;
+
+	for (const Actor* actor : actors_to_render(cameraPosition))
+	{
+		renderData.push_back(actor->get_renderable());
+	}
+	
+	return renderData;
 }
 
-void WorldSystem::spawn_entity(std::unique_ptr<Actor> entity) 
-{
-	entities.push_back(std::move(entity)); 
-}
-
-const ChunkMap& WorldSystem::get_chunkMap() const 
+const ChunkMap& WorldSystem::get_chunkMap() const
 {
 	return chunkMap;
 }
