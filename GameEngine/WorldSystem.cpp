@@ -20,7 +20,9 @@ void WorldSystem::update()
 
 	for (auto& entity : chunkMap.actors_to_update(cameraPosition))
 		if (entity)
+		{
 			entity->update();
+		}
 }
 
 void WorldSystem::render()

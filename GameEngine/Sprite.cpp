@@ -50,7 +50,7 @@ void Sprite::generate_normalMap(float value)
 		}
 	}
 
-	if (!image.saveToFile(normalMapFilePath))
+	if (!normalImage.saveToFile(normalMapFilePath))
 	{
 		std::cerr << "Failed to save normal map to " << normalMapFilePath << std::endl;
 	}

@@ -63,4 +63,4 @@ void SimulationChunk::set_visible(bool new_visible)
 	visible = new_visible; 
 }
 
-FVector SimulationChunk::chunkSize = FVector(500.f, 500.f);
+FVector SimulationChunk::chunkSize = FVector(10000.f, 10000.f);

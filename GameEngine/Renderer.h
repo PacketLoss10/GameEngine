@@ -6,6 +6,28 @@
 
 class Sprite;
 
+struct LightData
+{
+	FVector position;
+	float radius;
+	Color color;
+	float brightness;
+};
+
+struct SpriteData
+{
+	std::string texture;
+	std::string normalMap;
+	IRect rect;
+	Transform transform;
+};
+
+struct RenderData
+{
+	std::vector<SpriteData> spriteData;
+	std::vector<LightData> lightData;
+};
+
 #define RENDERER Renderer::instance()
 
 class Renderer 

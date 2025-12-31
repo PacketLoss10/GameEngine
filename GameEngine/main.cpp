@@ -3,18 +3,16 @@
 #include "TickClock.h"
 #include "Renderer.h"
 #include "WorldSystem.h"
-#include "Sprite.h"
 #include "LightSource.h"
-
 
 int main()
 {
 	SET_MAX_FPS(60);
 
-	Sprite s = Sprite("sprite.png");
-
-	WORLD.spawn_entity(std::make_unique<Actor>(Transform(), new Sprite("sprite.png")));
-	WORLD.spawn_entity(std::make_unique<LightSource>(FVector(0.f, 0.f), 200.f, 2.f, Color(0, 0, 0)));
+	WORLD.spawn_entity(std::make_unique<Actor>(Transform(FVector(0.f, 0.f), FVector(1.f, 0.f), FVector(5.f, 5.f)), new Sprite("energyblade.png")));
+	WORLD.spawn_entity(std::make_unique<Actor>(Transform(FVector(500.f, 500.f), FVector(1.f, 0.f), FVector(5.f, 5.f)), new Sprite("sprite.png")));
+	WORLD.spawn_entity(std::make_unique<LightSource>(FVector(0.f, 0.f), 200.f, 1.f, Color(255, 255, 255)));
+	WORLD.spawn_entity(std::make_unique<LightSource>(FVector(0.f, 0.f), 500.f, 1.f, Color(255, 0, 0)));
 
 	while (GAME_WINDOW.is_open())
 	{
@@ -22,6 +20,9 @@ int main()
 		INPUT.update();
 
 		WORLD.update();
+
+		WORLD.find_all_actors_of_type<LightSource>()[0]->set_position(INPUT.get_mouse_pos());
+
 
 		RENDERER.start_render();
 		WORLD.render();

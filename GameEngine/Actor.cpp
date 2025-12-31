@@ -13,8 +13,6 @@ void Actor::render()
 	if (!sprite)
 		return;
 
-	RENDERER.get_shader()->setUniform("u_texture", TEXTURE_LOADER.load_texture(sprite->get_texture()));
-	RENDERER.get_shader()->setUniform("u_texture", TEXTURE_LOADER.load_texture(sprite->get_normalMap()));
 	RENDERER.render(*sprite, transform);
 }
 

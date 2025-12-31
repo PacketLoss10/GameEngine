@@ -1,5 +1,6 @@
 #include "CircleCollision.h"
 #include "BoxCollision.h"
+#include "LightSource.h"
 
 CircleCollision::CircleCollision() {}
 

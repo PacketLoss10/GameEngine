@@ -3,8 +3,34 @@
 
 void LightSource::update()
 {
-	RENDERER.get_shader()->setUniform("u_lightPosition", sf::Glsl::Vec2(transform.position.x, 1080.f - transform.position.y));
-	RENDERER.get_shader()->setUniform("u_lightRadius", radius);
-	RENDERER.get_shader()->setUniform("u_lightColor", sf::Glsl::Vec3(color.r, color.g, color.b));
-	RENDERER.get_shader()->setUniform("u_lightBrightness", brightness);
+}
+
+float LightSource::get_radius() const
+{
+	return radius;
+}
+
+void LightSource::set_radius(float new_radius)
+{
+	radius = new_radius;
+}
+
+float LightSource::get_brightness() const
+{
+	return brightness;
+}
+
+void LightSource::set_brightness(float new_brightness)
+{
+	brightness = new_brightness;
+}
+
+Color LightSource::get_color() const
+{
+	return color;
+}
+
+void LightSource::set_color(Color new_color)
+{
+	color = new_color;
 }
