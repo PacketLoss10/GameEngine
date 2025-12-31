@@ -81,9 +81,6 @@
     <ClCompile Include="WorldSystem.cpp">
       <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
-    <ClCompile Include="Renderable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
@@ -95,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="CollisionArea.cpp">
       <Filter>Source Files\Engine\Simulation\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderable.cpp">
+      <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +140,6 @@
     <ClInclude Include="WorldSystem.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
-    <ClInclude Include="Renderable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
@@ -154,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="CollisionArea.h">
       <Filter>Header Files\Engine\Simulation\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderable.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

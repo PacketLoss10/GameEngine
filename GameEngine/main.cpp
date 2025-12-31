@@ -9,8 +9,10 @@ int main()
 {
 	SET_MAX_FPS(60);
 
-	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 0.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), new Sprite("brickwall_diffuse.png","brickwall_normal.png"));
-	//WORLD.spawn_actor<Actor>(Transform(FVector(500.f, 500.f), FVector(1.f, 0.f), FVector(5.f, 5.f)), new Sprite("sprite.png"));
+	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 0.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), new Sprite("brickwall_diffuse.png", "brickwall_normal.png"));
+	WORLD.spawn_actor<Actor>(Transform(FVector(1024.f, 0.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), new Sprite("brickwall_diffuse.png", "brickwall_normal.png"));
+	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 1024.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), new Sprite("brickwall_diffuse.png", "brickwall_normal.png"));
+	WORLD.spawn_actor<Actor>(Transform(FVector(1024.f, 1024.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), new Sprite("brickwall_diffuse.png","brickwall_normal.png"));
 	WORLD.spawn_actor<Actor>(Transform(FVector(100.f, 100.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), new Light(300.f, 1.f, Color(255, 255, 255)));
 
 	while (GAME_WINDOW.is_open())
