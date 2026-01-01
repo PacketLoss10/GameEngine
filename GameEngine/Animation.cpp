@@ -1,58 +1,11 @@
-//#include "Animation.h"
-//
-//Animation::Animation() :RenderObject() {}
-//
-//Animation::Animation(std::string texturePath, IVector layout,IVector start, IVector frameSize, int numFrames, float fps, bool oneshot) 
-//	:RenderObject(FrameData(texturePath, IRect(start, frameSize))), 
-//	layout(IVector(std::max(1, layout.x), std::max(1, layout.y))), 
-//	start(IVector(std::max(0, start.x), std::max(0, start.y))), 
-//	numFrames(std::max(1, numFrames)), 
-//	dt(1.f / fps),
-//	oneshot(oneshot) {}
-//
-//void Animation::update() 
-//{
-//	if (clock.getElapsedTime().asSeconds() < dt)
-//		return;
-//
-//	clock.restart();
-//
-//	if (oneshot && is_finished())
-//		return;
-//
-//	currentFrame = (currentFrame + 1) % numFrames;
-//
-//	data.rect = IRect(
-//		start.component_wise_mult(data.rect.size) +
-//		IVector(
-//			(currentFrame % layout.x) * data.rect.size.x,
-//			(currentFrame / layout.x) * data.rect.size.y),
-//		data.rect.size);
-//}
-//
-//void Animation::set_currentFrame(int new_currentFrame) 
-//{
-//	currentFrame = new_currentFrame;
-//}
-//
-//void Animation::set_duration(float new_duration) 
-//{
-//	dt = 1.f / (static_cast<float>(numFrames) / new_duration);
-// 
-// 
-//}
-//
-//bool Animation::is_finished() const 
-//{ 
-//	return currentFrame == numFrames - 1;
-//}
 #include "Animation.h"
 
 Animation::Animation() :Sprite(), layout(IVector(0, 0), IVector(1, 1)), numFrames(1), currentFrame(0), dt(0.f), oneshot(false) {}
 
-Animation::Animation(std::string texture, IVector frameSize, std::string normalMap, IRect layout, int numFrames, float fps, float oneshot)
-	:Sprite(texture, IRect(layout.position, IVector(std::max(0, frameSize.x), std::max(0, frameSize.y))), normalMap),
+Animation::Animation(std::string sheet, IVector frameSize, IRect layout, int numFrames, float fps, float oneshot)
+	:Sprite(sheet,IRect(IVector(std::max(0,layout.position.x),std::max(0,layout.position.y)),IVector(std::max(1,frameSize.x),std::max(1,frameSize.x)))),
 	layout(IRect(IVector(std::max(0, layout.position.x), std::max(0, layout.position.y)), IVector(std::max(1, layout.size.x), std::max(1, layout.size.y)))),
+	frameSize(IVector(std::max(0,frameSize.x),std::max(0,frameSize.y))),
 	numFrames(std::max(1, numFrames)),
 	currentFrame(0),
 	dt(1.f / fps),
@@ -73,11 +26,13 @@ void Animation::update()
 	currentFrame = (currentFrame + 1) % numFrames;
 
 	rect = IRect(
-		layout.position.component_wise_mult(rect.size) +
+		layout.position.component_wise_mult(frameSize) +
 		IVector(
-			(currentFrame % layout.size.x) * rect.size.x,
-			(currentFrame / layout.size.x) * rect.size.y),
-		rect.size);
+			(currentFrame % layout.size.x) * frameSize.x,
+			(currentFrame / layout.size.x) * frameSize.y),
+		frameSize);
+
+	std::cout << (std::string)rect.position << std::endl;
 }
 
 int Animation::get_numFrames() const

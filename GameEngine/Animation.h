@@ -7,6 +7,7 @@ class Animation :public Sprite
 {
 private:
 	IRect layout;
+	IVector frameSize;
 	int numFrames;
 	int currentFrame;
 	float dt;
@@ -14,7 +15,7 @@ private:
 	sf::Clock clock;
 public:
 	Animation();
-	Animation(std::string texture, IVector frameSize, std::string normalMap, IRect layout, int numFrames, float fps, float oneshot);
+	Animation(std::string sheet, IVector frameSize, IRect layout, int numFrames, float fps, float oneshot);
 	void update();
 	int get_numFrames() const;
 	int get_currentFrame() const;
