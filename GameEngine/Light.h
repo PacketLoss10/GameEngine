@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Renderable.h"
 #include "EngineUtils.h"
+#include "RenderObject.h"
 
-class Light: public Renderable
+class Light :public RenderObject
 {
 private:
 	float radius;

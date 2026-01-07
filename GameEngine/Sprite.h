@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Renderable.h"
 #include "EngineUtils.h"
+#include "RenderObject.h"
 #include "TextureLoader.h"
 
-class Sprite :public Renderable
+class Sprite :public RenderObject
 {
 private:
 	std::string texture;

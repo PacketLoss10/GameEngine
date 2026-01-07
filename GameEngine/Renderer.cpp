@@ -22,7 +22,7 @@ void Renderer::start_render() const
 	GAME_WINDOW.start_render();
 }
 
-void Renderer::render(const std::vector<Renderable*>& data)
+void Renderer::render(const std::vector<RenderObject*>& data)
 {
     if (data.empty())
         return;
@@ -35,7 +35,7 @@ void Renderer::render(const std::vector<Renderable*>& data)
     lights.reserve(std::min(data.size(), static_cast<size_t>(MAX_LIGHTS)));
 
     // Isolate sprites and lights
-    for (Renderable* renderable : data)
+    for (RenderObject* renderable : data)
     {
         if (Sprite* sprite = dynamic_cast<Sprite*>(renderable))
         {

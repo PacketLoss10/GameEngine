@@ -2,7 +2,7 @@
 #include "Renderer.h"
 
 Light::Light(float radius, float brightness, Color color) 
-	:Renderable(Transform()),
+	:RenderObject(Transform()),
 	radius(radius), 
 	brightness(brightness),
 	color(color)

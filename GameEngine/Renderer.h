@@ -4,7 +4,7 @@
 #include "TextureLoader.h"
 #include "GameWindow.h"
 
-class Renderable;
+class RenderObject;
 
 #define RENDERER Renderer::instance()
 
@@ -19,7 +19,7 @@ public:
 	static Renderer& instance();
 	void start_render() const;
 	//void render(const Sprite& data, const Transform& transform);
-	void render(const std::vector<Renderable*>& data);
+	void render(const std::vector<RenderObject*>& data);
 	void end_render() const;
 	sf::Shader* get_shader();
 };
