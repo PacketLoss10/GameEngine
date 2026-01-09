@@ -31,11 +31,6 @@ public:
 		return Vector<int>(static_cast<int>(x), static_cast<int>(y));
 	}
 
-	operator std::string() const
-	{
-		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
-	}
-
 	bool operator==(const Vector<T>& other) const
 	{
 		return x == other.x && y == other.y;
@@ -59,6 +54,11 @@ public:
 	Vector<T> operator/(T other) const
 	{
 		return Vector<T>(static_cast<T>(x / other), static_cast<T>(y / other));
+	}
+
+	std::string to_string() const
+	{
+		return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 	}
 
 	T dot(const Vector<T>& other) const
@@ -107,8 +107,8 @@ public:
 	json.set("y", y);
 		)
 
-	FROM_JSON(
-		x = json.get("x");
+		FROM_JSON(
+			x = json.get("x");
 	y = json.get("y");
 		)
 };

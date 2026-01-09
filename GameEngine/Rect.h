@@ -3,7 +3,7 @@
 #include "Vector.h"
 
 template<VectorConcept T>
-class Rect
+class Rect :public SLObject
 {
 public:
 	Vector<T> position = Vector<T>(0, 0);
@@ -35,6 +35,16 @@ public:
 		return point.x >= position.x && point.x <= position.x + size.x &&
 			point.y >= position.y && point.y <= position.y + size.y;
 	}
+
+	TO_JSON(
+		json.set("position", position);
+	json.set("size", size);
+		)
+
+		FROM_JSON(
+			position = json.get("position");
+	size = json.get("size");
+		)
 };
 
 using IRect = Rect<int>;

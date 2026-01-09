@@ -1,4 +1,4 @@
-//#include "GameWindow.h"
+#include "GameWindow.h"
 //#include "InputHandler.h"
 //#include "TickClock.h"
 //#include "Renderer.h"
@@ -36,7 +36,17 @@
 
 int main()
 {
-	IVector v(6, 7);
+	std::vector<FVector> vs;
+	vs.push_back(FVector(1.f, 1.f));
+	vs.push_back(FVector(2.f, 2.f));
+	vs.push_back(FVector(3.f, 3.f));
+
 	JSONFILE f("JSONTEST");
-	f.write(v);
+	JSONOBJECT j;
+
+	j.add("vector", vs[0]);
+
+	j.collect("vectors");
+
+	f.write(j);
 }

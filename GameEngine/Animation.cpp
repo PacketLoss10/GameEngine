@@ -31,8 +31,6 @@ void Animation::update()
 			(currentFrame % layout.size.x) * frameSize.x,
 			(currentFrame / layout.size.x) * frameSize.y),
 		frameSize);
-
-	std::cout << (std::string)rect.position << std::endl;
 }
 
 int Animation::get_numFrames() const

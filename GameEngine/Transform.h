@@ -2,7 +2,7 @@
 
 #include "Vector.h"
 
-class Transform
+class Transform :public SLObject
 {
 public:
 	FVector position = FVector(0.f, 0.f);
@@ -11,4 +11,16 @@ public:
 
 	Transform() {}
 	Transform(FVector position, FVector forward, FVector scale) :position(position), forward(forward), scale(scale) {}
+
+	TO_JSON(
+		json.set("position", position);
+	json.set("forward", forward);
+	json.set("scale", scale);
+		)
+
+		FROM_JSON(
+			position = json.get("position");
+	forward = json.get("forward");
+	scale = json.get("scale");
+		)
 };

@@ -25,10 +25,11 @@ public:
 
 	void set(const std::string& key, const JSONOBJECT& value);
 	void set(const std::string& key, const JSON& value);
+	void add(const std::string& key, const JSONOBJECT& value);
+	void add(const std::string& key, const JSON& value);
+
 	JSONOBJECT get(const std::string& key) const;
-
-	JSONOBJECT& read(const JSONFILE& file);
-
+	std::vector<JSONOBJECT> collect(const std::string& key) const;
 	operator int() const
 	{
 		return data.get<int>();
@@ -45,6 +46,9 @@ public:
 	{
 		return data.get<std::string>();
 	}
+
+	JSONOBJECT& read(const JSONFILE& file);
+
 	operator JSON() const
 	{
 		return data;

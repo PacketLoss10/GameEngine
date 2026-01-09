@@ -3,6 +3,7 @@
 #include "core.h"
 #include "RenderObject.h"
 #include "CollisionArea.h"
+#include "SLObject.h"
 
 class Actor: public Transformable
 {
