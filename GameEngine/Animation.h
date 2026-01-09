@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Sprite.h"
-#include "EngineUtils.h"
+#include "core.h"
 
 class Animation :public Sprite
 {

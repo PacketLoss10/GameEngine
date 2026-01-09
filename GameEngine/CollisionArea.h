@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EngineUtils.h"
+#include "core.h"
 #include "GameWindow.h"
 
 class CollisionArea 

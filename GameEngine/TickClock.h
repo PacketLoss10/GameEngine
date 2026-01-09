@@ -1,6 +1,6 @@
 #pragma once
 
-#include "EngineUtils.h"
+#include "core.h"
 
 #define UPDATE_DELTA_TIME TickClock::instance().update()
 #define DELTA_TIME TickClock::instance().dt()

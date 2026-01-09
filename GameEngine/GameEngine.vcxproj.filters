@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Engine\Simulation\Collision">
       <UniqueIdentifier>{9d99c45d-c4c6-4df7-8c6b-989a47720bac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\System">
+      <UniqueIdentifier>{12a639f2-0c20-4501-b4c1-2aeee61c11d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\System">
+      <UniqueIdentifier>{e730becb-4d10-4aff-9128-e70955741595}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,16 +69,7 @@
     <ClCompile Include="AnimationPlayer.cpp">
       <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
     <ClCompile Include="SimulationChunk.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="TickClock.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
     <ClCompile Include="WorldSystem.cpp">
@@ -93,8 +90,41 @@
     <ClCompile Include="RenderObject.cpp">
       <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Delegate.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONFILE.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONOBJECT.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
     <ClCompile Include="SLObject.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Transformable.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="TickClock.cpp">
+      <Filter>Source Files\Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -119,19 +149,10 @@
     <ClInclude Include="AnimationPlayer.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
-    <ClInclude Include="EngineUtils.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
+    <ClInclude Include="core.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
     <ClInclude Include="SimulationChunk.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="TickClock.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
     <ClInclude Include="WorldSystem.h">
@@ -152,8 +173,41 @@
     <ClInclude Include="RenderObject.h">
       <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Delegate.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONFILE.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="JSONOBJECT.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
     <ClInclude Include="SLObject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Transformable.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="TickClock.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
