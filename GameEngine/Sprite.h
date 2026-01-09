@@ -2,16 +2,16 @@
 
 #include "core.h"
 #include "RenderObject.h"
+#include "SLObject.h"
 #include "TextureLoader.h"
 
-class Sprite :public RenderObject
+class Sprite :public RenderObject, public SLObject
 {
-private:
+protected:
+	IRect rect;
 	std::string texture;
 	std::string normalMap;
 	void generate_normalMap(float value = 1.f);
-protected:
-	IRect rect;
 public:
 	// Default constructor. Creates a sprite with missing texture and flat normal map.
 	Sprite();
@@ -26,4 +26,16 @@ public:
 	const std::string& get_texture() const;
 	const IRect& get_rect() const;
 	const std::string& get_normalMap() const;
+	TO_JSON(
+		json.set("diffuse", texture);
+	json.set("nomal", normalMap);
+	json.set("rect", rect);
+	json.set("transfrom", transform);
+		)
+		FROM_JSON(
+			texture = json.get("diffuse");
+	normalMap = json.get("normal");
+	rect = json.get("rect");
+	transform = json.get("transform");
+		)
 };

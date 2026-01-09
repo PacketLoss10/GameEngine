@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Animation.h"
 
 Actor::Actor(Transform transform, std::vector<RenderObject*> graphics):Transformable(transform),graphics(graphics) {}
 
@@ -12,7 +13,13 @@ Actor::~Actor()
 void Actor::update()
 {
 	for (RenderObject* graphic : graphics)
+	{
 		graphic->set_transform(transform);
+		if (Animation* animation = dynamic_cast<Animation*>(graphic))
+		{
+			animation->update();
+		}
+	}
 }
 
 CollisionArea* Actor::get_collision() const

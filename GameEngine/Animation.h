@@ -25,4 +25,26 @@ public:
 	float get_duration() const;
 	void set_duration(float new_duration);
 	bool is_finished() const;
+	TO_JSON(
+		json.set("diffuse", texture);
+	json.set("normal", normalMap);
+	json.set("transform", transform);
+	json.set("layout", layout);
+	json.set("frameSize", frameSize);
+	json.set("numFrames", numFrames);
+	json.set("currentFrame", currentFrame);
+	json.set("dt", dt);
+	json.set("oneshot", oneshot);
+		)
+		FROM_JSON(
+			texture = json.get("diffuse");
+	normalMap = json.get("normal");
+	transform = json.get("transform");
+	layout = json.get("layout");
+	frameSize = json.get("frameSize");
+	numFrames = json.get("numFrames");
+	currentFrame = json.get("currentFrame");
+	dt = json.get("dt");
+	oneshot = json.get("oneshot");
+		)
 };

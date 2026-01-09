@@ -8,12 +8,8 @@
 #include "type_traits"
 
 class JSONFILE;
-class SLObject;
 
 using JSON = nlohmann::json;
-
-template<typename T>
-concept IsSLObject = std::is_base_of<SLObject, T>::value;
 
 class JSONOBJECT
 {

@@ -1,52 +1,43 @@
 #include "GameWindow.h"
-//#include "InputHandler.h"
-//#include "TickClock.h"
-//#include "Renderer.h"
-//#include "WorldSystem.h"
-//#include "Animation.h"
-//#include "Light.h"
-//
-//int main()
-//{
-//	SET_MAX_FPS(60);
-//
-//	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 0.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), std::vector<RenderObject*>{ new Sprite("brickwall_diffuse.png", "brickwall_normal.png") });
-//	WORLD.spawn_actor<Actor>(Transform(FVector(1024.f, 0.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), std::vector<RenderObject*>{ new Sprite("brickwall_diffuse.png", "brickwall_normal.png") });
-//	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 1024.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), std::vector<RenderObject*>{ new Sprite("brickwall_diffuse.png", "brickwall_normal.png") });
-//	WORLD.spawn_actor<Actor>(Transform(FVector(1024.f, 1024.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), std::vector<RenderObject*>{ new Sprite("brickwall_diffuse.png","brickwall_normal.png") });
-//	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 0.f), FVector(1.f, 0.f), FVector(10.f, 10.f)), std::vector<RenderObject*>{ new Animation("angel_idle.png", IVector(110, 112), IRect(IVector(0, 0), IVector(10, 1)), 10, 10.f, false) });
-//	WORLD.spawn_actor<Actor>(Transform(FVector(100.f, 100.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), std::vector<RenderObject*>{ new Light(300.f, 1.f, Color(255, 255, 255)) });
-//
-//	while (GAME_WINDOW.is_open())
-//	{
-//		GAME_WINDOW.update();
-//		INPUT.update();
-//		WORLD.update();
-//
-//		RENDERER.start_render();
-//		RENDERER.render(WORLD.generate_render_data());
-//		RENDERER.end_render();
-//
-//		UPDATE_DELTA_TIME;
-//	}
-//}
-
-#include "Vector.h"
+#include "InputHandler.h"
+#include "TickClock.h"
+#include "Renderer.h"
+#include "WorldSystem.h"
+#include "Animation.h"
+#include "Light.h"
 #include "JSONFILE.h"
 
 int main()
 {
-	std::vector<FVector> vs;
-	vs.push_back(FVector(1.f, 1.f));
-	vs.push_back(FVector(2.f, 2.f));
-	vs.push_back(FVector(3.f, 3.f));
+	SET_MAX_FPS(60);
 
-	JSONFILE f("JSONTEST");
-	JSONOBJECT j;
+	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 0.f), FVector(1.f, 0.f), FVector(10.f, 10.f)), std::vector<RenderObject*>{ new Animation("angel_idle.png", IVector(110, 112), IRect(IVector(0, 0), IVector(10, 1)), 10, 10.f, false) });
+	WORLD.spawn_actor<Actor>(Transform(FVector(100.f, 100.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), std::vector<RenderObject*>{ new Light(300.f, 1.f, Color(255, 255, 255)) });
 
-	j.add("vector", vs[0]);
+	while (GAME_WINDOW.is_open())
+	{
+		GAME_WINDOW.update();
+		INPUT.update();
+		WORLD.update();
+		for (auto actor : WORLD.find_all_actors())
+		{
+			for (auto g : actor->get_graphics())
+			{
+				if (auto light = dynamic_cast<Light*>(g))
+				{
+					light->set_position(INPUT.get_mouse_pos());
+					if (INPUT.is_button_pressed(Mouse::M1))
+						light->set_brightness(light->get_brightness() + 0.25f);
+					if (INPUT.is_button_pressed(Mouse::M2))
+						light->set_brightness(light->get_brightness() - 0.25f);
+				}
+			}
+		}
 
-	j.collect("vectors");
+		RENDERER.start_render();
+		RENDERER.render(WORLD.generate_render_data());
+		RENDERER.end_render();
 
-	f.write(j);
+		UPDATE_DELTA_TIME;
+	}
 }
