@@ -1,41 +1,62 @@
 #pragma once
 
-#include "core.h"
-#include "RenderObject.h"
-#include "SLObject.h"
+#include "RenderComponent.h"
+#include "Rect.h"
+#include "Vector.h"
 #include "TextureLoader.h"
 
-class Sprite :public RenderObject, public SLObject
+class TextureRect
 {
-protected:
-	IRect rect;
-	std::string texture;
-	std::string normalMap;
-	void generate_normalMap(float value = 1.f);
+private:
+	IVector position = IVector(0, 0);
+	IVector size = IVector(1, 1);
 public:
-	// Default constructor. Creates a sprite with missing texture and flat normal map.
-	Sprite();
-	// Constructor with texture and pre-generated normal map.
-	Sprite(std::string texture, IRect rect, std::string normalMap);
-	// Constructor with texture and pre-generated normal map. Automatically resizes rect.
-	Sprite(std::string texture, std::string normalMap);
-	// Constructor with texture only. Automatically generates normal map.
-	Sprite(std::string texture, IRect rect);
-	// Constructor with texture only. Automatically generated normal map. Automatically resizes rect.
-	Sprite(std::string texture);
-	const std::string& get_texture() const;
-	const IRect& get_rect() const;
-	const std::string& get_normalMap() const;
-	TO_JSON(
-		json.set("diffuse", texture);
-	json.set("nomal", normalMap);
-	json.set("rect", rect);
-	json.set("transfrom", transform);
-		)
-		FROM_JSON(
-			texture = json.get("diffuse");
-	normalMap = json.get("normal");
-	rect = json.get("rect");
-	transform = json.get("transform");
-		)
+	TextureRect() = default;
+	TextureRect(IVector position, IVector size) :position(IVector(std::max(0, position.x), std::max(0, position.y))), size(IVector(std::max(1, size.x), std::max(1, size.y))) {}
+	operator sf::IntRect() const
+	{
+		return sf::IntRect(position, size);
+	}
 };
+
+class Texture
+{
+public:
+	static std::string empty;
+	std::string filepath = empty;
+	Texture() = default;
+	Texture(std::string filepath) :filepath(filepath) {}
+};
+
+class NormalMap
+{
+public:
+	static std::string empty;
+	std::string filepath = empty;
+	NormalMap() = default;
+	NormalMap(std::string filepath) :filepath(filepath) {}
+};
+
+class Sprite :public RenderComponent
+{
+private:
+	static void generate_normal_map(Sprite& sprite, float value);
+protected:
+	TextureRect rect = TextureRect();
+	Texture texture = Texture();
+	NormalMap normal = NormalMap();
+public:
+	Sprite() = default;
+	Sprite(Texture texture, TextureRect rect, NormalMap normal);
+	Sprite(Texture texture, TextureRect rect);
+
+	const TextureRect& get_rect() const;
+	void set_rect(const TextureRect& rect);
+
+	const Texture& get_texture() const;
+	void set_texture(const Texture& texture);
+
+	const NormalMap& get_normal() const;
+	void set_normal(const NormalMap& normal);
+};
+

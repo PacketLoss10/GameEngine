@@ -63,12 +63,6 @@
     <ClCompile Include="TextureLoader.cpp">
       <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationPlayer.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
     <ClCompile Include="SimulationChunk.cpp">
       <Filter>Source Files\Engine\Simulation</Filter>
     </ClCompile>
@@ -78,16 +72,7 @@
     <ClCompile Include="Light.cpp">
       <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="BoxCollision.cpp">
-      <Filter>Source Files\Engine\Simulation\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollision.cpp">
-      <Filter>Source Files\Engine\Simulation\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionArea.cpp">
-      <Filter>Source Files\Engine\Simulation\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderObject.cpp">
+    <ClCompile Include="RenderComponent.cpp">
       <Filter>Source Files\Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
@@ -126,6 +111,36 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxCollisionComponent.cpp">
+      <Filter>Source Files\Engine\Simulation\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollisionComponent.cpp">
+      <Filter>Source Files\Engine\Simulation\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Source Files\Engine\Simulation\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponentManager.cpp">
+      <Filter>Source Files\Engine\Simulation\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponentManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -143,12 +158,6 @@
     <ClInclude Include="TextureLoader.h">
       <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationPlayer.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
     <ClInclude Include="core.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
@@ -161,16 +170,7 @@
     <ClInclude Include="Light.h">
       <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="BoxCollision.h">
-      <Filter>Header Files\Engine\Simulation\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollision.h">
-      <Filter>Header Files\Engine\Simulation\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionArea.h">
-      <Filter>Header Files\Engine\Simulation\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderObject.h">
+    <ClInclude Include="RenderComponent.h">
       <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
@@ -208,6 +208,36 @@
     </ClInclude>
     <ClInclude Include="Timer.h">
       <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxCollisionComponent.h">
+      <Filter>Header Files\Engine\Simulation\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollisionComponent.h">
+      <Filter>Header Files\Engine\Simulation\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Header Files\Engine\Simulation\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponentManager.h">
+      <Filter>Header Files\Engine\Simulation\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponentManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

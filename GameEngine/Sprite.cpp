@@ -1,15 +1,19 @@
 #include "Sprite.h"
 
-void Sprite::generate_normalMap(float value)
+std::string Texture::empty = "NULLTEXTURE.png";
+
+std::string NormalMap::empty = "NULLNORMAL.png";
+
+void Sprite::generate_normal_map(Sprite& sprite, float value)
 {
-	const std::string normalMapFilePath = "normalmap_" + texture;
+	const std::string normalMapFilePath = "normalmap_" + sprite.texture.filepath;
 	if (std::filesystem::exists(normalMapFilePath))
-		normalMap = normalMapFilePath;
+		sprite.normal.filepath = normalMapFilePath;
 
 	sf::Image image;
-	if (!image.loadFromFile(texture))
+	if (!image.loadFromFile(sprite.texture.filepath))
 	{
-		std::cerr << "Failed to load texture for normal map generation: " << texture << std::endl;
+		std::cerr << "Failed to load texture for normal map generation: " << sprite.texture.filepath << std::endl;
 		return;
 	}
 	sf::Vector2u size = image.getSize();
@@ -56,68 +60,43 @@ void Sprite::generate_normalMap(float value)
 	}
 	else
 	{
-		normalMap = normalMapFilePath;
+		sprite.normal.filepath = normalMapFilePath;
 	}
 }
 
-Sprite::Sprite()
-	:RenderObject(Transform()),
-	texture("NULLTEXTURE.png"),
-	rect(IRect(IVector(0, 0), IVector(420, 420))),
-	normalMap("NULLNORMAL.png") 
+Sprite::Sprite(Texture texture, TextureRect rect, NormalMap normal) :RenderComponent(Transform()), texture(texture), rect(rect), normal(normal) {}
+
+Sprite::Sprite(Texture texture, TextureRect rect):RenderComponent(Transform()),texture(texture),rect(rect)
 {
+	Sprite::generate_normal_map(*this, 1.f);
 }
 
-Sprite::Sprite(std::string texture, IRect rect, std::string normalMap)
-	:RenderObject(Transform()),
-	texture(texture),
-	rect(IRect(IVector(std::max(0, rect.position.x), std::max(0, rect.position.y)), IVector(std::max(1, rect.size.x), std::max(1, rect.size.y)))),
-	normalMap(normalMap)
-{
-}
-
-Sprite::Sprite(std::string texture, std::string normalMap)
-	:RenderObject(Transform()),
-	texture(texture),
-	rect(IRect(IVector(0, 0), IVector(1, 1))),
-	normalMap(normalMap)
-{
-	auto textureSize = TEXTURE_LOADER.load_texture(texture).getSize();
-	rect = IRect(IVector(0, 0), IVector(textureSize.x, textureSize.y));
-}
-
-Sprite::Sprite(std::string texture, IRect rect)
-	:RenderObject(Transform()),
-	texture(texture),
-	rect(IRect(IVector(std::max(0, rect.position.x), std::max(0, rect.position.y)), IVector(std::max(1, rect.size.x), std::max(1, rect.size.y)))),
-	normalMap("NULLNORMAL.png")
-{
-	generate_normalMap(1.f);
-}
-
-Sprite::Sprite(std::string texture)
-	:RenderObject(Transform()),
-	texture(texture),
-	rect(IRect(IVector(0, 0), IVector(1, 1))),
-	normalMap("NULLNORMAL.png")
-{
-	auto textureSize = TEXTURE_LOADER.load_texture(texture).getSize();
-	rect = IRect(IVector(0, 0), IVector(textureSize.x, textureSize.y));
-
-	generate_normalMap(1.f);
-}
-
-const std::string& Sprite::get_texture() const
-{
-	return texture;
-}
-
-const IRect& Sprite::get_rect() const
+const TextureRect& Sprite::get_rect() const
 {
 	return rect;
 }
 
-const std::string& Sprite::get_normalMap() const
+void Sprite::set_rect(const TextureRect& rect)
 {
-	return normalMap;
+	this->rect = rect;
+}
+
+const Texture& Sprite::get_texture() const
+{
+	return texture;
+}
+
+void Sprite::set_texture(const Texture& texture)
+{
+	this->texture = texture;
+}
+
+const NormalMap& Sprite::get_normal() const
+{
+	return normal;
+}
+
+void Sprite::set_normal(const NormalMap& normal)
+{
+	this->normal = normal;
 }

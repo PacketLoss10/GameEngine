@@ -22,7 +22,7 @@ void Renderer::start_render() const
 	GAME_WINDOW.start_render();
 }
 
-void Renderer::render(const std::vector<RenderObject*>& data)
+void Renderer::render(const std::vector<RenderComponent*>& data)
 {
     if (data.empty())
         return;
@@ -35,7 +35,7 @@ void Renderer::render(const std::vector<RenderObject*>& data)
     lights.reserve(std::min(data.size(), static_cast<size_t>(MAX_LIGHTS)));
 
     // Isolate sprites and lights
-    for (RenderObject* renderable : data)
+    for (RenderComponent* renderable : data)
     {
         if (Sprite* sprite = dynamic_cast<Sprite*>(renderable))
         {
@@ -78,8 +78,8 @@ void Renderer::render(const std::vector<RenderObject*>& data)
     // Rendering
     for (const Sprite* sprite : sprites)
     {
-        const sf::Texture& texture = TEXTURE_LOADER.load_texture(sprite->get_texture());
-        const sf::Texture& normalMap = TEXTURE_LOADER.load_texture(sprite->get_normalMap());
+        const sf::Texture& texture = TEXTURE_LOADER.load_texture(sprite->get_texture().filepath);
+        const sf::Texture& normal = TEXTURE_LOADER.load_texture(sprite->get_normal().filepath);
 
         sf::Sprite s = sf::Sprite(texture, sprite->get_rect());
         s.setPosition(sprite->get_transform().position);
@@ -96,7 +96,7 @@ void Renderer::render(const std::vector<RenderObject*>& data)
         }
 
         shader.setUniform("u_texture", texture);
-        shader.setUniform("u_normalMap", normalMap);
+        shader.setUniform("u_normalMap", normal);
 
         GAME_WINDOW.render(s, &shader);
     }

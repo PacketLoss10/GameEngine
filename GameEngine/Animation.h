@@ -1,50 +1,41 @@
 #pragma once
 
+#include "Component.h"
 #include "Sprite.h"
-#include "core.h"
+#include "Vector.h"
 
-class Animation :public Sprite
+class AnimLayout
+{
+public:
+	IVector start = IVector(0, 0);
+	IVector size = IVector(1, 1);
+	AnimLayout() = default;
+	AnimLayout(IVector start, IVector size) :start(IVector(std::max(0, start.x), std::max(0, start.y))), size(IVector(std::max(1, size.x), std::max(1, size.y))) {}
+	operator sf::IntRect() const
+	{
+		return sf::IntRect(start, size);
+	}
+};
+
+class Animation :public Component
 {
 private:
-	IRect layout;
-	IVector frameSize;
-	int numFrames;
-	int currentFrame;
-	float dt;
-	bool oneshot;
+	Sprite sprite = Sprite();
+	AnimLayout layout = AnimLayout();
+	IVector frameSize = IVector();
+	int numFrames = 1;
+	int currentFrame = 0;
+	float dt = 0.f;
+	bool oneShot = false;
 	sf::Clock clock;
+	bool paused = false;
 public:
-	Animation();
-	Animation(std::string sheet, IVector frameSize, IRect layout, int numFrames, float fps, float oneshot);
+	Animation() = default;
+	Animation(Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
+
 	void update();
-	int get_numFrames() const;
-	int get_currentFrame() const;
-	void set_currentFrame(int new_currentFrame);
-	bool is_oneshot() const;
-	void set_oneshot(bool new_oneshot);
-	float get_duration() const;
-	void set_duration(float new_duration);
+	void pause();
+	void play();
+	bool is_paused() const;
 	bool is_finished() const;
-	TO_JSON(
-		json.set("diffuse", texture);
-	json.set("normal", normalMap);
-	json.set("transform", transform);
-	json.set("layout", layout);
-	json.set("frameSize", frameSize);
-	json.set("numFrames", numFrames);
-	json.set("currentFrame", currentFrame);
-	json.set("dt", dt);
-	json.set("oneshot", oneshot);
-		)
-		FROM_JSON(
-			texture = json.get("diffuse");
-	normalMap = json.get("normal");
-	transform = json.get("transform");
-	layout = json.get("layout");
-	frameSize = json.get("frameSize");
-	numFrames = json.get("numFrames");
-	currentFrame = json.get("currentFrame");
-	dt = json.get("dt");
-	oneshot = json.get("oneshot");
-		)
 };

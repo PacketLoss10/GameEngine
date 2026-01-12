@@ -1,20 +1,24 @@
 #pragma once
 
-#include "core.h"
-#include "RenderObject.h"
+#include "RenderComponent.h"
+#include "Color.h"
 
-class Light :public RenderObject
+class Light :public RenderComponent
 {
 private:
-	float radius;
-	float brightness;
-	Color color;
+	float radius = 0.f;
+	float brightness = 0.f;
+	Color color = Color();
 public:
+	Light() = default;
 	Light(float radius, float brightness, Color color);
+
 	float get_radius() const;
-	void set_radius(float new_radius);
+	void set_radius(float radius);
+
 	float get_brightness() const;
-	void set_brightness(float new_brightness);
-	Color get_color() const;
-	void set_color(Color new_color);
+	void set_brightness(float brightness);
+
+	const Color& get_color() const;
+	void set_color(const Color& color);
 };

@@ -1,20 +1,34 @@
 #pragma once
 
-template<typename T, typename... Args>
+#include "functional"
+#include "algorithm"
+#include "vector"
+
+template<typename... Args>
 class Delegate
 {
 private:
-	T* object = nullptr;
-	void(T::* function)(Args...) = nullptr;
+	std::vector<std::function<void(Args...)>> funcs;
 public:
+	template<typename T>
 	void bind(T* obj, void(T::* func)(Args...))
 	{
-		object = obj;
-		function = func;
+		funcs.emplace_back([obj, func](Args... args)
+			{
+				(obj->*func)(args...);
+			}
+		);
+	}
+	template<typename T>
+	void unbind(T* obj, void(T::*func)(Args...))
+	{
+		funcs.erase(std::remove(funcs.begin(), funcs.end(), func), funcs.end());
 	}
 	void invoke(Args... args)
 	{
-		if (object && function)
-			(object->*function)(args...);
+		for (auto& f : funcs)
+		{
+			f(args...);
+		}
 	}
 };

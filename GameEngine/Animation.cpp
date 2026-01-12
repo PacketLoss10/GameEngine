@@ -1,71 +1,37 @@
 #include "Animation.h"
 
-Animation::Animation() :Sprite(), layout(IVector(0, 0), IVector(1, 1)), numFrames(1), currentFrame(0), dt(0.f), oneshot(false) {}
-
-Animation::Animation(std::string sheet, IVector frameSize, IRect layout, int numFrames, float fps, float oneshot)
-	:Sprite(sheet,IRect(IVector(std::max(0,layout.position.x),std::max(0,layout.position.y)),IVector(std::max(1,frameSize.x),std::max(1,frameSize.x)))),
-	layout(IRect(IVector(std::max(0, layout.position.x), std::max(0, layout.position.y)), IVector(std::max(1, layout.size.x), std::max(1, layout.size.y)))),
-	frameSize(IVector(std::max(0,frameSize.x),std::max(0,frameSize.y))),
-	numFrames(std::max(1, numFrames)),
-	currentFrame(0),
-	dt(1.f / fps),
-	oneshot(oneshot)
-{
-}
+Animation::Animation(Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart) :sprite(sprite), layout(layout), frameSize(frameSize), numFrames(numFrames), dt(1.f / std::max(fps, 0.01f)), oneShot(oneShot), paused(!autoStart) {}
 
 void Animation::update()
 {
-	if (clock.getElapsedTime().asSeconds() < dt)
+	if (clock.getElapsedTime().asSeconds() < dt || paused || (oneShot && is_finished()))
 		return;
 
 	clock.restart();
 
-	if (oneshot && is_finished())
-		return;
-
 	currentFrame = (currentFrame + 1) % numFrames;
 
-	rect = IRect(
-		layout.position.component_wise_mult(frameSize) +
+	sprite.set_rect(TextureRect(
+		layout.start.component_wise_mult(frameSize) +
 		IVector(
 			(currentFrame % layout.size.x) * frameSize.x,
 			(currentFrame / layout.size.x) * frameSize.y),
-		frameSize);
+		frameSize));
 }
 
-int Animation::get_numFrames() const
+void Animation::pause()
 {
-	return numFrames;
+	paused = true;
 }
 
-int Animation::get_currentFrame() const
+void Animation::play()
 {
-	return currentFrame;
+	paused = false;
 }
 
-void Animation::set_currentFrame(int new_currentFrame)
+bool Animation::is_paused() const
 {
-	currentFrame = new_currentFrame;
-}
-
-bool Animation::is_oneshot() const
-{
-	return oneshot;
-}
-
-void Animation::set_oneshot(bool new_oneshot)
-{
-	oneshot = new_oneshot;
-}
-
-float Animation::get_duration() const
-{
-	return dt*static_cast<float>(numFrames);
-}
-
-void Animation::set_duration(float new_duration) 
-{
-	dt = new_duration / static_cast<float>(numFrames);
+	return paused;
 }
 
 bool Animation::is_finished() const
