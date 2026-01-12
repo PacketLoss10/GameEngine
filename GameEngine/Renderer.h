@@ -1,6 +1,5 @@
 #pragma once
 
-#include "core.h"
 #include "TextureLoader.h"
 #include "GameWindow.h"
 

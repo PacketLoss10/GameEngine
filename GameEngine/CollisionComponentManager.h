@@ -4,7 +4,6 @@
 #include "CollisionComponent.h"
 #include "CircleCollisionComponent.h"
 #include "BoxCollisionComponent.h"
-#include "Rect.h"
 
 #define COLLISION_COMPONENT_MANAGER CollisionComponentManager::instance()
 

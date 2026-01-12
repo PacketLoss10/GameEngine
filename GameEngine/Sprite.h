@@ -1,8 +1,6 @@
 #pragma once
 
 #include "RenderComponent.h"
-#include "Rect.h"
-#include "Vector.h"
 #include "TextureLoader.h"
 
 class TextureRect

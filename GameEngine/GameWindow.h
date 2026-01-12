@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core.h"
+#include "Transform.h"
 
 class InputHandler;
 class Renderer;
@@ -31,5 +31,4 @@ public:
 	void update();
 
 	void render(const sf::Drawable& renderObject, sf::Shader* shader);
-
 };

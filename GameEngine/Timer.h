@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core.h"
+#include "SFML/Graphics.hpp"
 
 class Timer
 {
@@ -16,9 +16,11 @@ public:
 	void reset();
 	void restart();
 	bool timeout();
+	float time_elapsed() const;
+
 	float get_duration() const;
 	void set_duration(float new_duration);
+
 	bool is_oneShot() const;
 	void set_oneShot(bool new_oneShot);
-	float time_elapsed() const;
 };

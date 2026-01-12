@@ -149,7 +149,6 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Rect.cpp" />
     <ClCompile Include="RenderComponentManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
@@ -159,9 +158,7 @@
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="TickClock.cpp" />
     <ClCompile Include="Timer.cpp" />
-    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Transformable.cpp" />
-    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WorldSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -178,12 +175,10 @@
     <ClInclude Include="EntityB.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="core.h" />
     <ClInclude Include="JSONFILE.h" />
     <ClInclude Include="JSONOBJECT.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Component.h" />
-    <ClInclude Include="Rect.h" />
     <ClInclude Include="RenderComponentManager.h">
       <SubType>
       </SubType>
@@ -196,9 +191,8 @@
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="TickClock.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="Transform.h" />
     <ClInclude Include="Transformable.h" />
-    <ClInclude Include="Vector.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="WorldSystem.h" />
   </ItemGroup>
   <ItemGroup>

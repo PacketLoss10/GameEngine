@@ -2,6 +2,7 @@
 
 #include "Component.h"
 #include "Entity.h"
+#include "vector"
 
 template<typename T>
 concept IsComponent = std::is_base_of<Component, T>::value;

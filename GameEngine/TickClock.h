@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core.h"
+#include "SFML/Graphics.hpp"
 
 #define UPDATE_DELTA_TIME TickClock::instance().update()
 #define DELTA_TIME TickClock::instance().dt()
@@ -11,7 +11,8 @@ class TickClock
 private:
 	sf::Clock clock;
 	float elapsed = 0.f;
-	float maxFPS = 125.f;
+	float maxFPS = 120.f;
+
 	TickClock() = default;
 	TickClock(const TickClock&) = delete;
 	TickClock& operator=(const TickClock&) = delete;

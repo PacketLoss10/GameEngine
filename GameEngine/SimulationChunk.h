@@ -1,6 +1,7 @@
 #pragma once
 
-#include "core.h"
+#include "Transform.h"
+#include "Color.h"
 #include "GameWindow.h"
 
 class SimulationChunk 

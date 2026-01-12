@@ -87,19 +87,10 @@
     <ClCompile Include="JSONOBJECT.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="Rect.cpp">
-      <Filter>Source Files\Engine\System</Filter>
-    </ClCompile>
     <ClCompile Include="SLObject.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\Engine\System</Filter>
-    </ClCompile>
     <ClCompile Include="Transformable.cpp">
-      <Filter>Source Files\Engine\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector.cpp">
       <Filter>Source Files\Engine\System</Filter>
     </ClCompile>
     <ClCompile Include="InputHandler.cpp">
@@ -158,9 +149,6 @@
     <ClInclude Include="TextureLoader.h">
       <Filter>Header Files\Engine\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="core.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
     <ClInclude Include="SimulationChunk.h">
       <Filter>Header Files\Engine\Simulation</Filter>
     </ClInclude>
@@ -185,19 +173,13 @@
     <ClInclude Include="JSONOBJECT.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="Rect.h">
-      <Filter>Header Files\System</Filter>
-    </ClInclude>
     <ClInclude Include="SLObject.h">
-      <Filter>Header Files\System</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
     <ClInclude Include="Transformable.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
+    <ClInclude Include="Transform.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
     <ClInclude Include="InputHandler.h">

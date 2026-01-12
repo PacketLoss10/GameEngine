@@ -4,7 +4,7 @@ SimulationChunk::SimulationChunk(IVector coord) :coord(coord) {}
 
 bool SimulationChunk::operator==(const SimulationChunk& other) const
 {
-	return coord == other.get_coord();
+	return coord.x == other.get_coord().x && coord.y == other.get_coord().y;
 }
 
 void SimulationChunk::render() const 
@@ -12,7 +12,7 @@ void SimulationChunk::render() const
 	if (!visible) return;
 
 	sf::RectangleShape shape = sf::RectangleShape(chunkSize);
-	shape.setPosition((FVector)coord);
+	shape.setPosition(FVector(static_cast<float>(coord.x), static_cast<float>(coord.y)));
 	shape.setFillColor(fillColor);
 	shape.setOutlineThickness(5);
 	shape.setOutlineColor(outlineColor);

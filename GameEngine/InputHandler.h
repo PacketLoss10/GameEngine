@@ -1,6 +1,5 @@
 #pragma once
 
-#include "core.h"
 #include "GameWindow.h"
 
 #define INPUT InputHandler::instance()

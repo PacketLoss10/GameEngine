@@ -1,8 +1,5 @@
 #pragma once
 
-#include "utility"
-#include "vector"
-
 class Entity;
 
 class Component

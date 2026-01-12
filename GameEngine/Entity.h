@@ -1,6 +1,9 @@
 #pragma once
 
-class Entity
+#include "Transformable.h"
+#include "iostream"
+
+class Entity :public Transformable
 {
 protected:
 	bool toDelete = false;

@@ -1,6 +1,7 @@
 #pragma once
 
-#include "core.h"
+#include "SFML/Graphics.hpp"
+#include "iostream"
 
 #define TEXTURE_LOADER TextureLoader::instance()
 

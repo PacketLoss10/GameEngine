@@ -1,4 +1,5 @@
 #include "CollisionComponentManager.h"
+#include "iostream"
 
 CollisionComponentManager& CollisionComponentManager::instance()
 {
@@ -14,8 +15,6 @@ void CollisionComponentManager::update()
 	{
 		if (!compA->is_enabled())
 			return;
-
-		std::cout << "component detected" << std::endl;
 
 		for (CollisionComponent* compB : components)
 		{
