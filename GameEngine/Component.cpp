@@ -1,7 +1,5 @@
 #include "Component.h"
 
-Component::Component(Entity* owner, bool enabled) :owner(owner), enabled(enabled) {}
-
 Entity* Component::get_owner() const
 {
 	return owner;

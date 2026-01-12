@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "RenderComponentManager.h"
 
 std::string Texture::empty = "NULLTEXTURE.png";
 
@@ -64,11 +65,14 @@ void Sprite::generate_normal_map(Sprite& sprite, float value)
 	}
 }
 
-Sprite::Sprite(Texture texture, TextureRect rect, NormalMap normal) :RenderComponent(Transform()), texture(texture), rect(rect), normal(normal) {}
-
-Sprite::Sprite(Texture texture, TextureRect rect):RenderComponent(Transform()),texture(texture),rect(rect)
+void Sprite::init(Entity* owner, bool enabled, Texture texture, TextureRect rect, NormalMap normal)
 {
-	Sprite::generate_normal_map(*this, 1.f);
+	this->owner = owner;
+	this->enabled = enabled;
+	this->texture = texture;
+	this->rect = rect;
+	this->normal = normal;
+	RENDER_COMPONENT_MANAGER.register_component(this);
 }
 
 const TextureRect& Sprite::get_rect() const

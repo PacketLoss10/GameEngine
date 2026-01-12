@@ -5,7 +5,7 @@
 class Transformable
 {
 protected:
-	Transform transform;
+	Transform transform = Transform();
 public:
 	Transformable(Transform transform) :transform(transform) {}
 	virtual ~Transformable() = default;

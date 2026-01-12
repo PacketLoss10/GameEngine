@@ -53,7 +53,7 @@ int main()
 	EntityB b;
 	while (true)
 	{
-		if(INPUT.is_button_pressed(Mouse::M1))
-		COLLISION_COMPONENT_MANAGER.update();
+		if (INPUT.is_button_pressed(Mouse::M1))
+			COLLISION_COMPONENT_MANAGER.update();
 	}
 }

@@ -1,6 +1,13 @@
 #include "Light.h"
 
-Light::Light(float radius, float brightness, Color color) :RenderComponent(Transform()), radius(radius), brightness(brightness), color(color) {}
+void Light::init(Entity* owner, bool enabled, float radius, float brightness, Color color)
+{
+	this->owner = owner;
+	this->enabled = enabled;
+	this->radius = radius;
+	this->brightness = brightness;
+	this->color = color;
+}
 
 float Light::get_radius() const
 {

@@ -47,8 +47,8 @@ protected:
 	NormalMap normal = NormalMap();
 public:
 	Sprite() = default;
-	Sprite(Texture texture, TextureRect rect, NormalMap normal);
-	Sprite(Texture texture, TextureRect rect);
+
+	void init(Entity* owner, bool enabled, Texture texture, TextureRect rect, NormalMap normal);
 
 	const TextureRect& get_rect() const;
 	void set_rect(const TextureRect& rect);
@@ -59,4 +59,3 @@ public:
 	const NormalMap& get_normal() const;
 	void set_normal(const NormalMap& normal);
 };
-

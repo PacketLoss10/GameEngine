@@ -1,6 +1,17 @@
 #include "Animation.h"
 
-Animation::Animation(Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart) :sprite(sprite), layout(layout), frameSize(frameSize), numFrames(numFrames), dt(1.f / std::max(fps, 0.01f)), oneShot(oneShot), paused(!autoStart) {}
+void Animation::init(Entity* owner, bool enabled, Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart)
+{
+	this->owner = owner;
+	this->enabled = enabled;
+	this->sprite = sprite;
+	this->layout = layout;
+	this->frameSize = frameSize;
+	this->numFrames = std::max(1, numFrames);
+	this->dt = 1.f / fps;
+	this->oneShot = oneShot;
+	this->paused = !autoStart;
+}
 
 void Animation::update()
 {

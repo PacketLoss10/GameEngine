@@ -31,7 +31,8 @@ private:
 	bool paused = false;
 public:
 	Animation() = default;
-	Animation(Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
+
+	void init(Entity* owner, bool enabled, Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
 
 	void update();
 	void pause();

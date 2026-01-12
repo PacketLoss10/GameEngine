@@ -5,10 +5,11 @@
 class CircleCollisionComponent :public CollisionComponent
 {
 private:
-	float radius;
+	float radius = 0.f;
 public:
 	CircleCollisionComponent() = default;
-	CircleCollisionComponent(FVector position, float radius);
+
+	void init(Entity* owner, bool enabled, FVector position, float radius);
 
 	float get_radius() const;
 	void set_radius(float radius);

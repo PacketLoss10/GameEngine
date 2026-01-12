@@ -6,11 +6,10 @@
 
 class CollisionComponent :public Component
 {
-private:
-	FVector position;
+protected:
+	FVector position = FVector();
 public:
 	CollisionComponent() = default;
-	CollisionComponent(FVector position);
 	virtual ~CollisionComponent() = default;
 
 	Delegate<Entity*, CollisionComponent*, Entity*, CollisionComponent*> on_overlap;

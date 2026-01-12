@@ -1,6 +1,14 @@
 #include "CircleCollisionComponent.h"
+#include "CollisionComponentManager.h"
 
-CircleCollisionComponent::CircleCollisionComponent(FVector position, float radius) :CollisionComponent(position), radius(radius) {}
+void CircleCollisionComponent::init(Entity* owner, bool enabled, FVector position, float radius)
+{
+	this->owner = owner;
+	this->enabled = enabled;
+	this->position = position;
+	this->radius = radius;
+	COLLISION_COMPONENT_MANAGER.register_component(this);
+}
 
 float CircleCollisionComponent::get_radius() const
 {
