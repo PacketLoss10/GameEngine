@@ -10,7 +10,10 @@ protected:
 	bool toDelete = false;
 public:
 	Component() = default;
+	Component(Entity* owner, bool enabled);
 	virtual ~Component() = default;
+
+	virtual void init() {};
 
 	Entity* get_owner() const;
 	void set_owner(Entity* owner);

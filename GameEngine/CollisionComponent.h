@@ -1,20 +1,15 @@
 #pragma once
 
 #include "Component.h"
-#include "Transform.h"
+#include "Transformable.h"
 #include "Delegate.h"
 
-class CollisionComponent :public Component
+class CollisionComponent :public Component, public Transformable
 {
-protected:
-	FVector position = FVector();
 public:
 	CollisionComponent() = default;
-	CollisionComponent(FVector position);
+	CollisionComponent(Entity* owner, bool enabled, Transform transform);
 	virtual ~CollisionComponent() = default;
 
 	Delegate<Entity*, CollisionComponent*, Entity*, CollisionComponent*> on_overlap;
-
-	const FVector& get_position() const;
-	void set_position(const FVector& position);
 };

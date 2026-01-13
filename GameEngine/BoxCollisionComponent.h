@@ -8,9 +8,9 @@ private:
 	FVector size = FVector();
 public:
 	BoxCollisionComponent() = default;
-	BoxCollisionComponent(FVector position, FVector size);
+	BoxCollisionComponent(Entity* owner, bool enabled, Transform transform, FVector size);
 
-	void init(Entity* owner, bool enabled, FVector position, FVector size);
+	void init() override;
 
 	const FVector& get_size() const;
 	void set_size(const FVector& size);

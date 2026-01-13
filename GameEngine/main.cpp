@@ -1,59 +1,45 @@
-#include "GameWindow.h"
-#include "InputHandler.h"
-#include "TickClock.h"
-#include "Renderer.h"
-#include "WorldSystem.h"
-#include "Animation.h"
-#include "Light.h"
-#include "JSONFILE.h"
-
-//int main()
-//{
-//	SET_MAX_FPS(60);
-//
-//	WORLD.spawn_actor<Actor>(Transform(FVector(0.f, 0.f), FVector(1.f, 0.f), FVector(10.f, 10.f)), std::vector<RenderObject*>{ new Animation("angel_idle.png", IVector(110, 112), IRect(IVector(0, 0), IVector(10, 1)), 10, 10.f, false) });
-//	WORLD.spawn_actor<Actor>(Transform(FVector(100.f, 100.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), std::vector<RenderObject*>{ new Light(300.f, 1.f, Color(255, 255, 255)) });
-//
-//	while (GAME_WINDOW.is_open())
-//	{
-//		GAME_WINDOW.update();
-//		INPUT.update();
-//		WORLD.update();
-//		for (auto actor : WORLD.find_all_actors())
-//		{
-//			for (auto g : actor->get_graphics())
-//			{
-//				if (auto light = dynamic_cast<Light*>(g))
-//				{
-//					light->set_position(INPUT.get_mouse_pos());
-//					if (INPUT.is_button_pressed(Mouse::M1))
-//						light->set_brightness(light->get_brightness() + 0.25f);
-//					if (INPUT.is_button_pressed(Mouse::M2))
-//						light->set_brightness(light->get_brightness() - 0.25f);
-//				}
-//			}
-//		}
-//
-//		RENDERER.start_render();
-//		RENDERER.render(WORLD.generate_render_data());
-//		RENDERER.end_render();
-//
-//		UPDATE_DELTA_TIME;
-//	}
-//}
-
-#include "Entity.h"
 #include "CollisionComponentManager.h"
 #include "EntityA.h"
 #include "EntityB.h"
 
+#include <SFML/Graphics.hpp>
+#include <cmath>
+
+float forwardToAngle(sf::Vector2f forward)
+{
+    return std::atan2(forward.y, forward.x) * 180.f / 3.14159265f;
+}
+
 int main()
 {
-	EntityA a;
-	EntityB b;
-	while (true)
-	{
-		if (INPUT.is_button_pressed(Mouse::M1))
-			COLLISION_COMPONENT_MANAGER.update();
-	}
+    EntityA a;
+
+    sf::RenderWindow window(sf::VideoMode(sf::Vector2u(800, 600)), "");
+
+    sf::CircleShape ellipseShape(1.f);
+    ellipseShape.setOrigin(sf::Vector2f(0.5f,0.5f));
+    ellipseShape.setFillColor(sf::Color::Green);
+
+    sf::Vector2f position(a.get_collision()->get_position());
+    sf::Vector2f radii(a.get_collision()->get_radius());
+    sf::Vector2f forward(a.get_collision()->get_forward());
+    float length = std::sqrt(forward.x * forward.x + forward.y * forward.y);
+    forward /= length;
+
+    ellipseShape.setPosition(position);
+    ellipseShape.setScale(sf::Vector2f(radii.x, radii.y));
+    ellipseShape.setRotation(sf::radians(forwardToAngle(forward)));
+
+    while (window.isOpen())
+    {
+
+
+
+
+        window.clear(sf::Color::Black);
+        window.draw(ellipseShape);
+        window.display();
+    }
+
+    return 0;
 }

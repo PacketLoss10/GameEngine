@@ -6,12 +6,13 @@
 class EntityA :public Entity
 {
 private:
-	CircleCollisionComponent* collision = new  CircleCollisionComponent;
+	CircleCollisionComponent* collision;
 public:
 	EntityA()
 	{
-		collision->init(this, true, transform.position, 100.f);
+		collision = new CircleCollisionComponent(this, true,Transform(FVector(300.f,300.f),FVector(1.f,0.f),FVector(1.f,1.f)), FVector(200.f, 100.f));
 		collision->on_overlap.bind(this, &EntityA::collision_test);
+		collision->init();
 	}
 	CircleCollisionComponent* get_collision() const
 	{

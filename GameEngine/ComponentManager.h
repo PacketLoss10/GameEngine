@@ -23,12 +23,7 @@ public:
 			std::remove_if(components.begin(), components.end(),
 				[](T* component)
 				{
-					if (component->is_toDelete() || !component->get_owner())
-					{
-						delete component;
-						return true;
-					}
-					return false;
+					return !component;
 				}
 			), components.end()
 		);

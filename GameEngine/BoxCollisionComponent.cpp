@@ -1,14 +1,10 @@
 #include "BoxCollisionComponent.h"
 #include "CollisionComponentManager.h"
 
-BoxCollisionComponent::BoxCollisionComponent(FVector position, FVector size) :CollisionComponent(position), size(size) {}
+BoxCollisionComponent::BoxCollisionComponent(Entity* owner, bool enabled, Transform transform, FVector size) :CollisionComponent(owner, enabled, transform), size(size) {}
 
-void BoxCollisionComponent::init(Entity* owner, bool enabled, FVector position, FVector size)
+void BoxCollisionComponent::init()
 {
-	this->owner = owner;
-	this->enabled = owner;
-	this->position = position;
-	this->size = size;
 	COLLISION_COMPONENT_MANAGER.register_component(this);
 }
 
