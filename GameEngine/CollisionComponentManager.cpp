@@ -3,34 +3,30 @@
 
 void CollisionComponentManager::box_on_box(BoxCollisionComponent* boxA, BoxCollisionComponent* boxB)
 {
-	FVector axes[4];
-	axes[0] = boxA->get_forward() * boxA->get_scale().x;
-	axes[1] = perpendicular(boxA->get_forward()) * boxA->get_scale().y;
-	axes[2] = boxB->get_forward() * boxB->get_scale().x;
-	axes[3] = perpendicular(boxB->get_forward()) * boxB->get_scale().y;
+	FVector axisAX = boxA->get_forward();
+	FVector axisAY = boxA->get_forward().perpendicular();
+	FVector axisBX = boxB->get_forward();
+	FVector axisBY = boxB->get_forward().perpendicular();
 
-	FVector halfA = boxA->get_size() * 0.5f;
-	FVector halfB = boxB->get_size() * 0.5f;
+	FVector axes[4] = { axisAX,axisAY,axisBX,axisBY };
+
+	FVector halfA = boxA->get_size().component_wise_mult(boxA->get_scale()) * 0.5f;
+	FVector halfB = boxB->get_size().component_wise_mult(boxB->get_scale()) * 0.5f;
 
 	for (int i = 0; i < 4; i++)
 	{
 		FVector axis = axes[i];
 
-		float rA = halfA.x * std::abs(axis.dot(boxA->get_forward())) +
-			halfA.y * std::abs(axis.dot(perpendicular(boxA->get_forward())));
+		if (axis.size_squared() > 1.01f || axis.size_squared() < 0.99f)
+			axis = axis.normalised();
 
-		float projA = axis.dot(boxA->get_position());
-		float minA = projA - rA;
-		float maxA = projA + rA;
+		float cA = boxA->get_position().dot(axis);
+		float rA = halfA.x * std::abs(axis.dot(axisAX)) + halfA.y * std::abs(axis.dot(axisAY));
 
-		float rB = halfB.x * std::abs(axis.dot(boxB->get_forward())) +
-			halfB.y * std::abs(axis.dot(perpendicular(boxB->get_forward())));
+		float cB = boxB->get_position().dot(axis);
+		float rB = halfB.x * std::abs(axis.dot(axisBX)) + halfB.y * std::abs(axis.dot(axisBY));
 
-		float projB = axis.dot(boxB->get_position());
-		float minB = projB - rB;
-		float maxB = projB + rB;
-
-		if (maxA < minB || maxB < minA)
+		if (std::abs(cA - cB) > (rA + rB))
 			return;
 	}
 
@@ -38,80 +34,124 @@ void CollisionComponentManager::box_on_box(BoxCollisionComponent* boxA, BoxColli
 	boxB->on_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
 }
 
-void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circleA, CircleCollisionComponent* circleB)
+void CollisionComponentManager::circle_on_circle(
+	CircleCollisionComponent* A,
+	CircleCollisionComponent* B)
 {
-	FVector axes[4];
-	axes[0] = circleA->get_forward() * circleA->get_scale().x;
-	axes[1] = perpendicular(circleA->get_forward()) * circleA->get_scale().y;
-	axes[2] = circleB->get_forward() * circleB->get_scale().x;
-	axes[3] = perpendicular(circleB->get_forward()) * circleB->get_scale().y;
+	// --- effective radii ---
+	FVector rA = A->get_radius().component_wise_mult(A->get_scale());
+	FVector rB = B->get_radius().component_wise_mult(B->get_scale());
 
-	FVector halfA = circleA->get_radius();
-	FVector halfB = circleB->get_radius();
+	// --- transform B center into A space ---
+	FVector d = (B->get_position() - A->get_position())
+		.rotated_by(-A->get_forward().angle())
+		.component_wise_div(rA); // A becomes unit circle
 
-	for (int i = 0; i < 4; i++)
+	// --- relative rotation ---
+	float relAngle = B->get_forward().angle() - A->get_forward().angle();
+
+	// --- axes of B in A space ---
+	FVector ux = FVector(1, 0).rotated_by(relAngle);
+	FVector uy = FVector(0, 1).rotated_by(relAngle);
+
+	// scale axes by relative radii
+	float a = rB.x / rA.x;
+	float b = rB.y / rA.y;
+
+	ux = ux.normalised();
+	uy = uy.normalised();
+
+	// --- project center of B into B's axes ---
+	float px = d.dot(ux);
+	float py = d.dot(uy);
+
+	// --- Newton iteration to find closest point on ellipse B to origin ---
+	float t = 0.f;
+	for (int i = 0; i < 8; ++i)
 	{
-		FVector axis = axes[i];
+		float ct = cosf(t);
+		float st = sinf(t);
 
-		float rA = circleA->get_radius().x * std::abs(axis.dot(circleA->get_forward())) +
-			circleA->get_radius().y * std::abs(axis.dot(perpendicular(circleA->get_forward())));
-		float projA = axis.dot(circleA->get_position());
-		float minA = projA - rA;
-		float maxA = projA + rA;
+		float ex = a * ct;
+		float ey = b * st;
 
-		float rB = circleB->get_radius().x * std::abs(axis.dot(circleB->get_forward())) +
-			circleB->get_radius().y * std::abs(axis.dot(perpendicular(circleB->get_forward())));
-		float projB = axis.dot(circleB->get_position());
-		float minB = projB - rB;
-		float maxB = projB + rB;
+		float f = (a * a - b * b) * ct * st - px * a * st + py * b * ct;
+		float df = (a * a - b * b) * (ct * ct - st * st) - px * a * ct - py * b * st;
 
-		if (maxA < minB || maxB < minA)
-			return;
+		t -= f / df;
 	}
 
-	circleA->on_overlap.invoke(circleA->get_owner(), circleA, circleB->get_owner(), circleB);
-	circleB->on_overlap.invoke(circleB->get_owner(), circleB, circleA->get_owner(), circleA);
+	// --- compute closest point ---
+	float cx = a * cosf(t);
+	float cy = b * sinf(t);
+
+	float distSq = (cx - px) * (cx - px) + (cy - py) * (cy - py);
+
+	// --- overlap check ---
+	if (distSq <= 1.f)
+	{
+		A->on_overlap.invoke(A->get_owner(), A, B->get_owner(), B);
+		B->on_overlap.invoke(B->get_owner(), B, A->get_owner(), A);
+	}
 }
+
 
 void CollisionComponentManager::circle_on_box(CircleCollisionComponent* circle, BoxCollisionComponent* box)
 {
-	FVector axes[4];
-	axes[0] = circle->get_forward() * circle->get_scale().x;
-	axes[1] = perpendicular(circle->get_forward()) * circle->get_scale().y;
-	axes[2] = box->get_forward() * box->get_scale().x;
-	axes[3] = perpendicular(box->get_forward()) * box->get_scale().y;
+	FVector halfCircle = circle->get_radius().component_wise_mult(circle->get_scale());
+	FVector halfBox = box->get_size().component_wise_mult(box->get_scale()) * 0.5f;
 
-	FVector halfBox = box->get_size() * 0.5f;
+	FVector corners[4] =
+	{
+		{-halfBox.x, -halfBox.y},
+		{ halfBox.x, -halfBox.y},
+		{ halfBox.x,  halfBox.y},
+		{-halfBox.x,  halfBox.y}
+	};
 
+	for (int i = 0; i < 4; ++i)
+	{
+		corners[i] = corners[i].rotated_by(box->get_forward().angle()) + box->get_position() - circle->get_position();
+		corners[i] = corners[i].rotated_by(-circle->get_forward().angle());
+		corners[i] = corners[i].component_wise_div(halfCircle);
+	}
+
+	bool inside = true;
 	for (int i = 0; i < 4; i++)
 	{
-		FVector axis = axes[i];
+		FVector a = corners[i];
+		FVector b = corners[(i + 1) & 3];
+		FVector edge = b - a;
+		FVector normal(edge.y, -edge.x);
 
-		float rCircle = circle->get_radius().x * std::abs(axis.dot(circle->get_forward())) +
-			circle->get_radius().y * std::abs(axis.dot(perpendicular(circle->get_forward())));
-		float projCircle = axis.dot(circle->get_position());
-		float minCircle = projCircle - rCircle;
-		float maxCircle = projCircle + rCircle;
+		if (normal.dot(a * -1.f) < 0.f)
+		{
+			inside = false;
+			break;
+		}
+	}
 
-		float rBox = halfBox.x * std::abs(axis.dot(box->get_forward())) +
-			halfBox.y * std::abs(axis.dot(perpendicular(box->get_forward())));
-		float projBox = axis.dot(box->get_position());
-		float minBox = projBox - rBox;
-		float maxBox = projBox + rBox;
+	if (!inside)
+	{
+		float minDistSq = 100000000.f;
 
-		if (maxCircle < minBox || maxBox < minCircle)
+		for (int i = 0; i < 4; i++)
+		{
+			FVector a = corners[i];
+			FVector b = corners[(i + 1) % 4];
+
+			FVector p = a + (b - a) * std::clamp(-a.dot(b - a) / (b - a).dot(b - a), 0.0f, 1.0f);
+
+			minDistSq = std::min(minDistSq, p.dot(p));
+		}
+
+		if (minDistSq > 1.0f)
 			return;
 	}
 
 	circle->on_overlap.invoke(circle->get_owner(), circle, box->get_owner(), box);
 	box->on_overlap.invoke(box->get_owner(), box, circle->get_owner(), circle);
 }
-
-FVector CollisionComponentManager::perpendicular(const FVector& v) const
-{
-	return FVector(-v.y, v.x); 
-}
-
 
 CollisionComponentManager& CollisionComponentManager::instance()
 {
@@ -123,17 +163,14 @@ void CollisionComponentManager::update()
 {
 	delete_components();
 
-	for (CollisionComponent* compA : components)
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if (!compA->is_enabled())
-			return;
-
-		for (CollisionComponent* compB : components)
+		for (size_t j = i + 1; j < components.size(); j++)
 		{
-			if (!compB->is_enabled())
-				return;
+			CollisionComponent* compA = components[i];
+			CollisionComponent* compB = components[j];
 
-			if (compA == compB)
+			if (!compA->is_enabled() || !compB->is_enabled())
 				continue;
 
 			if (CircleCollisionComponent* circleA = dynamic_cast<CircleCollisionComponent*>(compA))

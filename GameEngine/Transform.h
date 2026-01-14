@@ -112,10 +112,18 @@ struct FVector
 	{
 		return *this / size();
 	}
+	FVector perpendicular() const
+	{
+		return FVector(-y, x);
+	}
 
 	float angle() const
 	{
 		return std::atan2f(y, x);
+	}
+	FVector rotated_by(float angle) const
+	{
+		return FVector(x * cosf(angle) - y * sinf(angle), x * sinf(angle) + y * cosf(angle));
 	}
 };
 

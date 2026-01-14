@@ -2,6 +2,7 @@
 
 #include "Entity.h"
 #include "CircleCollisionComponent.h"
+#include "BoxCollisionComponent.h"
 
 class EntityB :public Entity
 {
@@ -10,11 +11,11 @@ private:
 public:
 	EntityB()
 	{
-		collision = new CircleCollisionComponent(this, true, transform, FVector(100.f, 100.f));
+		collision = new CircleCollisionComponent(this, true, Transform(FVector(300.f, 300.f), FVector(1.f, 0.f), FVector(1.f, 1.f)), FVector(200.f, 100.f));
 		collision->on_overlap.bind(this, &EntityB::collision_test);
 		collision->init();
 	}
-	CircleCollisionComponent* get_collision() const
+	CircleCollisionComponent* get_collision()
 	{
 		return collision;
 	}
