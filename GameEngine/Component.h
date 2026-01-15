@@ -14,6 +14,7 @@ public:
 	virtual ~Component() = default;
 
 	virtual void init() {};
+	virtual void render() {};
 
 	Entity* get_owner() const;
 	void set_owner(Entity* owner);

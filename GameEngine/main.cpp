@@ -19,35 +19,35 @@ int main()
 		INPUT.update();
 
 		if (INPUT.is_key_held(Keyboard::W))
-			a.get_collision()->set_position(a.get_collision()->get_position() + FVector(0.f, -100.f) * DELTA_TIME);
+			a.get_collision()->move_by(FVector(0.f, -100.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::A))
-			a.get_collision()->set_position(a.get_collision()->get_position() + FVector(-100.f, 0.f) * DELTA_TIME);
+			a.get_collision()->move_by(FVector(-100.f, 0.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::S))
-			a.get_collision()->set_position(a.get_collision()->get_position() + FVector(0.f, 100.f) * DELTA_TIME);
+			a.get_collision()->move_by(FVector(0.f, 100.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::D))
-			a.get_collision()->set_position(a.get_collision()->get_position() + FVector(100.f, 0.f) * DELTA_TIME);
+			a.get_collision()->move_by(FVector(100.f, 0.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::Q))
-			a.get_collision()->set_forward(a.get_collision()->get_forward().rotated_by(3.14f * DELTA_TIME));
+			a.get_collision()->rotate_by(3.14f * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::E))
-			a.get_collision()->set_forward(a.get_collision()->get_forward().rotated_by(-3.14f * DELTA_TIME));
+			a.get_collision()->rotate_by(-3.14f * DELTA_TIME);
 
 		if (INPUT.is_key_held(Keyboard::Up))
-			b.get_collision()->set_position(b.get_collision()->get_position() + FVector(0.f, -100.f) * DELTA_TIME);
+			b.get_collision()->move_by(FVector(0.f, -100.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::Left))
-			b.get_collision()->set_position(b.get_collision()->get_position() + FVector(-100.f, 0.f) * DELTA_TIME);
+			b.get_collision()->move_by(FVector(-100.f, 0.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::Down))
-			b.get_collision()->set_position(b.get_collision()->get_position() + FVector(0.f, 100.f) * DELTA_TIME);
+			b.get_collision()->move_by(FVector(0.f, 100.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::Right))
-			b.get_collision()->set_position(b.get_collision()->get_position() + FVector(100.f, 0.f) * DELTA_TIME);
+			b.get_collision()->move_by(FVector(100.f, 0.f) * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::K))
-			b.get_collision()->set_forward(b.get_collision()->get_forward().rotated_by(3.14f * DELTA_TIME));
+			b.get_collision()->rotate_by(3.14f * DELTA_TIME);
 		if (INPUT.is_key_held(Keyboard::L))
-			b.get_collision()->set_forward(b.get_collision()->get_forward().rotated_by(-3.14f * DELTA_TIME));
+			b.get_collision()->rotate_by(-3.14f * DELTA_TIME);
 
 		system("cls");
 		COLLISION_COMPONENT_MANAGER.update();
 
-		window.clear(sf::Color::Black);
+		window.clear(sf::Color::White);
 
 		sf::RectangleShape box;
 		sf::CircleShape circle;
@@ -67,6 +67,8 @@ int main()
 		//window.draw(box);
 
 		circle.setFillColor(sf::Color::Red);
+		circle.setOutlineThickness(0.02f);
+		circle.setOutlineColor(sf::Color::Black);
 		circle.setRadius(1.f);
 		circle.setOrigin(FVector(1.f, 1.f));
 		position = a.get_collision()->get_position();
@@ -78,6 +80,8 @@ int main()
 		window.draw(circle);
 
 		circle.setFillColor(sf::Color::Blue);
+		circle.setOutlineThickness(0.02f);
+		circle.setOutlineColor(sf::Color::Black);
 		circle.setRadius(1.f);
 		circle.setOrigin(FVector(1.f, 1.f));
 		position = b.get_collision()->get_position();

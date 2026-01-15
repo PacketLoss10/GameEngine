@@ -2,6 +2,11 @@
 
 #include "SFML/Graphics.hpp"
 
+namespace mth
+{
+	const float pi = 3.14159f;
+};
+
 struct IVector
 {
 	int x = 0;

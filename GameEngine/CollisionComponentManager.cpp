@@ -34,67 +34,43 @@ void CollisionComponentManager::box_on_box(BoxCollisionComponent* boxA, BoxColli
 	boxB->on_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
 }
 
-void CollisionComponentManager::circle_on_circle(
-	CircleCollisionComponent* A,
-	CircleCollisionComponent* B)
+void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circleA, CircleCollisionComponent* circleB)
 {
-	// --- effective radii ---
-	FVector rA = A->get_radius().component_wise_mult(A->get_scale());
-	FVector rB = B->get_radius().component_wise_mult(B->get_scale());
+	auto pointOn = [](CircleCollisionComponent* c, float t)
+		{
+			return FVector(
+				c->get_position().x + cosf(c->get_rotation()) * c->get_radius().x * c->get_scale().x * cosf(t) - sinf(c->get_rotation()) * c->get_radius().y * c->get_scale().y * sinf(t),
+				c->get_position().y + sinf(c->get_rotation()) * c->get_radius().x * c->get_scale().x * cosf(t) + cosf(c->get_rotation()) * c->get_radius().y * c->get_scale().y * sinf(t)
+			);
+		};
 
-	// --- transform B center into A space ---
-	FVector d = (B->get_position() - A->get_position())
-		.rotated_by(-A->get_forward().angle())
-		.component_wise_div(rA); // A becomes unit circle
+	auto pointIn = [](CircleCollisionComponent* c, const FVector& P)
+		{
+			float ca = cosf(c->get_rotation()), sa = sinf(c->get_rotation());
+			FVector d = P - c->get_position();
 
-	// --- relative rotation ---
-	float relAngle = B->get_forward().angle() - A->get_forward().angle();
+			float x = ca * d.x + sa * d.y;
+			float y = -sa * d.x + ca * d.y;
 
-	// --- axes of B in A space ---
-	FVector ux = FVector(1, 0).rotated_by(relAngle);
-	FVector uy = FVector(0, 1).rotated_by(relAngle);
+			float nx = x / (c->get_radius().x * c->get_scale().x);
+			float ny = y / (c->get_radius().y * c->get_scale().y);
 
-	// scale axes by relative radii
-	float a = rB.x / rA.x;
-	float b = rB.y / rA.y;
+			return (nx * nx + ny * ny) <= 1.0f;
+		};
 
-	ux = ux.normalised();
-	uy = uy.normalised();
-
-	// --- project center of B into B's axes ---
-	float px = d.dot(ux);
-	float py = d.dot(uy);
-
-	// --- Newton iteration to find closest point on ellipse B to origin ---
-	float t = 0.f;
-	for (int i = 0; i < 8; ++i)
+	for (int i = 0; i < 32; i++)
 	{
-		float ct = cosf(t);
-		float st = sinf(t);
-
-		float ex = a * ct;
-		float ey = b * st;
-
-		float f = (a * a - b * b) * ct * st - px * a * st + py * b * ct;
-		float df = (a * a - b * b) * (ct * ct - st * st) - px * a * ct - py * b * st;
-
-		t -= f / df;
+		float t = (2.0f * mth::pi * i) / 32.0f;
+		if (pointIn(circleA, pointOn(circleB, t)))
+		{
+			circleA->on_overlap.invoke(circleA->get_owner(), circleA, circleB->get_owner(), circleB);
+			circleB->on_overlap.invoke(circleB->get_owner(), circleB, circleA->get_owner(), circleA);
+			return;
+		}
 	}
 
-	// --- compute closest point ---
-	float cx = a * cosf(t);
-	float cy = b * sinf(t);
-
-	float distSq = (cx - px) * (cx - px) + (cy - py) * (cy - py);
-
-	// --- overlap check ---
-	if (distSq <= 1.f)
-	{
-		A->on_overlap.invoke(A->get_owner(), A, B->get_owner(), B);
-		B->on_overlap.invoke(B->get_owner(), B, A->get_owner(), A);
-	}
+	return;
 }
-
 
 void CollisionComponentManager::circle_on_box(CircleCollisionComponent* circle, BoxCollisionComponent* box)
 {
@@ -111,8 +87,8 @@ void CollisionComponentManager::circle_on_box(CircleCollisionComponent* circle, 
 
 	for (int i = 0; i < 4; ++i)
 	{
-		corners[i] = corners[i].rotated_by(box->get_forward().angle()) + box->get_position() - circle->get_position();
-		corners[i] = corners[i].rotated_by(-circle->get_forward().angle());
+		corners[i] = corners[i].rotated_by(box->get_rotation()) + box->get_position() - circle->get_position();
+		corners[i] = corners[i].rotated_by(-circle->get_rotation());
 		corners[i] = corners[i].component_wise_div(halfCircle);
 	}
 
