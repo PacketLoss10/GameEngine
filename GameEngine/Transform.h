@@ -69,6 +69,11 @@ struct FVector
 		return sf::Vector2f(x, y);
 	}
 
+	bool operator==(const FVector& other) const
+	{
+		return x != other.x || y != other.y;
+	}
+
 	FVector operator+(const FVector& other) const
 	{
 		return FVector(x + other.x, y + other.y);

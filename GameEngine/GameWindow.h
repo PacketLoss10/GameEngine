@@ -4,8 +4,8 @@
 
 class InputHandler;
 class Renderer;
-class BoxCollision;
-class CircleCollision;
+class CircleCollisionComponent;
+class BoxCollisionComponent;
 class SimulationChunk;
 
 #define GAME_WINDOW GameWindow::instance()
@@ -19,16 +19,15 @@ private:
 	GameWindow& operator=(const GameWindow&) = delete;
 	FVector get_mouse_pos() const;
 	void start_render();
+	void render(const sf::Drawable& renderObject, sf::Shader* shader);
 	void end_render();
 	friend class InputHandler;
 	friend class Renderer;
-	friend class BoxCollision;
-	friend class CircleCollision;
+	friend class CircleCollisionComponent;
+	friend class BoxCollisionComponent;
 	friend class SimulationChunk;
 public:
 	static GameWindow& instance();
 	bool is_open() const;
 	void update();
-
-	void render(const sf::Drawable& renderObject, sf::Shader* shader);
 };

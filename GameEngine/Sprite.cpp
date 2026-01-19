@@ -1,9 +1,6 @@
 #include "Sprite.h"
+#include "SFML/Graphics.hpp"
 #include "RenderComponentManager.h"
-
-std::string Texture::empty = "NULLTEXTURE.png";
-
-std::string NormalMap::empty = "NULLNORMAL.png";
 
 void Sprite::generate_normal_map(Sprite& sprite, float value)
 {
@@ -65,13 +62,15 @@ void Sprite::generate_normal_map(Sprite& sprite, float value)
 	}
 }
 
-void Sprite::init(Entity* owner, bool enabled, Texture texture, TextureRect rect, NormalMap normal)
+Sprite::Sprite(Entity* owner, bool enabled, Texture texture, TextureRect rect, int zOrder, Transform transform): RenderComponent(owner, enabled, transform), ZSortable(zOrder), texture(texture),rect(rect)
 {
-	this->owner = owner;
-	this->enabled = enabled;
-	this->texture = texture;
-	this->rect = rect;
-	this->normal = normal;
+	generate_normal_map(*this, 1.f);
+}
+
+Sprite::Sprite(Entity* owner, bool enabled, Texture texture, TextureRect rect, NormalMap normal, int zOrder, Transform transform) :RenderComponent(owner, enabled, transform), ZSortable(zOrder), texture(texture), rect(rect), normal(normal) {}
+
+void Sprite::init()
+{
 	RENDER_COMPONENT_MANAGER.register_component(this);
 }
 

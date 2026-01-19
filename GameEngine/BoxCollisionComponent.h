@@ -11,6 +11,7 @@ public:
 	BoxCollisionComponent(Entity* owner, bool enabled, Transform transform, FVector size);
 
 	void init() override;
+	void render() override;
 
 	const FVector& get_size() const;
 	void set_size(const FVector& size);

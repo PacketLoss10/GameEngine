@@ -149,6 +149,11 @@ void CollisionComponentManager::update()
 			if (!compA->is_enabled() || !compB->is_enabled())
 				continue;
 
+			if (debugMode)
+			{
+
+			}
+
 			if (CircleCollisionComponent* circleA = dynamic_cast<CircleCollisionComponent*>(compA))
 			{
 				if (CircleCollisionComponent* circleB = dynamic_cast<CircleCollisionComponent*>(compB))

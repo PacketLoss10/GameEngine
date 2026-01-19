@@ -149,16 +149,28 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="NavBlock.cpp" />
+    <ClCompile Include="NavigationAgent.cpp" />
+    <ClCompile Include="NormalMap.cpp" />
+    <ClCompile Include="PathFinder.cpp" />
+    <ClCompile Include="PrimitiveBoxShape.cpp" />
+    <ClCompile Include="PrimitiveCircleShape.cpp" />
+    <ClCompile Include="PrimitiveLineShape.cpp" />
+    <ClCompile Include="PrimitiveShape.cpp" />
     <ClCompile Include="RenderComponentManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
+    <ClCompile Include="RenderObject.cpp" />
     <ClCompile Include="SimulationChunk.cpp" />
     <ClCompile Include="SLObject.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
+    <ClCompile Include="TextureRect.cpp" />
     <ClCompile Include="TickClock.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transformable.cpp" />
+    <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorldSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -179,20 +191,32 @@
     <ClInclude Include="JSONOBJECT.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="NavBlock.h" />
+    <ClInclude Include="NavigationAgent.h" />
+    <ClInclude Include="NormalMap.h" />
+    <ClInclude Include="PathFinder.h" />
+    <ClInclude Include="PrimitiveBoxShape.h" />
+    <ClInclude Include="PrimitiveCircleShape.h" />
+    <ClInclude Include="PrimitiveLineShape.h" />
+    <ClInclude Include="PrimitiveShape.h" />
     <ClInclude Include="RenderComponentManager.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="RenderObject.h" />
     <ClInclude Include="SimulationChunk.h" />
     <ClInclude Include="SLObject.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureLoader.h" />
+    <ClInclude Include="TextureRect.h" />
     <ClInclude Include="TickClock.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Window.h" />
     <ClInclude Include="WorldSystem.h" />
   </ItemGroup>
   <ItemGroup>
@@ -200,7 +224,7 @@
     <Image Include="NULLTEXTURE.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shader.frag" />
+    <None Include="CORESHADER.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

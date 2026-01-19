@@ -1,10 +1,11 @@
 #include "Renderer.h"
+#include "Window.h"
 #include "Sprite.h"
 #include "Light.h"
 
 Renderer::Renderer()
 {
-	if (!shader.loadFromFile("shader.frag", sf::Shader::Type::Fragment))
+	if (!shader.loadFromFile("CORESHADER.frag", sf::Shader::Type::Fragment))
 	{
 		std::cerr << "Failed to load core shader" << std::endl;
 		return;
@@ -17,94 +18,82 @@ Renderer& Renderer::instance()
 	return instance;
 }
 
-void Renderer::start_render() const
+void Renderer::push(Light* lightData)
 {
-	GAME_WINDOW.start_render();
+    lights.push_back(lightData);
 }
 
-void Renderer::render(const std::vector<RenderComponent*>& data)
+void Renderer::push(Sprite* spriteData)
 {
-    if (data.empty())
+    sprites.push_back(spriteData);
+}
+
+void Renderer::render(Window& window)
+{
+    if (sprites.empty() && lights.empty())
         return;
 
-    std::vector<Sprite*> sprites;
-    sprites.reserve(data.size());
+    window.start_display();
+
+    std::sort(sprites.begin(), sprites.end(), [](const Sprite* a, const Sprite* b) {return a->get_zOrder() < b->get_zOrder(); });
 
     constexpr int MAX_LIGHTS = 16;
-    std::vector<Light*> lights;
-    lights.reserve(std::min(data.size(), static_cast<size_t>(MAX_LIGHTS)));
-
-    // Isolate sprites and lights
-    for (RenderComponent* renderable : data)
-    {
-        if (Sprite* sprite = dynamic_cast<Sprite*>(renderable))
-        {
-            sprites.push_back(sprite);
-        }
-        else if (Light* light = dynamic_cast<Light*>(renderable))
-        {
-            lights.push_back(light);
-        }
-    }
-
-    // Light data init
-    int lightCount = std::min(static_cast<int>(lights.size()), MAX_LIGHTS);
-
+    const int numLights = std::min(static_cast<int>(lights.size()), MAX_LIGHTS);
     std::vector<sf::Glsl::Vec2> positions;
-    positions.reserve(lightCount);
-
+    positions.reserve(numLights);
     std::vector<float> radii;
-    radii.reserve(lightCount);
-
+    radii.reserve(numLights);
     std::vector<sf::Glsl::Vec3> colors;
-    colors.reserve(lightCount);
-
-    std::vector<float> brightness;
-    brightness.reserve(lightCount);
-
-    for (const Light* light : lights)
+    colors.reserve(numLights);
+    std::vector<float> brightnesses;
+    brightnesses.reserve(numLights);
+    while (!lights.empty())
     {
-        const FVector& pos = light->get_transform().position;
-        positions.emplace_back(pos.x, 1080.f - pos.y);
+        const Light* light = lights.back();
+
+        const FVector& pos = light->get_position();
+        positions.emplace_back(pos.x, window.get_size().y - pos.y);
 
         radii.push_back(light->get_radius());
 
         const Color& c = light->get_color();
         colors.emplace_back(c.r / 255.f, c.g / 255.f, c.b / 255.f);
 
-        brightness.push_back(light->get_brightness());
+        brightnesses.push_back(light->get_brightness());
+
+        lights.pop_back();
     }
 
-    // Rendering
-    for (const Sprite* sprite : sprites)
+    while (!sprites.empty())
     {
-        const sf::Texture& texture = TEXTURE_LOADER.load_texture(sprite->get_texture().filepath);
-        const sf::Texture& normal = TEXTURE_LOADER.load_texture(sprite->get_normal().filepath);
+        const Sprite* sprite = sprites.back();
+
+        const sf::Texture& texture = TEXTURE_LOADER.load_texture(sprite->get_texture().filepath, TextureLoadContext::Texture);
+        const sf::Texture& normal = TEXTURE_LOADER.load_texture(sprite->get_normal().filepath, TextureLoadContext::NormalMap);
 
         sf::Sprite s = sf::Sprite(texture, sprite->get_rect());
-        s.setPosition(sprite->get_transform().position);
-        s.setRotation(sf::radians(sprite->get_transform().forward.angle()));
-        s.setScale(sprite->get_transform().scale);
+        s.setPosition(sprite->get_position());
+        s.setRotation(sf::radians(sprite->get_rotation()));
+        s.setScale(sprite->get_scale());
 
-        shader.setUniform("u_lightCount", lightCount);
-        if (lightCount > 0)
+        shader.setUniform("u_lightCount", numLights);
+        if (numLights > 0)
         {
-            shader.setUniformArray("u_lightPosition", positions.data(), lightCount);
-            shader.setUniformArray("u_lightRadius", radii.data(), lightCount);
-            shader.setUniformArray("u_lightColor", colors.data(), lightCount);
-            shader.setUniformArray("u_lightBrightness", brightness.data(), lightCount);
+            shader.setUniformArray("u_lightPosition", positions.data(), numLights);
+            shader.setUniformArray("u_lightRadius", radii.data(), numLights);
+            shader.setUniformArray("u_lightColor", colors.data(), numLights);
+            shader.setUniformArray("u_lightBrightness", brightnesses.data(), numLights);
         }
 
         shader.setUniform("u_texture", texture);
         shader.setUniform("u_normalMap", normal);
 
-        GAME_WINDOW.render(s, &shader);
-    }
-}
+        window.display(s, &shader);
 
-void Renderer::end_render() const
-{
-	GAME_WINDOW.end_render();
+        sprites.pop_back();
+    }
+
+    window.end_display();
 }
 
 sf::Shader* Renderer::get_shader()

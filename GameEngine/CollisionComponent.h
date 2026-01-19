@@ -7,9 +7,9 @@
 class CollisionComponent :public Component, public Transformable
 {
 public:
+	Delegate<Entity*, CollisionComponent*, Entity*, CollisionComponent*> on_overlap;
+
 	CollisionComponent() = default;
 	CollisionComponent(Entity* owner, bool enabled, Transform transform);
 	virtual ~CollisionComponent() = default;
-
-	Delegate<Entity*, CollisionComponent*, Entity*, CollisionComponent*> on_overlap;
 };

@@ -1,4 +1,5 @@
 #include "InputHandler.h"
+#include "Window.h"
 
 InputHandler::InputHandler() 
 {
@@ -235,6 +236,11 @@ void InputHandler::update()
 		}
 }
 
+void InputHandler::set_activeWindow(Window* activeWindow)
+{
+	this->activeWindow = activeWindow;
+}
+
 bool InputHandler::is_key_pressed(Keyboard key) const 
 {
 	auto it = keyPressed.find(convert(key));
@@ -259,5 +265,8 @@ bool InputHandler::is_button_held(Mouse button) const
 
 FVector InputHandler::get_mouse_pos() const
 {
-	return GAME_WINDOW.get_mouse_pos();
+	if (!activeWindow)
+		return FVector(0.f, 0.f);
+
+	return activeWindow->get_mouse_pos();
 }

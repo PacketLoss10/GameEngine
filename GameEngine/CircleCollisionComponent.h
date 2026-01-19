@@ -11,6 +11,7 @@ public:
 	CircleCollisionComponent(Entity* owner, bool enabled, Transform transform, FVector radius);
 
 	void init() override;
+	void render() override;
 
 	const FVector& get_radius() const;
 	void set_radius(const FVector& radius);

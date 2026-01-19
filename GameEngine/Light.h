@@ -11,8 +11,9 @@ private:
 	Color color = Color();
 public:
 	Light() = default;
+	Light(Entity* owner, bool enabled, Transform transform, float radius, float brightness, Color color);
 
-	void init(Entity* owner, bool enabled, float radius, float brightness, Color color);
+	void init() override;
 
 	float get_radius() const;
 	void set_radius(float radius);

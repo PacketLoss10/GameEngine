@@ -17,7 +17,7 @@ public:
 	}
 };
 
-class Animation :public Component
+class Animation :public Component, public Transformable
 {
 private:
 	Sprite sprite = Sprite();
@@ -31,8 +31,11 @@ private:
 	bool paused = false;
 public:
 	Animation() = default;
+	Animation(Entity* owner, bool enabled, Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
+	Animation(Entity* owner, bool enabled, int zOrder, Transform transform, Texture texture, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
+	Animation(Entity* owner, bool enabled, int zOrder, Transform transform, Texture texture, NormalMap normal, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
 
-	void init(Entity* owner, bool enabled, Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
+	void init() override;
 
 	void update();
 	void pause();

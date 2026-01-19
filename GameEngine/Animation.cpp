@@ -1,20 +1,21 @@
 #include "Animation.h"
+#include "RenderComponentManager.h"
 
-void Animation::init(Entity* owner, bool enabled, Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart)
+Animation::Animation(Entity* owner, bool enabled, Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart) :Component(owner, enabled), Transformable(sprite.get_transform()), sprite(sprite), layout(layout), frameSize(frameSize), numFrames(std::max(1, numFrames)), dt(1.f / fps), oneShot(oneShot), paused(!autoStart) {}
+
+Animation::Animation(Entity* owner, bool enabled, int zOrder, Transform transform, Texture texture, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart) :Component(owner, enabled), sprite(owner, enabled, texture, TextureRect(), zOrder, transform), layout(layout), frameSize(frameSize), numFrames(std::max(1, numFrames)), dt(1.f / fps), oneShot(oneShot), paused(!autoStart) {}
+
+Animation::Animation(Entity* owner, bool enabled, int zOrder, Transform transform, Texture texture, NormalMap normal, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart) :Component(owner, enabled), sprite(owner, enabled, texture, TextureRect(), normal, zOrder, transform), layout(layout), frameSize(frameSize), numFrames(std::max(1, numFrames)), dt(1.f / fps), oneShot(oneShot), paused(!autoStart) {}
+
+void Animation::init()
 {
-	this->owner = owner;
-	this->enabled = enabled;
-	this->sprite = sprite;
-	this->layout = layout;
-	this->frameSize = frameSize;
-	this->numFrames = std::max(1, numFrames);
-	this->dt = 1.f / fps;
-	this->oneShot = oneShot;
-	this->paused = !autoStart;
+	RENDER_COMPONENT_MANAGER.register_component(&sprite);
 }
 
 void Animation::update()
 {
+	sprite.set_transform(transform);
+
 	if (clock.getElapsedTime().asSeconds() < dt || paused || (oneShot && is_finished()))
 		return;
 

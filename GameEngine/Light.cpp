@@ -1,12 +1,11 @@
 #include "Light.h"
+#include "RenderComponentManager.h"
 
-void Light::init(Entity* owner, bool enabled, float radius, float brightness, Color color)
+Light::Light(Entity* owner, bool enabled, Transform transform, float radius, float brightness, Color color) :RenderComponent(owner, enabled, transform), radius(radius), brightness(brightness), color(color) {}
+
+void Light::init()
 {
-	this->owner = owner;
-	this->enabled = enabled;
-	this->radius = radius;
-	this->brightness = brightness;
-	this->color = color;
+	RENDER_COMPONENT_MANAGER.register_component(this);
 }
 
 float Light::get_radius() const

@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Component.h"
-#include "Transformable.h"
+#include "RenderObject.h"
 
-class RenderComponent :public Component, public Transformable
+class RenderComponent :public Component, public RenderObject
 {
 public:
 	RenderComponent() = default;
-	RenderComponent(Transform transform);
+	RenderComponent(Entity* owner, bool enabled, Transform transform);
 	virtual ~RenderComponent() = default;
 };

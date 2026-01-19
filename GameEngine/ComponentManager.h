@@ -12,6 +12,7 @@ class ComponentManager
 {
 protected:
 	std::vector<T*> components;
+	bool debugMode = false;
 public:
 	void register_component(T* component)
 	{
@@ -27,5 +28,13 @@ public:
 				}
 			), components.end()
 		);
+	}
+	void enable_debug()
+	{
+		debugMode = true;
+	}
+	void disable_debug()
+	{
+		debugMode = false;
 	}
 };

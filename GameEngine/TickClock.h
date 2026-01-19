@@ -12,7 +12,6 @@ private:
 	sf::Clock clock;
 	float elapsed = 0.f;
 	float maxFPS = 120.f;
-
 	TickClock() = default;
 	TickClock(const TickClock&) = delete;
 	TickClock& operator=(const TickClock&) = delete;

@@ -1,6 +1,9 @@
 #pragma once
 
-#include "GameWindow.h"
+#include "Transform.h"
+#include "unordered_map"
+
+class Window;
 
 #define INPUT InputHandler::instance()
 
@@ -69,6 +72,7 @@ enum class Mouse
 class InputHandler 
 {
 private:
+    Window* activeWindow = nullptr;
     std::unordered_map<sf::Keyboard::Key, bool> canPressKey;
     std::unordered_map<sf::Keyboard::Key, bool> keyPressed;
     std::unordered_map<sf::Mouse::Button, bool> canPressButton;
@@ -81,6 +85,7 @@ private:
 public:
     static InputHandler& instance();
     void update();
+    void set_activeWindow(Window* activeWindow);
     bool is_key_pressed(Keyboard key) const;
     bool is_key_held(Keyboard key) const;
     bool is_button_pressed(Mouse button) const;

@@ -1,9 +1,10 @@
 #pragma once
 
 #include "TextureLoader.h"
-#include "GameWindow.h"
 
-class RenderComponent;
+class Window;
+class Light;
+class Sprite;
 
 #define RENDERER Renderer::instance()
 
@@ -11,13 +12,15 @@ class Renderer
 {
 private:
 	sf::Shader shader;
+	std::vector<Sprite*> sprites;
+	std::vector<Light*> lights;
 	Renderer();
 	Renderer(const Renderer&) = delete;
 	Renderer& operator=(const Renderer&) = delete;
 public:
 	static Renderer& instance();
-	void start_render() const;
-	void render(const std::vector<RenderComponent*>& data);
-	void end_render() const;
+	void push(Light* lightData);
+	void push(Sprite* spriteData);
+	void render(Window& window);
 	sf::Shader* get_shader();
 };

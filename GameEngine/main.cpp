@@ -3,97 +3,37 @@
 #include "EntityA.h"
 #include "EntityB.h"
 #include "TickClock.h"
-
+#include "Color.h"
 #include <SFML/Graphics.hpp>
 #include <cmath>
+#include "PrimitiveBoxShape.h"
+#include "PrimitiveCircleShape.h"
+#include "PrimitiveLineShape.h"
+#include "Window.h"
+#include "Light.h"
+#include "Renderer.h"
+#include "RenderComponentManager.h"
 
 int main()
 {
+	SET_MAX_FPS(6000);
+	Window window = Window(IVector(1600, 900), "");
+	INPUT.set_activeWindow(&window);
 	EntityA a;
-	EntityB b;
 
-	sf::RenderWindow window(sf::VideoMode(sf::Vector2u(800, 600)), "");
+	PrimitiveCircleShape c(FVector(200.f, 300.f), Transform(FVector(200.f, 200.f), FVector(1.f, 0.f), FVector(1.f, 1.f)));
 
-	while (window.isOpen())
+	while (window.is_open())
 	{
+		//std::cout << 1.f / DELTA_TIME << std::endl;
 		INPUT.update();
+		window.update();
 
-		if (INPUT.is_key_held(Keyboard::W))
-			a.get_collision()->move_by(FVector(0.f, -100.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::A))
-			a.get_collision()->move_by(FVector(-100.f, 0.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::S))
-			a.get_collision()->move_by(FVector(0.f, 100.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::D))
-			a.get_collision()->move_by(FVector(100.f, 0.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::Q))
-			a.get_collision()->rotate_by(3.14f * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::E))
-			a.get_collision()->rotate_by(-3.14f * DELTA_TIME);
+		//std::cout << "(" << INPUT.get_mouse_pos().x << ", " << INPUT.get_mouse_pos().y << ")" << std::endl;
+		a.get_light()->set_position(INPUT.get_mouse_pos());
 
-		if (INPUT.is_key_held(Keyboard::Up))
-			b.get_collision()->move_by(FVector(0.f, -100.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::Left))
-			b.get_collision()->move_by(FVector(-100.f, 0.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::Down))
-			b.get_collision()->move_by(FVector(0.f, 100.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::Right))
-			b.get_collision()->move_by(FVector(100.f, 0.f) * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::K))
-			b.get_collision()->rotate_by(3.14f * DELTA_TIME);
-		if (INPUT.is_key_held(Keyboard::L))
-			b.get_collision()->rotate_by(-3.14f * DELTA_TIME);
-
-		system("cls");
-		COLLISION_COMPONENT_MANAGER.update();
-
-		window.clear(sf::Color::White);
-
-		sf::RectangleShape box;
-		sf::CircleShape circle;
-		sf::Vector2f position;
-		sf::Vector2f scale;
-		sf::Vector2f forward;
-
-		//box.setFillColor(sf::Color::Blue);
-		//box.setSize(a.get_collision()->get_size());
-		//box.setOrigin(a.get_collision()->get_size() / 2.f);
-		//position = a.get_collision()->get_position();
-		//scale = a.get_collision()->get_scale();
-		//forward = a.get_collision()->get_forward();
-		//box.setPosition(position);
-		//box.setScale(scale);
-		//box.setRotation(forward.angle());
-		//window.draw(box);
-
-		circle.setFillColor(sf::Color::Red);
-		circle.setOutlineThickness(0.02f);
-		circle.setOutlineColor(sf::Color::Black);
-		circle.setRadius(1.f);
-		circle.setOrigin(FVector(1.f, 1.f));
-		position = a.get_collision()->get_position();
-		scale = a.get_collision()->get_scale();
-		forward = a.get_collision()->get_forward();
-		circle.setPosition(position);
-		circle.setScale(scale.componentWiseMul(a.get_collision()->get_radius()));
-		circle.setRotation(forward.angle());
-		window.draw(circle);
-
-		circle.setFillColor(sf::Color::Blue);
-		circle.setOutlineThickness(0.02f);
-		circle.setOutlineColor(sf::Color::Black);
-		circle.setRadius(1.f);
-		circle.setOrigin(FVector(1.f, 1.f));
-		position = b.get_collision()->get_position();
-		scale = b.get_collision()->get_scale();
-		forward = b.get_collision()->get_forward();
-		circle.setPosition(position);
-		circle.setScale(scale.componentWiseMul(b.get_collision()->get_radius()));
-		circle.setRotation(forward.angle());
-		window.draw(circle);
-
-		window.display();
-
+		RENDER_COMPONENT_MANAGER.update();
+		RENDERER.render(window);
 		UPDATE_DELTA_TIME;
 	}
 
