@@ -5,7 +5,7 @@
 #include "unordered_map"
 #include "unordered_set"
 #include "shared_mutex"
-#include "NavBlock.h"
+#include "Transform.h"
 
 #define PATHFINDER PathFinder::instance()
 
@@ -44,15 +44,13 @@ namespace std
 class PathFinder
 {
 private:
-	std::vector<NavBlock> navBlocks;
-	mutable std::shared_mutex navBlocksMutex;
 	const float stepSize = 20.f;
-	int maxIterations = 10000;
 	const FVector directions[8] = { FVector(stepSize, stepSize), FVector(-stepSize, stepSize), FVector(stepSize, -stepSize), FVector(-stepSize, -stepSize), FVector(stepSize, 0.f), FVector(-stepSize, 0.f), FVector(0.f, stepSize), FVector(0.f, -stepSize) };
 	inline static auto fCompare = [](const std::pair<float, FVector>& a, const std::pair<float, FVector>& b) {return a.first > b.first; };
 	inline static auto euclidean = [](const FVector& a, const FVector& b) {return (a - b).size(); };
 	inline static auto manhattan = [](const FVector& a, const FVector& b) {return std::abs(b.x - a.x) + std::abs(b.y - a.y); };
 	inline static auto chebyshev = [](const FVector& a, const FVector& b) {return std::max(std::abs(b.x - a.x), std::abs(b.y - a.y)); };
+	int maxIterations = 10000;
 
 	PathFinder() = default;
 	PathFinder(const PathFinder&) = delete;
@@ -62,6 +60,6 @@ private:
 	std::vector<std::pair<FVector, float>> valid_adjacent_nodes(const FVector& position) const;
 public:
 	static PathFinder& instance();
-	std::optional<std::stack<FVector>> find_path(const FVector& start, const FVector& end, float acceptance = 20.f);
+	std::optional<std::stack<FVector>> find_path(const FVector& start, const FVector& end, float acceptance = 30.f);
 	float get_stepSize() const;
 };

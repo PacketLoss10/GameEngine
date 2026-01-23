@@ -13,6 +13,7 @@
 #include "Light.h"
 #include "Renderer.h"
 #include "RenderComponentManager.h"
+#include "NavigationComponentManager.h"
 
 int main()
 {
@@ -29,9 +30,14 @@ int main()
 		INPUT.update();
 		window.update();
 
-		//std::cout << "(" << INPUT.get_mouse_pos().x << ", " << INPUT.get_mouse_pos().y << ")" << std::endl;
-		a.get_light()->set_position(INPUT.get_mouse_pos());
+		if (INPUT.is_button_pressed(Mouse::M2))
+		{
+			a.get_nav()->start(a.get_position(), INPUT.get_mouse_pos());
+		}
+		a.update();
 
+
+		NAVIGATION_COMPONENT_MANAGER.update();
 		RENDER_COMPONENT_MANAGER.update();
 		RENDERER.render(window);
 		UPDATE_DELTA_TIME;

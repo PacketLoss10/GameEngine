@@ -1,11 +1,12 @@
 #pragma once
 
-#include "PathFinder.h"
-#include "TickClock.h"
+#include "Component.h"
+#include "Transform.h"
 #include "chrono"
 #include "future"
+#include "stack"
 
-class NavigationAgent
+class NavigationComponent: public Component
 {
 private:
 	float speed = 0.f;
@@ -13,10 +14,12 @@ private:
 	FVector target = FVector(0.f, 0.f);
 	FVector velocity = FVector(0.f, 0.f);
 	FVector forward = FVector(1.f, 0.f);
-	std::stack<FVector> currentPath;
+	std::stack<FVector> path;
 	std::optional<std::future<std::optional<std::stack<FVector>>>> task;
 public:
-	NavigationAgent();
+	NavigationComponent() = default;
+	NavigationComponent(Entity* owner, bool enabled, float speed);
+	void init() override;
 	void update();
 	void start(const FVector& start, const FVector& end);
 	void clear();

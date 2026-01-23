@@ -150,7 +150,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="NavBlock.cpp" />
-    <ClCompile Include="NavigationAgent.cpp" />
+    <ClCompile Include="NavigationComponent.cpp" />
+    <ClCompile Include="NavigationComponentManager.cpp" />
     <ClCompile Include="NormalMap.cpp" />
     <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="PrimitiveBoxShape.cpp" />
@@ -192,7 +193,11 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="NavBlock.h" />
-    <ClInclude Include="NavigationAgent.h" />
+    <ClInclude Include="NavigationComponent.h" />
+    <ClInclude Include="NavigationComponentManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="NormalMap.h" />
     <ClInclude Include="PathFinder.h" />
     <ClInclude Include="PrimitiveBoxShape.h" />

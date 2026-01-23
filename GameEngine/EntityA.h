@@ -5,6 +5,7 @@
 #include "BoxCollisionComponent.h"
 #include "Light.h"
 #include "Sprite.h"
+#include "NavigationComponent.h"
 
 class EntityA :public Entity
 {
@@ -12,6 +13,7 @@ private:
 	CircleCollisionComponent* collision;
 	Light* light;
 	Sprite* sprite;
+	NavigationComponent* nav;
 public:
 	EntityA()
 	{
@@ -24,6 +26,14 @@ public:
 
 		sprite = new Sprite(this, true, Texture("NULLTEXTURE.png"), TextureRect(IVector(0, 0), IVector(420, 420)), 1, transform);
 		sprite->init();
+
+		nav = new NavigationComponent(this, true, 200.f);
+		nav->init();
+	}
+	void update()
+	{
+		transform.position = nav->get_position();
+		sprite->set_position(transform.position);
 	}
 	CircleCollisionComponent* get_collision()
 	{
@@ -36,6 +46,10 @@ public:
 	Sprite* get_sprite()
 	{
 		return sprite;
+	}
+	NavigationComponent* get_nav()
+	{
+		return nav;
 	}
 	void collision_test(Entity* thisEntity, CollisionComponent* thisCollision, Entity* otherEntity, CollisionComponent* otherCollision)
 	{

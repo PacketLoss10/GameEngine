@@ -128,6 +128,7 @@
 //	}
 //	return std::nullopt;
 //}
+#include "iostream"
 
 bool PathFinder::is_goal_blocked(const FVector& goal) const
 {
@@ -154,87 +155,127 @@ PathFinder& PathFinder::instance()
 	return instance;
 }
 
+//std::optional<std::stack<FVector>> PathFinder::find_path(const FVector& start, const FVector& end, float acceptance)
+//{
+//	std::cout << "PATHFINDING STARTED" << std::endl;
+//	int iterations = 0;
+//
+//	std::priority_queue<std::pair<float, FVector>, std::vector<std::pair<float, FVector>>, decltype(fCompare)> pq(fCompare);
+//	std::unordered_map<FVector, FVector> prev;
+//	std::unordered_map<FVector, float> g;
+//	std::unordered_map<FVector, float> f;
+//
+//	g[start] = 0.f;
+//	f[start] = euclidean(start, end);
+//	pq.emplace(f[start], start);
+//
+//	while (!pq.empty() && iterations < maxIterations)
+//	{
+//		iterations++;
+//		FVector current = pq.top().second;
+//		pq.pop();
+//		std::cout << euclidean(current, end) << std::endl;
+//		if (euclidean(current, end) < acceptance)
+//		{
+//			std::stack<FVector> path;
+//			while (prev.count(current))
+//			{
+//				path.push(current);
+//				current = prev[current];
+//			}
+//
+//			path.push(start);
+//
+//			std::cout << "PATH FOUND" << std::endl;
+//			return path;
+//		}
+//
+//		for (const auto& [adjacent, cost] : valid_adjacent_nodes(current))
+//		{
+//			float tentativeG = g[current] + cost;
+//			if (!g.count(adjacent) || tentativeG < g[adjacent])
+//			{
+//				prev[adjacent] = current;
+//				g[adjacent] = tentativeG;
+//				f[adjacent] = tentativeG + euclidean(adjacent, end);
+//				pq.emplace(f[adjacent], adjacent);
+//			}
+//		}
+//	}
+//
+//	std::cout << "NO PATH FOUND" << std::endl;
+//	return std::nullopt;
+//}
+
 std::optional<std::stack<FVector>> PathFinder::find_path(const FVector& start, const FVector& end, float acceptance)
 {
-	int iterations = 0;
-	FVector target = end;
-	if (is_goal_blocked(end))
-	{
-		std::queue<FVector> bfs;
-		std::unordered_set<FVector> visited;
-		bfs.push(end);
-		visited.insert(end);
-		bool found = false;
+    std::cout << "PATHFINDING STARTED" << std::endl;
 
-		while (!bfs.empty())
-		{
-			FVector current = bfs.front();
-			bfs.pop();
-			for (const FVector& dir : directions)
-			{
-				FVector adj = current + dir;
-				if (visited.count(adj))
-					continue;
-				visited.insert(adj);
-				if (!is_goal_blocked(adj))
-				{
-					target = adj;
-					found = true;
-					break;
-				}
-				bfs.push(adj);
-			}
+    std::priority_queue<
+        std::pair<float, FVector>,
+        std::vector<std::pair<float, FVector>>,
+        decltype(fCompare)> openSet(fCompare);
 
-			if (found)
-				break;
-		}
+    std::unordered_map<FVector, FVector> cameFrom;
+    std::unordered_map<FVector, float> gScore;
 
-		if (!found)
-			return std::nullopt;
-	}
+    // Snap start and end to the step grid
+    auto snapToGrid = [this](const FVector& v) {
+        return FVector(
+            std::round(v.x / stepSize) * stepSize,
+            std::round(v.y / stepSize) * stepSize
+        );
+        };
 
-	std::priority_queue<std::pair<float, FVector>, std::vector<std::pair<float, FVector>>, decltype(fCompare)> pq(fCompare);
-	std::unordered_map<FVector, FVector> prev;
-	std::unordered_map<FVector, float> g;
-	std::unordered_map<FVector, float> f;
+    FVector startGrid = snapToGrid(start);
+    FVector endGrid = snapToGrid(end);
 
-	g[start] = 0.f;
-	f[start] = manhattan(start, target);
-	pq.emplace(f[start], start);
+    gScore[startGrid] = 0.f;
+    float fScoreStart = euclidean(startGrid, endGrid);
+    openSet.emplace(fScoreStart, startGrid);
 
-	while (!pq.empty() && iterations < maxIterations)
-	{
-		iterations++;
-		FVector current = pq.top().second;
-		pq.pop();
+    int iterations = 0;
 
-		if (manhattan(current, target) < acceptance)
-		{
-			std::stack<FVector> path;
-			while (prev.count(current))
-			{
-				path.push(current);
-				current = prev[current];
-			}
+    while (!openSet.empty() && iterations < maxIterations)
+    {
+        iterations++;
+        FVector current = openSet.top().second;
+        openSet.pop();
 
-			path.push(start);
-			return path;
-		}
+        // Goal check
+        if (euclidean(current, endGrid) <= acceptance)
+        {
+            std::stack<FVector> path;
+            while (cameFrom.count(current))
+            {
+                path.push(current);
+                current = cameFrom[current];
+            }
+            path.push(startGrid);
+            std::cout << "PATH FOUND" << std::endl;
+            return path;
+        }
 
-		for (const auto& [adjacent, cost] : valid_adjacent_nodes(current))
-		{
-			float tentativeG = g[current] + cost;
-			if (!g.count(adjacent) || tentativeG < g[adjacent])
-			{
-				prev[adjacent] = current;
-				g[adjacent] = tentativeG;
-				f[adjacent] = tentativeG + manhattan(adjacent, target);
-				pq.emplace(f[adjacent], adjacent);
-			}
-		}
-	}
+        // Generate neighbors on the step grid
+        for (const FVector& dir : directions)
+        {
+            FVector neighbor = current + dir;
+            neighbor = snapToGrid(neighbor);
 
-	return std::nullopt;
+            float tentativeG = gScore[current] + dir.size();
+
+            if (!gScore.count(neighbor) || tentativeG < gScore[neighbor])
+            {
+                cameFrom[neighbor] = current;
+                gScore[neighbor] = tentativeG;
+                float fScore = tentativeG + euclidean(neighbor, endGrid);
+                openSet.emplace(fScore, neighbor);
+            }
+        }
+    }
+
+    std::cout << "NO PATH FOUND" << std::endl;
+    return std::nullopt;
 }
 
 float PathFinder::get_stepSize() const

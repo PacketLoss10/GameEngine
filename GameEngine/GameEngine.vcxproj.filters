@@ -162,10 +162,13 @@
     <ClCompile Include="NavBlock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NavigationAgent.cpp">
+    <ClCompile Include="NavigationComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PathFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NavigationComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -227,13 +230,7 @@
     <ClInclude Include="Timer.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EntityA.h">
@@ -254,9 +251,6 @@
     <ClInclude Include="CollisionComponentManager.h">
       <Filter>Header Files\Engine\Simulation\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="RenderComponentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="PrimitiveShape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -272,25 +266,37 @@
     <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalMap.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureRect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NavBlock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NavigationAgent.h">
+    <ClInclude Include="NavigationComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PathFinder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderObject.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponentManager.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalMap.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureRect.h">
+      <Filter>Header Files\Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentManager.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="NavigationComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
