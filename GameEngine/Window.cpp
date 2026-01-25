@@ -28,6 +28,11 @@ void Window::display(const sf::Drawable& object, sf::Shader* shader)
 	window.draw(object, shader);
 }
 
+void Window::display(sf::Vertex* vertex, size_t count, sf::PrimitiveType type, sf::Shader* shader)
+{
+	window.draw(vertex, count, type, shader);
+}
+
 void Window::end_display()
 {
 	window.display();

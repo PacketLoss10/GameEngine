@@ -71,7 +71,7 @@ struct FVector
 
 	bool operator==(const FVector& other) const
 	{
-		return x != other.x || y != other.y;
+		return x == other.x && y == other.y;
 	}
 
 	FVector operator+(const FVector& other) const

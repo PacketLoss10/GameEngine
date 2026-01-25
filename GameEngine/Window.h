@@ -15,6 +15,7 @@ public:
 	void update();
 	void start_display();
 	void display(const sf::Drawable& object, sf::Shader* shader);
+	void display(sf::Vertex* vertex, size_t count, sf::PrimitiveType type, sf::Shader* shader);
 	void end_display();
 
 	const IVector& get_size() const;

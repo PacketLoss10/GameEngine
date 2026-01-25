@@ -92,6 +92,7 @@ void Renderer::render(Window& window)
 
         sprites.pop_back();
     }
+    navmesh.render(window);
 
     window.end_display();
 }
@@ -99,4 +100,9 @@ void Renderer::render(Window& window)
 sf::Shader* Renderer::get_shader()
 {
 	return &shader;
+}
+
+void Renderer::set_navmesh(const NavMesh& navmesh)
+{
+    this->navmesh = navmesh;
 }

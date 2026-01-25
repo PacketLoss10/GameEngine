@@ -152,6 +152,7 @@
     <ClCompile Include="NavBlock.cpp" />
     <ClCompile Include="NavigationComponent.cpp" />
     <ClCompile Include="NavigationComponentManager.cpp" />
+    <ClCompile Include="NavMesh.cpp" />
     <ClCompile Include="NormalMap.cpp" />
     <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="PrimitiveBoxShape.cpp" />
@@ -198,6 +199,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="NavMesh.h" />
     <ClInclude Include="NormalMap.h" />
     <ClInclude Include="PathFinder.h" />
     <ClInclude Include="PrimitiveBoxShape.h" />

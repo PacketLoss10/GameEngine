@@ -14,31 +14,44 @@
 #include "Renderer.h"
 #include "RenderComponentManager.h"
 #include "NavigationComponentManager.h"
+#include "NavMesh.h"
 
 int main()
 {
-	SET_MAX_FPS(6000);
 	Window window = Window(IVector(1600, 900), "");
 	INPUT.set_activeWindow(&window);
+	std::vector<FVector> nodes;
+	NavMesh navmesh;
 	EntityA a;
-
-	PrimitiveCircleShape c(FVector(200.f, 300.f), Transform(FVector(200.f, 200.f), FVector(1.f, 0.f), FVector(1.f, 1.f)));
 
 	while (window.is_open())
 	{
-		//std::cout << 1.f / DELTA_TIME << std::endl;
 		INPUT.update();
 		window.update();
 
-		if (INPUT.is_button_pressed(Mouse::M2))
+		if (INPUT.is_button_pressed(Mouse::M1))
 		{
-			a.get_nav()->start(a.get_position(), INPUT.get_mouse_pos());
+			a.get_nav()->start(a.get_position(), INPUT.get_mouse_pos(), navmesh);
 		}
 		a.update();
+		if (INPUT.is_button_pressed(Mouse::M2))
+		{
+			nodes.push_back(INPUT.get_mouse_pos());
+		}
 
+		navmesh.clear();
+		for (int i = 0; nodes.size() >= 3 && i < static_cast<int>(nodes.size()) - 2; i++)
+		{
+			Triangle tri;
+			tri.A = nodes[0];
+			tri.B = nodes[i + 1];
+			tri.C = nodes[i + 2];
+			navmesh.add_triangle(tri);
+		}
 
 		NAVIGATION_COMPONENT_MANAGER.update();
 		RENDER_COMPONENT_MANAGER.update();
+		RENDERER.set_navmesh(navmesh);
 		RENDERER.render(window);
 		UPDATE_DELTA_TIME;
 	}

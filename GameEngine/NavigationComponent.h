@@ -6,6 +6,8 @@
 #include "future"
 #include "stack"
 
+class NavMesh;
+
 class NavigationComponent: public Component
 {
 private:
@@ -21,7 +23,7 @@ public:
 	NavigationComponent(Entity* owner, bool enabled, float speed);
 	void init() override;
 	void update();
-	void start(const FVector& start, const FVector& end);
+	void start(const FVector& start, const FVector& end, const NavMesh& navmesh);
 	void clear();
 	bool is_finished() const;
 	float get_speed() const;
