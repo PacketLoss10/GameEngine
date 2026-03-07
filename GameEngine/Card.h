@@ -16,6 +16,6 @@ public:
 	void input_tick() override;
 	void tap() {};
 
-	void begin(Entity*, CollisionComponent*, Entity*, CollisionComponent*);
-	void end(Entity*, CollisionComponent*, Entity*, CollisionComponent*);
+	void begin(Entity*, CollisionComponent*, const FVector&);
+	void end(Entity*, CollisionComponent*, const FVector&);
 };

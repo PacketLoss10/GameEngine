@@ -9,8 +9,8 @@ Card::Card()
 	sprite->init();
 
 	collision = new BoxCollisionComponent(this, true, Transform(), FVector(672.f, 936.f));
-	collision->on_begin_overlap.bind(this, &Card::begin);
-	collision->on_end_overlap.bind(this, &Card::end);
+	collision->on_mouse_begin_overlap.bind(this, &Card::begin);
+	collision->on_mouse_end_overlap.bind(this, &Card::end);
 	collision->init();
 }
 
@@ -22,6 +22,11 @@ void Card::update_tick()
 
 void Card::input_tick()
 {
+	if (INPUT.is_button_pressed(Mouse::M1) && collision->is_mouseOverlapping())
+	{
+		rotate_by(3.14 / 2.f);
+	}
+
 	if (INPUT.is_key_held(Keyboard::W))
 	{
 		move_by(FVector(0.f, -100.f) * DELTA_TIME);
@@ -40,12 +45,12 @@ void Card::input_tick()
 	}
 }
 
-void Card::begin(Entity*, CollisionComponent*, Entity*, CollisionComponent*)
+void Card::begin(Entity*, CollisionComponent*, const FVector&)
 {
 	std::cout << "begin overlap" << std::endl;
 }
 
-void Card::end(Entity*, CollisionComponent*, Entity*, CollisionComponent*)
+void Card::end(Entity*, CollisionComponent*, const FVector&)
 {
 	std::cout << "end overlap" << std::endl;
 }

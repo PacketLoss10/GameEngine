@@ -22,7 +22,6 @@ int main()
 	INPUT.set_activeWindow(&window);
 
 	Card* card1 = new Card();
-	Card* card2 = new Card();
 
 	while (window.is_open())
 	{
@@ -31,8 +30,6 @@ int main()
 
 		card1->update_tick();
 		card1->input_tick();
-
-		card2->update_tick();
 
 		RENDER_COMPONENT_MANAGER.update();
 		COLLISION_COMPONENT_MANAGER.update();

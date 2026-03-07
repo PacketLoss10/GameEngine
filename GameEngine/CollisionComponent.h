@@ -20,6 +20,10 @@ public:
 	void add_overlap(CollisionComponent* overlap);
 	void remove_overlap(CollisionComponent* overlap);
 
+	bool mouseOverlapping = false;
+	bool is_mouseOverlapping() const;
+	void set_mouseOverlapping(bool mouseOverlapping);
+
 	CollisionComponent() = default;
 	CollisionComponent(Entity* owner, bool enabled, Transform transform);
 	virtual ~CollisionComponent() = default;
