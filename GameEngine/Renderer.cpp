@@ -69,30 +69,37 @@ void Renderer::render(Window& window)
         const Sprite* sprite = sprites.back();
 
         const sf::Texture& texture = TEXTURE_LOADER.load_texture(sprite->get_texture().filepath, TextureLoadContext::Texture);
-        const sf::Texture& normal = TEXTURE_LOADER.load_texture(sprite->get_normal().filepath, TextureLoadContext::NormalMap);
 
         sf::Sprite s = sf::Sprite(texture, sprite->get_rect());
         s.setPosition(sprite->get_position());
         s.setRotation(sf::radians(sprite->get_rotation()));
         s.setScale(sprite->get_scale());
 
-        shader.setUniform("u_lightCount", numLights);
-        if (numLights > 0)
+        if (sprite->is_lit())
         {
-            shader.setUniformArray("u_lightPosition", positions.data(), numLights);
-            shader.setUniformArray("u_lightRadius", radii.data(), numLights);
-            shader.setUniformArray("u_lightColor", colors.data(), numLights);
-            shader.setUniformArray("u_lightBrightness", brightnesses.data(), numLights);
+            const sf::Texture& normal = TEXTURE_LOADER.load_texture(sprite->get_normal().filepath, TextureLoadContext::NormalMap);
+
+            shader.setUniform("u_lightCount", numLights);
+            if (numLights > 0)
+            {
+                shader.setUniformArray("u_lightPosition", positions.data(), numLights);
+                shader.setUniformArray("u_lightRadius", radii.data(), numLights);
+                shader.setUniformArray("u_lightColor", colors.data(), numLights);
+                shader.setUniformArray("u_lightBrightness", brightnesses.data(), numLights);
+            }
+
+            shader.setUniform("u_texture", texture);
+            shader.setUniform("u_normalMap", normal);
+
+            window.display(s, &shader);
         }
-
-        shader.setUniform("u_texture", texture);
-        shader.setUniform("u_normalMap", normal);
-
-        window.display(s, &shader);
+        else
+        {
+            window.display(s, nullptr);
+        }
 
         sprites.pop_back();
     }
-    navmesh.render(window);
 
     window.end_display();
 }
@@ -100,9 +107,4 @@ void Renderer::render(Window& window)
 sf::Shader* Renderer::get_shader()
 {
 	return &shader;
-}
-
-void Renderer::set_navmesh(const NavMesh& navmesh)
-{
-    this->navmesh = navmesh;
 }

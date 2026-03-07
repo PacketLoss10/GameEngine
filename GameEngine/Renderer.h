@@ -2,8 +2,6 @@
 
 #include "TextureLoader.h"
 
-#include "NavMesh.h"
-
 class Window;
 class Light;
 class Sprite;
@@ -19,14 +17,10 @@ private:
 	Renderer();
 	Renderer(const Renderer&) = delete;
 	Renderer& operator=(const Renderer&) = delete;
-
-	NavMesh navmesh;
 public:
 	static Renderer& instance();
 	void push(Light* lightData);
 	void push(Sprite* spriteData);
 	void render(Window& window);
 	sf::Shader* get_shader();
-
-	void set_navmesh(const NavMesh& navmesh);
 };

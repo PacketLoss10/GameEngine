@@ -13,6 +13,7 @@ protected:
 	TextureRect rect = TextureRect();
 	Texture texture = Texture();
 	NormalMap normal = NormalMap();
+	bool lit = false;
 public:
 	Sprite() = default;
 	Sprite(Entity* owner, bool enabled, Texture texture, TextureRect rect, int zOrder, Transform transform);
@@ -28,4 +29,7 @@ public:
 
 	const NormalMap& get_normal() const;
 	void set_normal(const NormalMap& normal);
+
+	bool is_lit() const;
+	void set_lit(bool lit);
 };

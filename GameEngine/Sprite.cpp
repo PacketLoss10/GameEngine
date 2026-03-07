@@ -103,3 +103,13 @@ void Sprite::set_normal(const NormalMap& normal)
 {
 	this->normal = normal;
 }
+
+bool Sprite::is_lit() const
+{
+	return lit;
+}
+
+void Sprite::set_lit(bool lit)
+{
+	this->lit = lit;
+}

@@ -27,11 +27,33 @@ void CollisionComponentManager::box_on_box(BoxCollisionComponent* boxA, BoxColli
 		float rB = halfB.x * std::abs(axis.dot(axisBX)) + halfB.y * std::abs(axis.dot(axisBY));
 
 		if (std::abs(cA - cB) > (rA + rB))
+		{
+			if (boxA->is_overlapping(boxB))
+			{
+				boxA->remove_overlap(boxB);
+				boxA->on_end_overlap.invoke(boxA->get_owner(), boxA, boxB->get_owner(), boxB);
+			}
+			if (boxB->is_overlapping(boxA))
+			{
+				boxB->remove_overlap(boxA);
+				boxB->on_end_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
+			}
 			return;
+		}
 	}
 
 	boxA->on_overlap.invoke(boxA->get_owner(), boxA, boxB->get_owner(), boxB);
+	if (!boxA->is_overlapping(boxB))
+	{
+		boxA->add_overlap(boxB);
+		boxA->on_begin_overlap.invoke(boxA->get_owner(), boxA, boxB->get_owner(), boxB);
+	}
 	boxB->on_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
+	if (!boxB->is_overlapping(boxA))
+	{
+		boxB->add_overlap(boxA);
+		boxB->on_begin_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
+	}
 }
 
 void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circleA, CircleCollisionComponent* circleB)
