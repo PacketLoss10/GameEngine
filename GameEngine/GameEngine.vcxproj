@@ -148,6 +148,7 @@
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="NavBlock.cpp" />
     <ClCompile Include="NavigationComponent.cpp" />
     <ClCompile Include="NavigationComponentManager.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="JSONOBJECT.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="NavBlock.h" />
     <ClInclude Include="NavigationComponent.h" />
     <ClInclude Include="NavigationComponentManager.h">

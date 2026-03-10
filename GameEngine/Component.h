@@ -1,11 +1,14 @@
 #pragma once
 
+#include "Matrix.h"
+
 class Entity;
 
 class Component
 {
 protected:
 	Entity* owner = nullptr;
+	Matrix relativeTransform;
 	bool enabled = true;
 	bool toDelete = false;
 public:
