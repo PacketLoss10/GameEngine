@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Transform.h"
+#include "Vector2.h"
 
 class Matrix
 {
@@ -42,15 +42,18 @@ public:
 		return result;
 	}
 
-	static Matrix identity();
+	static Matrix identity;
 
-	const FVector& get_position() const;
-	void translate_by(FVector step);
+	Matrix inverse() const;
 
-	const FVector& get_forward() const;
+	Vector2 get_position() const;
+	void set_position(const Vector2& position);
+	void translate_by(const Vector2& step);
+
+	Vector2 get_forward() const;
 	float get_rotation() const;
-	void rotate_by(float angle, FVector origin);
+	void rotate_by(float angle, const Vector2& origin);
 
-	const FVector& get_scale() const;
-	void scale_by(FVector scale, FVector origin);
+	Vector2 get_scale() const;
+	void scale_by(const Vector2& scale, const Vector2& origin);
 };

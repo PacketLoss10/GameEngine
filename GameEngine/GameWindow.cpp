@@ -24,10 +24,10 @@ void GameWindow::end_render()
 	window.display();
 }
 
-FVector GameWindow::get_mouse_pos() const
+Vector2 GameWindow::get_mouse_pos() const
 {
 	auto pos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-	return FVector(pos.x, pos.y);
+	return Vector2(pos.x, pos.y);
 }
 
 bool GameWindow::is_open() const

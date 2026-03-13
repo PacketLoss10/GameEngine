@@ -17,7 +17,7 @@ private:
 	GameWindow() = default;
 	GameWindow(const GameWindow&) = delete;
 	GameWindow& operator=(const GameWindow&) = delete;
-	FVector get_mouse_pos() const;
+	Vector2 get_mouse_pos() const;
 	void start_render();
 	void render(const sf::Drawable& renderObject, sf::Shader* shader);
 	void end_render();

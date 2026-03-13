@@ -12,22 +12,22 @@ class NavigationComponent: public Component
 {
 private:
 	float speed = 0.f;
-	FVector position = FVector(0.f, 0.f);
-	FVector target = FVector(0.f, 0.f);
-	FVector velocity = FVector(0.f, 0.f);
-	FVector forward = FVector(1.f, 0.f);
-	std::stack<FVector> path;
-	std::optional<std::future<std::optional<std::stack<FVector>>>> task;
+	Vector2 position = Vector2(0.f, 0.f);
+	Vector2 target = Vector2(0.f, 0.f);
+	Vector2 velocity = Vector2(0.f, 0.f);
+	Vector2 forward = Vector2(1.f, 0.f);
+	std::stack<Vector2> path;
+	std::optional<std::future<std::optional<std::stack<Vector2>>>> task;
 public:
-	NavigationComponent() = default;
-	NavigationComponent(Entity* owner, bool enabled, float speed);
-	void init() override;
+	NavigationComponent(Entity* owner);
+	virtual ~NavigationComponent() = default;
+	virtual void finalise() override;
 	void update();
-	void start(const FVector& start, const FVector& end, const NavMesh& navmesh);
+	void start(const Vector2& start, const Vector2& end, const NavMesh& navmesh);
 	void clear();
 	bool is_finished() const;
 	float get_speed() const;
 	void set_speed(float speed);
-	const FVector& get_forward() const;
-	const FVector& get_position() const;
+	const Vector2& get_forward() const;
+	const Vector2& get_position() const;
 };

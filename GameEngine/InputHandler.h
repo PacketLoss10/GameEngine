@@ -90,5 +90,5 @@ public:
     bool is_key_held(Keyboard key) const;
     bool is_button_pressed(Mouse button) const;
     bool is_button_held(Mouse button) const;
-    FVector get_mouse_pos() const;
+    Vector2 get_mouse_pos() const;
 };

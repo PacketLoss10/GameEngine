@@ -5,12 +5,12 @@
 //class NavBlock
 //{
 //private:
-//	FVector position = FVector();
-//	FVector size = FVector();
+//	Vector2 position = Vector2();
+//	Vector2 size = Vector2();
 //public:
 //	NavBlock() = default;
-//	NavBlock(FVector position, FVector size);
+//	NavBlock(Vector2 position, Vector2 size);
 //
-//	const FVector& get_position() const;
-//	const FVector& get_size() const;
+//	const Vector2& get_position() const;
+//	const Vector2& get_size() const;
 //};

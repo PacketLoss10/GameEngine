@@ -16,6 +16,9 @@ public:
 	void input_tick() override;
 	void tap() {};
 
-	void begin(Entity*, CollisionComponent*, const FVector&);
-	void end(Entity*, CollisionComponent*, const FVector&);
+	void mouse_overlap_begin(Entity*, CollisionComponent*, const Vector2&);
+	void mouse_overlap_end(Entity*, CollisionComponent*, const Vector2&);
+
+	void overlap_begin(Entity*, CollisionComponent*, Entity*, CollisionComponent*);
+	void overlap_end(Entity*, CollisionComponent*, Entity*, CollisionComponent*);
 };

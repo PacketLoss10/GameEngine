@@ -3,10 +3,11 @@
 #include "Component.h"
 #include "RenderObject.h"
 
-class RenderComponent :public Component, public RenderObject
+class RenderComponent :public Component
 {
 public:
-	RenderComponent() = default;
-	RenderComponent(Entity* owner, bool enabled, Transform transform);
+	RenderComponent(Entity* owner);
 	virtual ~RenderComponent() = default;
+
+	virtual void finalise() override;
 };

@@ -1,4 +1,5 @@
 #include "Transformable.h"
+#include "Matrix.h"
 
 Transformable::Transformable(Transform transform) :transform(transform) {}
 
@@ -12,27 +13,37 @@ void Transformable::set_transform(const Transform& transform)
 	this->transform = transform;
 }
 
-const FVector& Transformable::get_position() const
+const Vector2& Transformable::get_origin() const
+{
+	return origin;
+}
+
+void Transformable::set_origin(const Vector2& origin)
+{
+	this->origin = origin;
+}
+
+const Vector2& Transformable::get_position() const
 {
 	return transform.position;
 }
 
-void Transformable::set_position(const FVector& position)
+void Transformable::set_position(const Vector2& position)
 {
 	transform.position = position;
 }
 
-void Transformable::move_by(const FVector& step)
+void Transformable::move_by(const Vector2& step)
 {
 	transform.position = transform.position + step;
 }
 
-const FVector& Transformable::get_forward() const
+const Vector2& Transformable::get_forward() const
 {
 	return transform.forward;
 }
 
-void Transformable::set_forward(const FVector& forward)
+void Transformable::set_forward(const Vector2& forward)
 {
 	transform.forward = forward;
 }
@@ -44,7 +55,7 @@ float Transformable::get_rotation() const
 
 void Transformable::set_rotation(float rotation)
 {
-	transform.forward = FVector(cosf(rotation), sinf(rotation));
+	transform.forward = Vector2(cosf(rotation), sinf(rotation));
 }
 
 void Transformable::rotate_by(float angle)
@@ -52,12 +63,17 @@ void Transformable::rotate_by(float angle)
 	transform.forward = transform.forward.rotated_by(angle);
 }
 
-const FVector& Transformable::get_scale() const
+const Vector2& Transformable::get_scale() const
 {
 	return transform.scale;
 }
 
-void Transformable::set_scale(const FVector& scale)
+void Transformable::set_scale(const Vector2& scale)
 {
 	transform.scale = scale;
+}
+
+void Transformable::scale_by(const Vector2& factor)
+{
+	transform.scale = transform.scale.component_wise_mult(factor);
 }

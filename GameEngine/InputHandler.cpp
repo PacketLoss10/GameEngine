@@ -263,10 +263,10 @@ bool InputHandler::is_button_held(Mouse button) const
 	return sf::Mouse::isButtonPressed(convert(button));
 }
 
-FVector InputHandler::get_mouse_pos() const
+Vector2 InputHandler::get_mouse_pos() const
 {
 	if (!activeWindow)
-		return FVector(0.f, 0.f);
+		return Vector2(0.f, 0.f);
 
 	return activeWindow->get_mouse_pos();
 }

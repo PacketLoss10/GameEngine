@@ -13,7 +13,7 @@ public:
 	{
 		sf::RectangleShape* line = static_cast<sf::RectangleShape*>(shape);
 		line->setFillColor(fillColor);
-		line->setSize(FVector(length, thickness));
+		line->setSize(Vector2(length, thickness));
 		line->setOrigin(line->getSize() / 2.f);
 		line->setPosition(transform.position);
 		line->setRotation(sf::radians(transform.forward.angle()));

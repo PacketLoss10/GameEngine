@@ -1,19 +1,18 @@
 #pragma once
 
 #include "Component.h"
-#include "Transformable.h"
 #include "Delegate.h"
 
-class CollisionComponent :public Component, public Transformable
+class CollisionComponent :public Component
 {
 public:
 	Delegate<Entity*, CollisionComponent*, Entity*, CollisionComponent*> on_overlap;
 	Delegate<Entity*, CollisionComponent*, Entity*, CollisionComponent*> on_begin_overlap;
 	Delegate<Entity*, CollisionComponent*, Entity*, CollisionComponent*> on_end_overlap;
 
-	Delegate<Entity*, CollisionComponent*, const FVector&> on_mouse_overlap;
-	Delegate<Entity*, CollisionComponent*, const FVector&> on_mouse_begin_overlap;
-	Delegate<Entity*, CollisionComponent*, const FVector&> on_mouse_end_overlap;
+	Delegate<Entity*, CollisionComponent*, const Vector2&> on_mouse_overlap;
+	Delegate<Entity*, CollisionComponent*, const Vector2&> on_mouse_begin_overlap;
+	Delegate<Entity*, CollisionComponent*, const Vector2&> on_mouse_end_overlap;
 
 	std::unordered_set<CollisionComponent*> overlaps;
 	bool is_overlapping(CollisionComponent* overlap) const;
@@ -24,7 +23,8 @@ public:
 	bool is_mouseOverlapping() const;
 	void set_mouseOverlapping(bool mouseOverlapping);
 
-	CollisionComponent() = default;
-	CollisionComponent(Entity* owner, bool enabled, Transform transform);
+	CollisionComponent(Entity* owner);
 	virtual ~CollisionComponent() = default;
+
+	virtual void finalise() override;
 };

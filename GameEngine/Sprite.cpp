@@ -62,16 +62,9 @@ void Sprite::generate_normal_map(Sprite& sprite, float value)
 	}
 }
 
-Sprite::Sprite(Entity* owner, bool enabled, Texture texture, TextureRect rect, int zOrder, Transform transform): RenderComponent(owner, enabled, transform), ZSortable(zOrder), texture(texture),rect(rect)
+Sprite::Sprite(Entity* owner): RenderComponent(owner), ZSortable(0)
 {
-	generate_normal_map(*this, 1.f);
-}
 
-Sprite::Sprite(Entity* owner, bool enabled, Texture texture, TextureRect rect, NormalMap normal, int zOrder, Transform transform) :RenderComponent(owner, enabled, transform), ZSortable(zOrder), texture(texture), rect(rect), normal(normal) {}
-
-void Sprite::init()
-{
-	RENDER_COMPONENT_MANAGER.register_component(this);
 }
 
 const TextureRect& Sprite::get_rect() const

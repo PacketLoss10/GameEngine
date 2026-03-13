@@ -26,4 +26,9 @@ void CollisionComponent::set_mouseOverlapping(bool mouseOverlapping)
 	this->mouseOverlapping = mouseOverlapping;
 }
 
-CollisionComponent::CollisionComponent(Entity* owner, bool enabled, Transform transform) :Component(owner, enabled), Transformable(transform) {}
+void CollisionComponent::finalise()
+{
+	COLLISION_COMPONENT_MANAGER.register_component(this);
+}
+
+CollisionComponent::CollisionComponent(Entity* owner) :Component(owner) {}

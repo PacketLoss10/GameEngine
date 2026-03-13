@@ -1,6 +1,7 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
+#include "Matrix.h"
+#include "Vector2.h"
 
 namespace mth
 {
@@ -56,87 +57,6 @@ struct IVector
 	}
 };
 
-struct FVector
-{
-	float x = 0.f;
-	float y = 0.f;
-
-	FVector() = default;
-	FVector(float x, float y) :x(x), y(y) {}
-
-	operator sf::Vector2f() const
-	{
-		return sf::Vector2f(x, y);
-	}
-
-	bool operator==(const FVector& other) const
-	{
-		return x == other.x && y == other.y;
-	}
-
-	FVector operator+(const FVector& other) const
-	{
-		return FVector(x + other.x, y + other.y);
-	}
-	FVector operator-(const FVector& other) const
-	{
-		return FVector(x - other.x, y - other.y);
-	}
-	FVector operator*(float other) const
-	{
-		return FVector(x * other, y * other);
-	}
-	FVector operator/(float other) const
-	{
-		return FVector(x / other, y / other);
-	}
-
-	float dot(const FVector& other) const
-	{
-		return x * other.x + y * other.y;
-	}
-	float cross(const FVector& other) const
-	{
-		return x * other.y - y * other.x;
-	}
-
-	FVector component_wise_mult(const FVector& other) const
-	{
-		return FVector(x * other.x, y * other.y);
-	}
-	FVector component_wise_div(const FVector& other) const
-	{
-		return FVector(x / other.x, y / other.y);
-	}
-
-	float size() const
-	{
-		return std::sqrtf(x * x + y * y);
-	}
-	float size_squared() const
-	{
-		return x * x + y * y;
-	}
-
-	FVector normalised() const
-	{
-		return *this / size();
-	}
-	FVector perpendicular() const
-	{
-		return FVector(-y, x);
-	}
-
-	float angle() const
-	{
-		return std::atan2f(y, x);
-	}
-	FVector rotated_by(float angle) const
-	{
-		return FVector(x * cosf(angle) - y * sinf(angle), x * sinf(angle) + y * cosf(angle));
-	}
-};
-
 struct IRect
 {
 	IVector position = IVector();
@@ -164,45 +84,49 @@ struct IRect
 	}
 };
 
-struct FRect
+//struct FRect
+//{
+//	Vector2 position = Vector2();
+//	Vector2 size = Vector2();
+//
+//	FRect() = default;
+//	FRect(Vector2 position, Vector2 size) :position(position), size(size) {}
+//
+//	operator sf::FloatRect() const
+//	{
+//		return sf::FloatRect(sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y));
+//	}
+//
+//	std::optional<FRect> find_intersection(const FRect& other) const
+//	{
+//		float x = std::max(position.x, other.position.x);
+//		float y = std::max(position.y, other.position.y);
+//		float w = std::min(position.x + size.x, other.position.x + other.size.x) - x;
+//		float h = std::min(position.y + size.y, other.position.y + other.size.y) - y;
+//
+//		if (w <= 0 || h <= 0)
+//			return std::nullopt;
+//
+//		return FRect(Vector2(x, y), Vector2(w, h));
+//	}
+//
+//	bool contains_point(const Vector2& point) const
+//	{
+//		return point.x >= position.x && point.x <= position.x + size.x &&
+//			point.y >= position.y && point.y <= position.y + size.y;
+//	}
+//};
+
+class Transform
 {
-	FVector position = FVector();
-	FVector size = FVector();
+public:
+	Vector2 position = Vector2(0.f, 0.f);
+	Vector2 forward = Vector2(1.f, 0.f);
+	Vector2 scale = Vector2(1.f, 1.f);
 
-	FRect() = default;
-	FRect(FVector position, FVector size) :position(position), size(size) {}
-
-	operator sf::FloatRect() const
-	{
-		return sf::FloatRect(sf::Vector2f(position.x, position.y), sf::Vector2f(size.x, size.y));
-	}
-
-	std::optional<FRect> find_intersection(const FRect& other) const
-	{
-		float x = std::max(position.x, other.position.x);
-		float y = std::max(position.y, other.position.y);
-		float w = std::min(position.x + size.x, other.position.x + other.size.x) - x;
-		float h = std::min(position.y + size.y, other.position.y + other.size.y) - y;
-
-		if (w <= 0 || h <= 0)
-			return std::nullopt;
-
-		return FRect(FVector(x, y), FVector(w, h));
-	}
-
-	bool contains_point(const FVector& point) const
-	{
-		return point.x >= position.x && point.x <= position.x + size.x &&
-			point.y >= position.y && point.y <= position.y + size.y;
-	}
-};
-
-struct Transform
-{
-	FVector position = FVector(0.f, 0.f);
-	FVector forward = FVector(1.f, 0.f);
-	FVector scale = FVector(1.f, 1.f);
+	static Transform identity;
 
 	Transform() = default;
-	Transform(FVector position, FVector forward, FVector scale) :position(position), forward(forward), scale(scale) {}
+	Transform(Vector2 position, Vector2 forward, Vector2 scale);
+	Transform(Matrix matrix);
 };

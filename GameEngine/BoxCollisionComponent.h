@@ -5,14 +5,10 @@
 class BoxCollisionComponent :public CollisionComponent
 {
 private:
-	FVector size = FVector();
+	Vector2 size = Vector2(0.f, 0.f);
 public:
-	BoxCollisionComponent() = default;
-	BoxCollisionComponent(Entity* owner, bool enabled, Transform transform, FVector size);
+	BoxCollisionComponent(Entity* owner);
 
-	void init() override;
-	void render() override;
-
-	const FVector& get_size() const;
-	void set_size(const FVector& size);
+	const Vector2& get_size() const;
+	void set_size(const Vector2& size);
 };

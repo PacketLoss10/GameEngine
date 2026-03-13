@@ -65,10 +65,10 @@ void Window::set_title(const std::string& title)
 	window.setTitle(title);
 }
 
-FVector Window::get_mouse_pos() const
+Vector2 Window::get_mouse_pos() const
 {
 	auto mousePos = sf::Mouse::getPosition(window);
-	return FVector(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
+	return Vector2(static_cast<float>(mousePos.x), static_cast<float>(mousePos.y));
 }
 
 bool Window::is_open() const

@@ -19,17 +19,45 @@ Matrix::Matrix()
 {
 }
 
-Matrix Matrix::identity()
+Matrix Matrix::identity = Matrix();
+
+Matrix Matrix::inverse() const
 {
-	return Matrix();
+
+	float det =
+		data[0][0] * (data[1][1] * data[2][2] - data[1][2] * data[2][1])
+		- data[0][1] * (data[1][0] * data[2][2] - data[1][2] * data[2][0])
+		+ data[0][2] * (data[1][0] * data[2][1] - data[1][1] * data[2][0]);
+
+	if (det == 0.f)
+	{
+		return Matrix::identity;
+	}
+
+	float invDet = 1.0f / det;
+	Matrix inverse;
+
+	inverse[0][0] = (data[1][1] * data[2][2] - data[1][2] * data[2][1]) * invDet;
+	inverse[0][1] = -(data[0][1] * data[2][2] - data[0][2] * data[2][1]) * invDet;
+	inverse[0][2] = (data[0][1] * data[1][2] - data[0][2] * data[1][1]) * invDet;
+
+	inverse[1][0] = -(data[1][0] * data[2][2] - data[1][2] * data[2][0]) * invDet;
+	inverse[1][1] = (data[0][0] * data[2][2] - data[0][2] * data[2][0]) * invDet;
+	inverse[1][2] = -(data[0][0] * data[1][2] - data[0][2] * data[1][0]) * invDet;
+
+	inverse[2][0] = (data[1][0] * data[2][1] - data[1][1] * data[2][0]) * invDet;
+	inverse[2][1] = -(data[0][0] * data[2][1] - data[0][1] * data[2][0]) * invDet;
+	inverse[2][2] = (data[0][0] * data[1][1] - data[0][1] * data[1][0]) * invDet;
+
+	return inverse;
 }
 
-const FVector& Matrix::get_position() const
+Vector2 Matrix::get_position() const
 {
-	return FVector(data[0][2], data[1][2]);
+	return Vector2(data[0][2], data[1][2]);
 }
 
-void Matrix::translate_by(FVector step)
+void Matrix::translate_by(const Vector2& step)
 {
 	Matrix translator;
 	translator[2][0] = step.x;
@@ -38,9 +66,9 @@ void Matrix::translate_by(FVector step)
 	*this = translator * *this;
 }
 
-const FVector& Matrix::get_forward() const
+Vector2 Matrix::get_forward() const
 {
-	return FVector(data[0][0], data[0][1]);
+	return Vector2(data[0][0], data[0][1]);
 }
 
 float Matrix::get_rotation() const
@@ -48,7 +76,7 @@ float Matrix::get_rotation() const
 	return atan2f(data[0][1], data[0][0]);
 }
 
-void Matrix::rotate_by(float angle, FVector origin)
+void Matrix::rotate_by(float angle, const Vector2& origin)
 {
 	Matrix rotator;
 	rotator[0][0] = cosf(angle);
@@ -65,12 +93,12 @@ void Matrix::rotate_by(float angle, FVector origin)
 	*this = translator1 * rotator * translator2 * *this;
 }
 
-const FVector& Matrix::get_scale() const
+Vector2 Matrix::get_scale() const
 {
-	return FVector(sqrtf(data[0][0] * data[0][0] + data[1][0] * data[1][0]), sqrtf(data[0][1] * data[0][1] + data[1][1]));
+	return Vector2(sqrtf(data[0][0] * data[0][0] + data[1][0] * data[1][0]), sqrtf(data[0][1] * data[0][1] + data[1][1]));
 }
 
-void Matrix::scale_by(FVector scale, FVector origin)
+void Matrix::scale_by(const Vector2& scale, const Vector2& origin)
 {
 	Matrix scaler;
 	scaler[0][0] = scale.x;

@@ -6,12 +6,12 @@
 
 struct Triangle
 {
-	FVector A = FVector();
-	FVector B = FVector();
-	FVector C = FVector();
+	Vector2 A = Vector2();
+	Vector2 B = Vector2();
+	Vector2 C = Vector2();
 
 	Triangle() = default;
-	Triangle(FVector A, FVector B, FVector C) :A(A), B(B), C(C) {}
+	Triangle(Vector2 A, Vector2 B, Vector2 C) :A(A), B(B), C(C) {}
 
 	float area() const
 	{
@@ -24,7 +24,7 @@ class NavMesh
 private:
 	std::vector<Triangle> navmesh;
 public:
-	bool contains_point(const FVector& point) const
+	bool contains_point(const Vector2& point) const
 	{
 		for (const Triangle& tri : navmesh)
 		{

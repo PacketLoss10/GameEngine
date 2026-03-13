@@ -12,14 +12,14 @@
 //{
 //private:
 //	std::vector<Actor*> actors;
-//	FVector view = FVector(0.f, 0.f);
+//	Vector2 view = Vector2(0.f, 0.f);
 //	const int updateDistance = 5;
 //	const int renderDistance = 3;
 //	std::unordered_map<SimulationChunk, std::vector<Actor*>> chunkMap;
 //	WorldSystem();
 //	WorldSystem(const WorldSystem&) = delete;
 //	WorldSystem& operator=(const WorldSystem&) = delete;
-//	std::vector<SimulationChunk> find_chunks_in_radius(FVector origin, float radius) const;
+//	std::vector<SimulationChunk> find_chunks_in_radius(Vector2 origin, float radius) const;
 //public:
 //	static WorldSystem& instance();
 //	
@@ -35,15 +35,15 @@
 //
 //	std::vector<RenderObject*> generate_render_data() const;
 //
-//	const FVector& get_view() const;
-//	void set_view(const FVector& new_view);
+//	const Vector2& get_view() const;
+//	void set_view(const Vector2& new_view);
 //
 //	std::vector<Actor*> find_actors_to_update() const;
 //	std::vector<Actor*> find_actors_to_render() const;
 //
-//	std::vector<Actor*> find_actors_in_radius(FVector origin, float radius) const;
+//	std::vector<Actor*> find_actors_in_radius(Vector2 origin, float radius) const;
 //	template<actortype T>
-//	std::vector<T*> find_actors_in_radius_of_type(FVector origin, float radius) const
+//	std::vector<T*> find_actors_in_radius_of_type(Vector2 origin, float radius) const
 //	{
 //		std::vector<T*> actors;
 //

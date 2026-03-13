@@ -5,14 +5,11 @@
 class CircleCollisionComponent :public CollisionComponent
 {
 private:
-	FVector radius = FVector(0.f, 0.f);
+	Vector2 radius = Vector2(0.f, 0.f);
 public:
-	CircleCollisionComponent() = default;
-	CircleCollisionComponent(Entity* owner, bool enabled, Transform transform, FVector radius);
+	CircleCollisionComponent(Entity* owner);
+	virtual ~CircleCollisionComponent() = default;
 
-	void init() override;
-	void render() override;
-
-	const FVector& get_radius() const;
-	void set_radius(const FVector& radius);
+	const Vector2& get_radius() const;
+	void set_radius(const Vector2& radius);
 };

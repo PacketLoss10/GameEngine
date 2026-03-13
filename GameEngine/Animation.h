@@ -2,7 +2,6 @@
 
 #include "Component.h"
 #include "Sprite.h"
-#include "Transform.h"
 
 class AnimLayout
 {
@@ -17,10 +16,10 @@ public:
 	}
 };
 
-class Animation :public Component, public Transformable
+class Animation :public Component
 {
 private:
-	Sprite sprite = Sprite();
+	Sprite* sprite;
 	AnimLayout layout = AnimLayout();
 	IVector frameSize = IVector();
 	int numFrames = 1;
@@ -30,12 +29,8 @@ private:
 	sf::Clock clock;
 	bool paused = false;
 public:
-	Animation() = default;
-	Animation(Entity* owner, bool enabled, Sprite sprite, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
-	Animation(Entity* owner, bool enabled, int zOrder, Transform transform, Texture texture, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
-	Animation(Entity* owner, bool enabled, int zOrder, Transform transform, Texture texture, NormalMap normal, AnimLayout layout, IVector frameSize, int numFrames, float fps, bool oneShot, bool autoStart);
-
-	void init() override;
+	Animation(Entity* owner);
+	virtual ~Animation() = default;
 
 	void update();
 	void pause();

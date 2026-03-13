@@ -1,13 +1,13 @@
 #include "PrimitiveCircleShape.h"
 
-PrimitiveCircleShape::PrimitiveCircleShape(FVector radius, Transform transform, Color fillColor, Color outlineColor) :PrimitiveShape(new sf::CircleShape, transform, fillColor, outlineColor), radius(radius) {}
+PrimitiveCircleShape::PrimitiveCircleShape(Vector2 radius, Transform transform, Color fillColor, Color outlineColor) :PrimitiveShape(new sf::CircleShape, transform, fillColor, outlineColor), radius(radius) {}
 
-const FVector& PrimitiveCircleShape::get_radius() const
+const Vector2& PrimitiveCircleShape::get_radius() const
 {
 	return radius;
 }
 
-void PrimitiveCircleShape::set_radius(const FVector& radius)
+void PrimitiveCircleShape::set_radius(const Vector2& radius)
 {
 	this->radius = radius;
 }

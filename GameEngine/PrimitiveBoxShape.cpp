@@ -1,13 +1,13 @@
 #include "PrimitiveBoxShape.h"
 
-PrimitiveBoxShape::PrimitiveBoxShape(FVector size, Transform transform, Color fillColor, Color outlineColor) :PrimitiveShape(new sf::RectangleShape, transform, fillColor, outlineColor), size(size) {}
+PrimitiveBoxShape::PrimitiveBoxShape(Vector2 size, Transform transform, Color fillColor, Color outlineColor) :PrimitiveShape(new sf::RectangleShape, transform, fillColor, outlineColor), size(size) {}
 
-const FVector& PrimitiveBoxShape::get_size() const
+const Vector2& PrimitiveBoxShape::get_size() const
 {
 	return size;
 }
 
-void PrimitiveBoxShape::set_size(const FVector& size)
+void PrimitiveBoxShape::set_size(const Vector2& size)
 {
 	this->size = size;
 }

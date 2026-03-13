@@ -1,14 +1,14 @@
 #include "PathFinder.h"
 #include "NavMesh.h"
 
-std::vector<std::pair<FVector, float>> PathFinder::valid_adjacent_nodes(const FVector& position, const NavMesh& navmesh) const
+std::vector<std::pair<Vector2, float>> PathFinder::valid_adjacent_nodes(const Vector2& position, const NavMesh& navmesh) const
 {
-	std::vector<std::pair<FVector, float>> adjacents;
+	std::vector<std::pair<Vector2, float>> adjacents;
 	adjacents.reserve(8);
 
-	for (const FVector& dir : directions)
+	for (const Vector2& dir : directions)
 	{
-		FVector adjacent = position + dir;
+		Vector2 adjacent = position + dir;
 		if (navmesh.contains_point(adjacent))
 		{
 			adjacents.emplace_back(adjacent, dir.size());
@@ -24,7 +24,7 @@ PathFinder& PathFinder::instance()
 	return instance;
 }
 
-std::optional<std::stack<FVector>> PathFinder::find_path(const FVector& start, const FVector& end, const NavMesh& navmesh, const PathFinderHeuristic& heuristic)
+std::optional<std::stack<Vector2>> PathFinder::find_path(const Vector2& start, const Vector2& end, const NavMesh& navmesh, const PathFinderHeuristic& heuristic)
 {
 	if (navmesh.empty())
 	{
@@ -32,22 +32,22 @@ std::optional<std::stack<FVector>> PathFinder::find_path(const FVector& start, c
 	}
 
 	int iterations = 0;
-	FVector target = end;
+	Vector2 target = end;
 
 	if (!navmesh.contains_point(end))
 	{
-		std::queue<FVector> bfs;
-		std::unordered_set<FVector> visited;
+		std::queue<Vector2> bfs;
+		std::unordered_set<Vector2> visited;
 		bfs.push(end);
 		visited.insert(end);
 		bool found = false;
 		while (!bfs.empty())
 		{
-			FVector current = bfs.front();
+			Vector2 current = bfs.front();
 			bfs.pop();
-			for (const FVector& dir : directions)
+			for (const Vector2& dir : directions)
 			{
-				FVector adjacent = current + dir;
+				Vector2 adjacent = current + dir;
 				if (visited.count(adjacent))
 					continue;
 				visited.insert(adjacent);
@@ -70,11 +70,11 @@ std::optional<std::stack<FVector>> PathFinder::find_path(const FVector& start, c
 		}
 	}
 
-	std::priority_queue<std::pair<float, FVector>, std::vector<std::pair<float, FVector>>, decltype(fCompare)> pq(fCompare);
-	std::unordered_set<FVector> visited;
-	std::unordered_map<FVector, FVector> prev;
-	std::unordered_map<FVector, float> g;
-	std::unordered_map<FVector, float> f;
+	std::priority_queue<std::pair<float, Vector2>, std::vector<std::pair<float, Vector2>>, decltype(fCompare)> pq(fCompare);
+	std::unordered_set<Vector2> visited;
+	std::unordered_map<Vector2, Vector2> prev;
+	std::unordered_map<Vector2, float> g;
+	std::unordered_map<Vector2, float> f;
 
 	g[start] = 0.f;
 	f[start] = heuristic.invoke(start, target);
@@ -84,7 +84,7 @@ std::optional<std::stack<FVector>> PathFinder::find_path(const FVector& start, c
 	{
 		iterations++;
 
-		FVector current = pq.top().second;
+		Vector2 current = pq.top().second;
 		pq.pop();
 
 		if (visited.count(current))
@@ -93,7 +93,7 @@ std::optional<std::stack<FVector>> PathFinder::find_path(const FVector& start, c
 
 		if ((current - target).size_squared() <= stepSize * stepSize)
 		{
-			std::stack<FVector> path;
+			std::stack<Vector2> path;
 			while (prev.count(current))
 			{
 				path.push(current);

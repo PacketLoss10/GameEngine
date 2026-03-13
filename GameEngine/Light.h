@@ -10,10 +10,8 @@ private:
 	float brightness = 0.f;
 	Color color = Color();
 public:
-	Light() = default;
-	Light(Entity* owner, bool enabled, Transform transform, float radius, float brightness, Color color);
-
-	void init() override;
+	Light(Entity* owner);
+	virtual ~Light() = default;
 
 	float get_radius() const;
 	void set_radius(float radius);

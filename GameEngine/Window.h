@@ -24,7 +24,7 @@ public:
 	const std::string& get_title() const;
 	void set_title(const std::string& title);
 
-	FVector get_mouse_pos() const;
+	Vector2 get_mouse_pos() const;
 
 	bool is_open() const;
 };

@@ -51,7 +51,7 @@ void Renderer::render(Window& window)
     {
         const Light* light = lights.back();
 
-        const FVector& pos = light->get_position();
+        const Vector2& pos = light->get_worldPosition();
         positions.emplace_back(pos.x, window.get_size().y - pos.y);
 
         radii.push_back(light->get_radius());
@@ -71,9 +71,9 @@ void Renderer::render(Window& window)
         const sf::Texture& texture = TEXTURE_LOADER.load_texture(sprite->get_texture().filepath, TextureLoadContext::Texture);
 
         sf::Sprite s = sf::Sprite(texture, sprite->get_rect());
-        s.setPosition(sprite->get_position());
-        s.setRotation(sf::radians(sprite->get_rotation()));
-        s.setScale(sprite->get_scale());
+        s.setPosition(sprite->get_worldPosition());
+        s.setRotation(sf::radians(sprite->get_worldRotation()));
+        s.setScale(sprite->get_worldScale());
 
         if (sprite->is_lit())
         {

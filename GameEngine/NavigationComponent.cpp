@@ -4,9 +4,9 @@
 #include "NavMesh.h"
 #include "TickClock.h"
 
-NavigationComponent::NavigationComponent(Entity* owner, bool enabled, float speed) :Component(owner, enabled), speed(speed) {}
+NavigationComponent::NavigationComponent(Entity* owner) :Component(owner) {}
 
-void NavigationComponent::init()
+void NavigationComponent::finalise()
 {
 	NAVIGATION_COMPONENT_MANAGER.register_component(this);
 }
@@ -31,7 +31,7 @@ void NavigationComponent::update()
 
 	if (!path.empty())
 	{
-		FVector next = path.top();
+		Vector2 next = path.top();
 		if ((next - position).size_squared() > 0.01f)
 			forward = (path.top() - position).normalised();
 
@@ -48,7 +48,7 @@ void NavigationComponent::update()
 	}
 }
 
-void NavigationComponent::start(const FVector& start, const FVector& end, const NavMesh& navmesh)
+void NavigationComponent::start(const Vector2& start, const Vector2& end, const NavMesh& navmesh)
 {
 	position = start;
 	target = end;
@@ -76,12 +76,12 @@ void NavigationComponent::set_speed(float speed)
 	this->speed = speed; 
 }
 
-const FVector& NavigationComponent::get_forward() const
+const Vector2& NavigationComponent::get_forward() const
 {
 	return forward;
 }
 
-const FVector& NavigationComponent::get_position() const
+const Vector2& NavigationComponent::get_position() const
 {
 	return position;
 }

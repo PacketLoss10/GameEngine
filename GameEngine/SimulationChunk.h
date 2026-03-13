@@ -12,11 +12,11 @@ private:
 	Color outlineColor = Color(255, 255, 255, 255);
 	bool visible = false;
 public:
-	static FVector chunkSize;
+	static Vector2 chunkSize;
 	SimulationChunk(IVector coord);
 	bool operator==(const SimulationChunk& other) const;
 	void render() const;
-	static IVector map_point_to_chunk_coords(const FVector& point);
+	static IVector map_point_to_chunk_coords(const Vector2& point);
 	const IVector& get_coord() const;
 	const Color& get_fillColor() const;
 	void set_fillColor(const Color& new_fillColor);

@@ -171,7 +171,9 @@
     <ClCompile Include="TextureRect.cpp" />
     <ClCompile Include="TickClock.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Transformable.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WorldSystem.cpp" />
   </ItemGroup>
@@ -223,6 +225,7 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transformable.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Vector2.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WorldSystem.h" />
   </ItemGroup>

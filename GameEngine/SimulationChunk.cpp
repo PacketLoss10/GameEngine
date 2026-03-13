@@ -12,7 +12,7 @@ void SimulationChunk::render() const
 	if (!visible) return;
 
 	sf::RectangleShape shape = sf::RectangleShape(chunkSize);
-	shape.setPosition(FVector(static_cast<float>(coord.x), static_cast<float>(coord.y)));
+	shape.setPosition(Vector2(static_cast<float>(coord.x), static_cast<float>(coord.y)));
 	shape.setFillColor(fillColor);
 	shape.setOutlineThickness(5);
 	shape.setOutlineColor(outlineColor);
@@ -20,7 +20,7 @@ void SimulationChunk::render() const
 	GAME_WINDOW.render(shape, nullptr);
 }
 
-IVector SimulationChunk::map_point_to_chunk_coords(const FVector& point) 
+IVector SimulationChunk::map_point_to_chunk_coords(const Vector2& point) 
 {
 	return IVector(
 		static_cast<int>(std::floor(point.x / chunkSize.x)),
@@ -63,4 +63,4 @@ void SimulationChunk::set_visible(bool new_visible)
 	visible = new_visible; 
 }
 
-FVector SimulationChunk::chunkSize = FVector(10000.f, 10000.f);
+Vector2 SimulationChunk::chunkSize = Vector2(10000.f, 10000.f);

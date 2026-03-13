@@ -15,11 +15,8 @@ protected:
 	NormalMap normal = NormalMap();
 	bool lit = false;
 public:
-	Sprite() = default;
-	Sprite(Entity* owner, bool enabled, Texture texture, TextureRect rect, int zOrder, Transform transform);
-	Sprite(Entity* owner, bool enabled, Texture texture, TextureRect rect, NormalMap normal, int zOrder, Transform transform);
-
-	void init() override;
+	Sprite(Entity* owner);
+	virtual ~Sprite() = default;
 
 	const TextureRect& get_rect() const;
 	void set_rect(const TextureRect& rect);
