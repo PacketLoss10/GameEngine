@@ -42,6 +42,8 @@ int main()
 
 		RENDER_COMPONENT_MANAGER.update();
 		COLLISION_COMPONENT_MANAGER.update();
+		card1->get_collision()->render(window);
+
 		RENDERER.render(window);
 		UPDATE_DELTA_TIME;
 	}

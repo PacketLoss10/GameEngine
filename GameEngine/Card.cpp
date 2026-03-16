@@ -26,6 +26,12 @@ Card::Card()
 	set_origin(Vector2(168.f, 234.f));
 }
 
+Card::~Card()
+{
+	delete sprite;
+	delete collision;
+}
+
 void Card::update_tick()
 {
 }

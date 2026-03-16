@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Transform.h"
+#include "Window.h"
 
 class Entity;
 
@@ -17,7 +18,7 @@ public:
 
 	virtual void finalise() {};
 	virtual void tick() {};
-	virtual void render() {};
+	virtual void render(Window& window) {};
 
 	Entity* get_owner() const;
 
@@ -38,6 +39,8 @@ public:
 
 	const Vector2& get_relativeScale() const;
 	void set_relativeScale(const Vector2& relativeScale);
+
+	const Transform& get_worldTransform() const;
 
 	const Vector2& get_worldPosition() const;
 	void set_worldPosition(const Vector2& worldPosition);

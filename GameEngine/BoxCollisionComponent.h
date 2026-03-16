@@ -11,4 +11,6 @@ public:
 
 	const Vector2& get_size() const;
 	void set_size(const Vector2& size);
+
+	void render(Window& window) override;
 };

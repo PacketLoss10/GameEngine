@@ -68,6 +68,11 @@ void Component::set_relativeScale(const Vector2& relativeScale)
 	relativeTransform.scale = relativeScale;
 }
 
+const Transform& Component::get_worldTransform() const
+{
+	return Transform(get_worldPosition(), get_worldForward(), get_worldScale());
+}
+
 const Vector2& Component::get_worldPosition() const
 {
 	const Transform& ownerTransform = owner->get_transform();

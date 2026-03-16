@@ -15,9 +15,16 @@ private:
 	static int overlaps;
 public:
 	Card();
+	~Card();
+
 	void cull() override {};
 	void update_tick() override;
 	void input_tick() override;
+
+	BoxCollisionComponent* get_collision() const
+	{
+		return collision;
+	}
 
 	void tap();
 	void untap();
