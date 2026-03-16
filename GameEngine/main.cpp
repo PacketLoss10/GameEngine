@@ -22,6 +22,10 @@ int main()
 	INPUT.set_activeWindow(&window);
 
 	Card* card1 = new Card();
+	Card* card2 = new Card();
+	card2->set_position(Vector2(500.f, 0.f));
+	Card* card3 = new Card();
+	card3->set_position(Vector2(1000.f, 0.f));
 
 	while (window.is_open())
 	{
@@ -29,13 +33,22 @@ int main()
 		window.update();
 
 		card1->update_tick();
+		card2->update_tick();
+		card3->update_tick();
+
 		card1->input_tick();
+		card2->input_tick();
+		card3->input_tick();
 
 		RENDER_COMPONENT_MANAGER.update();
 		COLLISION_COMPONENT_MANAGER.update();
 		RENDERER.render(window);
 		UPDATE_DELTA_TIME;
 	}
+
+	delete card1;
+	delete card2;
+	delete card3;
 
 	return 0;
 }

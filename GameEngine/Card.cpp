@@ -2,6 +2,8 @@
 #include "InputHandler.h"
 #include "TickClock.h"
 
+int Card::overlaps = 0;
+
 Card::Card()
 {
 	sprite = new Sprite(this);
@@ -13,6 +15,7 @@ Card::Card()
 	collision = new BoxCollisionComponent(this);
 	collision->set_size(Vector2(672.f, 936.f));
 	collision->set_relativePosition(Vector2(336.f, 468.f));
+	collision->on_overlap.bind(this, &Card::overlap);
 	collision->on_mouse_begin_overlap.bind(this, &Card::mouse_overlap_begin);
 	collision->on_mouse_end_overlap.bind(this, &Card::mouse_overlap_end);
 	collision->on_begin_overlap.bind(this, &Card::overlap_begin); 
@@ -20,6 +23,7 @@ Card::Card()
 	collision->finalise();
 
 	set_scale(Vector2(0.5f, 0.5f));
+	set_origin(Vector2(168.f, 234.f));
 }
 
 void Card::update_tick()
@@ -28,27 +32,36 @@ void Card::update_tick()
 
 void Card::input_tick()
 {
-	if (INPUT.is_button_pressed(Mouse::M1) && collision->is_mouseOverlapping())
+	if (INPUT.is_button_held(Mouse::M1))
 	{
-		rotate_by(3.14f / 2.f);
+		if (collision->is_mouseOverlapping())
+		{
+			if (!grabbed)
+			{
+				grabbed = true;
+				grabbedAt = INPUT.get_mouse_pos() - get_position();
+			}
+			set_position(INPUT.get_mouse_pos() - grabbedAt);
+		}
 	}
+	else grabbed = false;
 
-	if (INPUT.is_key_held(Keyboard::W))
+	if (INPUT.is_button_pressed(Mouse::M2)&&collision->is_mouseOverlapping())
 	{
-		move_by(Vector2(0.f, -100.f) * DELTA_TIME);
+		tapped ? untap() : tap();
 	}
-	if (INPUT.is_key_held(Keyboard::A))
-	{
-		move_by(Vector2(-100.f, 0.f) * DELTA_TIME);
-	}
-	if (INPUT.is_key_held(Keyboard::S))
-	{
-		move_by(Vector2(0.f, 100.f) * DELTA_TIME);
-	}
-	if (INPUT.is_key_held(Keyboard::D))
-	{
-		move_by(Vector2(100.f, 0.f) * DELTA_TIME);
-	}
+}
+
+void Card::tap()
+{
+	tapped = true;
+	set_forward(Vector2(0.f, -1.f));
+}
+
+void Card::untap()
+{
+	tapped = false;
+	set_forward(Vector2(1.f, 0.f));
 }
 
 void Card::mouse_overlap_begin(Entity*, CollisionComponent*, const Vector2&)
@@ -59,6 +72,11 @@ void Card::mouse_overlap_begin(Entity*, CollisionComponent*, const Vector2&)
 void Card::mouse_overlap_end(Entity*, CollisionComponent*, const Vector2&)
 {
 	std::cout << "end overlap with mouse" << std::endl;
+}
+
+void Card::overlap(Entity*, CollisionComponent*, Entity*, CollisionComponent*)
+{
+	std::cout << overlaps++ << std::endl;
 }
 
 void Card::overlap_begin(Entity*, CollisionComponent*, Entity*, CollisionComponent*)

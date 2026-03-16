@@ -20,7 +20,7 @@ void Window::update()
 
 void Window::start_display()
 {
-	window.clear(sf::Color::Black);
+	window.clear(sf::Color::White);
 }
 
 void Window::display(const sf::Drawable& object, sf::Shader* shader)

@@ -280,17 +280,19 @@ void CollisionComponentManager::update()
 {
 	delete_components();
 
-	if (components.size() == 1)
+	for (size_t i = 0; i < components.size(); i++)
 	{
-		if (CircleCollisionComponent* circle = dynamic_cast<CircleCollisionComponent*>(components[0]))
-		{
-			point_in_circle(circle);
-		}
-		else if (BoxCollisionComponent* box = dynamic_cast<BoxCollisionComponent*>(components[0]))
+		if (!components[i] || !components[i]->is_enabled())
+			continue;
+
+		if (BoxCollisionComponent* box = dynamic_cast<BoxCollisionComponent*>(components[i]))
 		{
 			point_in_box(box);
 		}
-		else return;
+		else if (CircleCollisionComponent* circle = dynamic_cast<CircleCollisionComponent*>(components[i]))
+		{
+			point_in_circle(circle);
+		}
 	}
 
 	for (size_t i = 0; i < components.size(); i++)
@@ -303,42 +305,26 @@ void CollisionComponentManager::update()
 			if (!compA || !compB || !compA->is_enabled() || !compB->is_enabled())
 				continue;
 
-			if (debugMode)
-			{
-
-			}
-
 			if (CircleCollisionComponent* circleA = dynamic_cast<CircleCollisionComponent*>(compA))
 			{
-				point_in_circle(circleA);
-
 				if (CircleCollisionComponent* circleB = dynamic_cast<CircleCollisionComponent*>(compB))
 				{
 					circle_on_circle(circleA, circleB);
-					continue;
 				}
-
-				if (BoxCollisionComponent* boxB = dynamic_cast<BoxCollisionComponent*>(compB))
+				else if (BoxCollisionComponent* boxB = dynamic_cast<BoxCollisionComponent*>(compB))
 				{
 					circle_on_box(circleA, boxB);
-					continue;
 				}
 			}
-
-			if (BoxCollisionComponent* boxA = dynamic_cast<BoxCollisionComponent*>(compA))
+			else if (BoxCollisionComponent* boxA = dynamic_cast<BoxCollisionComponent*>(compA))
 			{
-				point_in_box(boxA);
-
 				if (CircleCollisionComponent* circleB = dynamic_cast<CircleCollisionComponent*>(compB))
 				{
 					circle_on_box(circleB, boxA);
-					continue;
 				}
-
-				if (BoxCollisionComponent* boxB = dynamic_cast<BoxCollisionComponent*>(compB))
+				else if (BoxCollisionComponent* boxB = dynamic_cast<BoxCollisionComponent*>(compB))
 				{
 					box_on_box(boxA, boxB);
-					continue;
 				}
 			}
 		}

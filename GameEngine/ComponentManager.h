@@ -37,4 +37,8 @@ public:
 	{
 		debugMode = false;
 	}
+	size_t get_components_count() const
+	{
+		return components.size();
+	}
 };

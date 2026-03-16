@@ -60,4 +60,6 @@ public:
 	float angle() const;
 
 	Vector2 rotated_by(float angle) const;
+
+	std::string to_string() const;
 };

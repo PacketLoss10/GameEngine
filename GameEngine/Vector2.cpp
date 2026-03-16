@@ -51,3 +51,8 @@ Vector2 Vector2::rotated_by(float angle) const
 {
 	return Vector2(x * cosf(angle) - y * sinf(angle), x * sinf(angle) + y * cosf(angle));
 }
+
+std::string Vector2::to_string() const
+{
+	return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+}
