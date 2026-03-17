@@ -21,36 +21,35 @@ int main()
 	Window window = Window(IVector(1600, 900), "");
 	INPUT.set_activeWindow(&window);
 
-	Card* card1 = new Card();
-	Card* card2 = new Card();
-	card2->set_position(Vector2(500.f, 0.f));
-	Card* card3 = new Card();
-	card3->set_position(Vector2(1000.f, 0.f));
+	std::vector<Card*> cards;
+	cards.push_back(new Card());
 
 	while (window.is_open())
 	{
 		INPUT.update();
 		window.update();
 
-		card1->update_tick();
-		card2->update_tick();
-		card3->update_tick();
+		for (Card* card : cards)
+		{
+			card->update_tick();
+			card->input_tick();
+		}
 
-		card1->input_tick();
-		card2->input_tick();
-		card3->input_tick();
+		if (INPUT.is_button_pressed(Mouse::M3))
+		{
+			cards.push_back(new Card());
+		}
 
 		RENDER_COMPONENT_MANAGER.update();
 		COLLISION_COMPONENT_MANAGER.update();
-		card1->get_collision()->render(window);
-
 		RENDERER.render(window);
 		UPDATE_DELTA_TIME;
 	}
 
-	delete card1;
-	delete card2;
-	delete card3;
+	for (Card* card : cards)
+	{
+		delete card;
+	}
 
 	return 0;
 }

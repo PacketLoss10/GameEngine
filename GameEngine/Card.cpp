@@ -2,19 +2,18 @@
 #include "InputHandler.h"
 #include "TickClock.h"
 
-int Card::overlaps = 0;
-
 Card::Card()
 {
 	sprite = new Sprite(this);
 	sprite->set_texture(Texture("ugin-eye-of-the-storms.png"));
+	sprite->set_texture(Texture("back-of-card.png"));
 	sprite->set_rect(TextureRect(IVector(0, 0), IVector(672, 936)));
 	sprite->set_lit(false);
+	sprite->set_relativePosition(Vector2(-336.f, -468.f));
 	sprite->finalise();
 
 	collision = new BoxCollisionComponent(this);
 	collision->set_size(Vector2(672.f, 936.f));
-	collision->set_relativePosition(Vector2(336.f, 468.f));
 	collision->on_overlap.bind(this, &Card::overlap);
 	collision->on_mouse_begin_overlap.bind(this, &Card::mouse_overlap_begin);
 	collision->on_mouse_end_overlap.bind(this, &Card::mouse_overlap_end);
@@ -23,7 +22,6 @@ Card::Card()
 	collision->finalise();
 
 	set_scale(Vector2(0.5f, 0.5f));
-	set_origin(Vector2(168.f, 234.f));
 }
 
 Card::~Card()
@@ -82,7 +80,6 @@ void Card::mouse_overlap_end(Entity*, CollisionComponent*, const Vector2&)
 
 void Card::overlap(Entity*, CollisionComponent*, Entity*, CollisionComponent*)
 {
-	std::cout << overlaps++ << std::endl;
 }
 
 void Card::overlap_begin(Entity*, CollisionComponent*, Entity*, CollisionComponent*)

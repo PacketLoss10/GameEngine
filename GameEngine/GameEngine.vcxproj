@@ -145,6 +145,7 @@
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="JSONFILE.cpp" />
     <ClCompile Include="JSONOBJECT.cpp" />
+    <ClCompile Include="Library.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="JSONFILE.h" />
     <ClInclude Include="JSONOBJECT.h" />
+    <ClInclude Include="Library.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Matrix.h" />

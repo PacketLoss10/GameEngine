@@ -1,0 +1,29 @@
+#pragma once
+
+#include "Entity.h"
+#include "Sprite.h"
+#include "BoxCollisionComponent.h"
+#include "Card.h"
+#include "queue"
+
+enum class LibraryPosition
+{
+	Top, Bottom
+};
+
+class Library :public Entity
+{
+private:
+	Sprite* sprite;
+	BoxCollisionComponent* collision;
+	std::deque<Card*> library;
+public:
+	Library();
+	~Library();
+
+	void input_tick() override;
+
+	Card* draw_card();
+	void add_card(Card* card, LibraryPosition at);
+	void shuffle();
+};

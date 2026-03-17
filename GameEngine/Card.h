@@ -12,7 +12,6 @@ private:
 	bool tapped = false;
 	bool grabbed = false;
 	Vector2 grabbedAt = Vector2(0.f, 0.f);
-	static int overlaps;
 public:
 	Card();
 	~Card();
@@ -20,11 +19,6 @@ public:
 	void cull() override {};
 	void update_tick() override;
 	void input_tick() override;
-
-	BoxCollisionComponent* get_collision() const
-	{
-		return collision;
-	}
 
 	void tap();
 	void untap();

@@ -4,7 +4,7 @@
 
 void CollisionComponentManager::box_on_box(BoxCollisionComponent* boxA, BoxCollisionComponent* boxB)
 {
-	Vector2 axisAX = boxA->get_worldPosition();
+	Vector2 axisAX = boxA->get_worldForward();
 	Vector2 axisAY = boxA->get_worldForward().perpendicular();
 	Vector2 axisBX = boxB->get_worldForward();
 	Vector2 axisBY = boxB->get_worldForward().perpendicular();
