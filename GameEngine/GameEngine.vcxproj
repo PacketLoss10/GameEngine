@@ -140,6 +140,8 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="ComponentManager.cpp" />
     <ClCompile Include="Delegate.cpp" />
+    <ClCompile Include="DragDropComponent.cpp" />
+    <ClCompile Include="DragDropManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameWindow.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -188,6 +190,11 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="Delegate.h" />
+    <ClInclude Include="DragDropComponent.h" />
+    <ClInclude Include="DragDropManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InputHandler.h" />

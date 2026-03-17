@@ -21,7 +21,7 @@ Card::Card()
 	collision->on_end_overlap.bind(this, &Card::overlap_end);
 	collision->finalise();
 
-	set_scale(Vector2(0.5f, 0.5f));
+	set_scale(Vector2(0.25f, 0.25f));
 }
 
 Card::~Card()
