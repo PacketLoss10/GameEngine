@@ -45,7 +45,7 @@
     <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RenderObject.cpp">
+    <ClCompile Include="ZSortable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
@@ -269,7 +269,7 @@
     <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderObject.h">
+    <ClInclude Include="ZSortable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">

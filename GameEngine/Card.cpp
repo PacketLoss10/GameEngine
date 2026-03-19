@@ -68,6 +68,11 @@ void Card::untap()
 	set_forward(Vector2(1.f, 0.f));
 }
 
+void Card::mouse_overlap(Entity*, CollisionComponent*, const Vector2&)
+{
+	sprite->to_front();
+}
+
 void Card::mouse_overlap_begin(Entity*, CollisionComponent*, const Vector2&)
 {
 	std::cout << "begin overlap with mouse" << std::endl;

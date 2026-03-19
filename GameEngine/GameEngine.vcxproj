@@ -165,7 +165,7 @@
     <ClCompile Include="RenderComponentManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="RenderObject.cpp" />
+    <ClCompile Include="ZSortable.cpp" />
     <ClCompile Include="SimulationChunk.cpp" />
     <ClCompile Include="SLObject.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -223,7 +223,7 @@
     </ClInclude>
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="RenderObject.h" />
+    <ClInclude Include="ZSortable.h" />
     <ClInclude Include="SimulationChunk.h" />
     <ClInclude Include="SLObject.h" />
     <ClInclude Include="Sprite.h" />

@@ -11,7 +11,7 @@ private:
 	Vector2 grabbedAt = Vector2(0.f, 0.f);
 public:
 	DragDropComponent(Entity* owner);
-	virtual ~DragDropComponent() = default;
+	virtual ~DragDropComponent() = default; 
 
 	virtual void finalise() override;
 

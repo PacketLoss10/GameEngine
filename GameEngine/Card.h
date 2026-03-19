@@ -23,6 +23,7 @@ public:
 	void tap();
 	void untap();
 
+	void mouse_overlap(Entity*, CollisionComponent*, const Vector2&);
 	void mouse_overlap_begin(Entity*, CollisionComponent*, const Vector2&);
 	void mouse_overlap_end(Entity*, CollisionComponent*, const Vector2&);
 

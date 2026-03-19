@@ -1,6 +1,7 @@
 #pragma once
 
 #include "RenderComponent.h"
+#include "ZSortable.h"
 #include "TextureRect.h"
 #include "Texture.h"
 #include "NormalMap.h"
