@@ -57,11 +57,7 @@ void Renderer::render(Window& window)
 
 	window.start_display();
 
-	//if (!ZSortable::is_sorted())
-	{
-		std::sort(renderData.begin(), renderData.end(), [](const RenderData& a, const RenderData& b) { return a.zOrder < b.zOrder; });
-		//ZSortable::set_sorted(true);
-	}
+	std::sort(renderData.begin(), renderData.end(), [](const RenderData& a, const RenderData& b) { return a.zOrder < b.zOrder; });
 
 	constexpr int MAX_LIGHTS = 16;
 	const int numLights = std::min(static_cast<int>(lightData.size()), MAX_LIGHTS);
@@ -252,5 +248,6 @@ void Renderer::render(Window& window)
 	}
 
 	renderData.clear();
+	lightData.clear();
 	window.end_display();
 }

@@ -8,8 +8,7 @@ Card::Card(std::string id) : id(id)
 	sprite->set_texture(Texture("Cards//" + id + ".png"));
 	sprite->set_rect(TextureRect(IntVector(0, 0), IntVector(672, 936)));
 	sprite->set_relativePosition(Vector2(-336.f, -468.f));
-	SpriteComponent::generate_normal_map(*sprite, 1.f);
-	sprite->set_lit(true);
+	sprite->set_lit(false);
 	sprite->finalise();
 
 	collision = new BoxCollisionComponent(this);
@@ -22,7 +21,7 @@ Card::Card(std::string id) : id(id)
 	dragDrop->on_hover_end.bind(this, &Card::mouse_unhover);
 	dragDrop->finalise();
 
-	set_scale(Vector2(0.25f, 0.25f));
+	set_scale(Vector2(0.5f, 0.5f));
 }
 
 Card::~Card()
@@ -76,10 +75,10 @@ void Card::unflip()
 void Card::mouse_hover(const Vector2&)
 {
 	sprite->to_front();
-	set_scale(Vector2(0.3f, 0.3f));
+	set_scale(Vector2(0.6f, 0.6f));
 }
 
 void Card::mouse_unhover(const Vector2&)
 {
-	set_scale(Vector2(0.25f, 0.25f));
+	set_scale(Vector2(0.5f, 0.5f));
 }
