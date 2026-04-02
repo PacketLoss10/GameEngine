@@ -12,6 +12,7 @@
 #include "Renderer.h"
 #include "RenderComponentManager.h"
 #include "NavigationComponentManager.h"
+#include "DragDropManager.h"
 #include "NavMesh.h"
 #include "SFML/Network.hpp"
 #include "Card.h"
@@ -42,6 +43,7 @@ int main()
 
 		RENDER_COMPONENT_MANAGER.update();
 		COLLISION_COMPONENT_MANAGER.update();
+		DRAG_DROP_MANAGER.update();
 		RENDERER.render(window);
 		UPDATE_DELTA_TIME;
 	}

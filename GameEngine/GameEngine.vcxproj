@@ -191,10 +191,7 @@
     <ClInclude Include="ComponentManager.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="DragDropComponent.h" />
-    <ClInclude Include="DragDropManager.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="DragDropManager.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameWindow.h" />
     <ClInclude Include="InputHandler.h" />

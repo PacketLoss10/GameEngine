@@ -35,7 +35,7 @@ void Renderer::render(Window& window)
 
     window.start_display();
 
-    std::sort(sprites.begin(), sprites.end(), [](const Sprite* a, const Sprite* b) {return a->get_zOrder() < b->get_zOrder(); });
+    std::sort(sprites.begin(), sprites.end(), [](const Sprite* a, const Sprite* b) {return a->get_zOrder() > b->get_zOrder(); });
 
     constexpr int MAX_LIGHTS = 16;
     const int numLights = std::min(static_cast<int>(lights.size()), MAX_LIGHTS);

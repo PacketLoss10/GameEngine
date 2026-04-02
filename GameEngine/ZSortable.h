@@ -6,7 +6,7 @@
 class ZSortable
 {
 private:
-	static std::vector<int> others;
+	static std::vector<ZSortable*> others;
 	int zOrder = 0;
 public:
 	ZSortable(int zOrder);

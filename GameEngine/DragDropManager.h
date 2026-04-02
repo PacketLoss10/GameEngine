@@ -11,6 +11,9 @@ private:
 	DragDropManager() = default;
 	DragDropManager(const DragDropManager&) = delete;
 	DragDropManager& operator=(const DragDropManager&) = delete;
+
+	DragDropComponent* hovered = nullptr;
+	DragDropComponent* dragging = nullptr;
 public:
 	static DragDropManager& instance();
 	void update();

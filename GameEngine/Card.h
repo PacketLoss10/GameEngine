@@ -2,6 +2,7 @@
 
 #include "Entity.h"
 #include "BoxCollisionComponent.h"
+#include "DragDropComponent.h"
 #include "Sprite.h"
 
 class Card :public Entity
@@ -9,9 +10,9 @@ class Card :public Entity
 private:
 	Sprite* sprite;
 	BoxCollisionComponent* collision;
+	DragDropComponent* dragDrop;
+
 	bool tapped = false;
-	bool grabbed = false;
-	Vector2 grabbedAt = Vector2(0.f, 0.f);
 public:
 	Card();
 	~Card();
@@ -23,11 +24,5 @@ public:
 	void tap();
 	void untap();
 
-	void mouse_overlap(Entity*, CollisionComponent*, const Vector2&);
-	void mouse_overlap_begin(Entity*, CollisionComponent*, const Vector2&);
-	void mouse_overlap_end(Entity*, CollisionComponent*, const Vector2&);
-
-	void overlap(Entity*, CollisionComponent*, Entity*, CollisionComponent*);
-	void overlap_begin(Entity*, CollisionComponent*, Entity*, CollisionComponent*);
-	void overlap_end(Entity*, CollisionComponent*, Entity*, CollisionComponent*);
+	void bring_to_front(const Vector2&);
 };

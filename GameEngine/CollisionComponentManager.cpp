@@ -32,29 +32,29 @@ void CollisionComponentManager::box_on_box(BoxCollisionComponent* boxA, BoxColli
 			if (boxA->is_overlapping(boxB))
 			{
 				boxA->remove_overlap(boxB);
-				boxA->on_end_overlap.invoke(boxA->get_owner(), boxA, boxB->get_owner(), boxB);
+				boxA->on_end_overlap.invoke(boxB->get_owner(), boxB);
 			}
 			if (boxB->is_overlapping(boxA))
 			{
 				boxB->remove_overlap(boxA);
-				boxB->on_end_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
+				boxB->on_end_overlap.invoke(boxA->get_owner(), boxA);
 			}
 
 			return;
 		}
 	}
 
-	boxA->on_overlap.invoke(boxA->get_owner(), boxA, boxB->get_owner(), boxB);
+	boxA->on_overlap.invoke(boxB->get_owner(), boxB);
 	if (!boxA->is_overlapping(boxB))
 	{
 		boxA->add_overlap(boxB);
-		boxA->on_begin_overlap.invoke(boxA->get_owner(), boxA, boxB->get_owner(), boxB);
+		boxA->on_begin_overlap.invoke(boxB->get_owner(), boxB);
 	}
-	boxB->on_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
+	boxB->on_overlap.invoke(boxA->get_owner(), boxA);
 	if (!boxB->is_overlapping(boxA))
 	{
 		boxB->add_overlap(boxA);
-		boxB->on_begin_overlap.invoke(boxB->get_owner(), boxB, boxA->get_owner(), boxA);
+		boxB->on_begin_overlap.invoke(boxA->get_owner(), boxA);
 	}
 
 	return;
@@ -89,17 +89,17 @@ void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circl
 		float t = (2.0f * mth::pi * i) / 32.0f;
 		if (pointIn(circleA, pointOn(circleB, t)))
 		{
-			circleA->on_overlap.invoke(circleA->get_owner(), circleA, circleB->get_owner(), circleB);
+			circleA->on_overlap.invoke(circleB->get_owner(), circleB);
 			if (!circleA->is_overlapping(circleB))
 			{
 				circleA->add_overlap(circleB);
-				circleA->on_begin_overlap.invoke(circleA->get_owner(), circleA, circleB->get_owner(), circleB);
+				circleA->on_begin_overlap.invoke(circleB->get_owner(), circleB);
 			}
-			circleB->on_overlap.invoke(circleB->get_owner(), circleB, circleA->get_owner(), circleA);
+			circleB->on_overlap.invoke(circleA->get_owner(), circleA);
 			if (!circleB->is_overlapping(circleA))
 			{
 				circleB->add_overlap(circleA);
-				circleB->on_begin_overlap.invoke(circleB->get_owner(), circleB, circleA->get_owner(), circleA);
+				circleB->on_begin_overlap.invoke(circleA->get_owner(), circleA);
 			}
 
 			return;
@@ -109,12 +109,12 @@ void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circl
 	if (circleA->is_overlapping(circleB))
 	{
 		circleA->remove_overlap(circleB);
-		circleA->on_end_overlap.invoke(circleA->get_owner(), circleA, circleB->get_owner(), circleB);
+		circleA->on_end_overlap.invoke(circleB->get_owner(), circleB);
 	}
 	if (circleB->is_overlapping(circleA))
 	{
 		circleB->remove_overlap(circleA);
-		circleB->on_end_overlap.invoke(circleB->get_owner(), circleB, circleA->get_owner(), circleA);
+		circleB->on_end_overlap.invoke(circleA->get_owner(), circleA);
 	}
 
 	return;
@@ -174,29 +174,29 @@ void CollisionComponentManager::circle_on_box(CircleCollisionComponent* circle, 
 			if (circle->is_overlapping(box))
 			{
 				circle->remove_overlap(box);
-				circle->on_end_overlap.invoke(circle->get_owner(), circle, box->get_owner(), box);
+				circle->on_end_overlap.invoke(box->get_owner(), box);
 			}
 			if (box->is_overlapping(circle))
 			{
 				box->remove_overlap(circle);
-				box->on_end_overlap.invoke(box->get_owner(), box, circle->get_owner(), circle);
+				box->on_end_overlap.invoke(circle->get_owner(), circle);
 			}
 
 			return;
 		}
 	}
 
-	circle->on_overlap.invoke(circle->get_owner(), circle, box->get_owner(), box);
+	circle->on_overlap.invoke(box->get_owner(), box);
 	if (!circle->is_overlapping(box))
 	{
 		circle->add_overlap(box);
-		circle->on_begin_overlap.invoke(circle->get_owner(), circle, box->get_owner(), box);
+		circle->on_begin_overlap.invoke(box->get_owner(), box);
 	}
-	box->on_overlap.invoke(box->get_owner(), box, circle->get_owner(), circle);
+	box->on_overlap.invoke(circle->get_owner(), circle);
 	if (!box->is_overlapping(circle))
 	{
 		box->add_overlap(circle);
-		box->on_begin_overlap.invoke(box->get_owner(), box, circle->get_owner(), circle);
+		box->on_begin_overlap.invoke(circle->get_owner(), circle);
 	}
 
 	return;
@@ -214,11 +214,11 @@ void CollisionComponentManager::point_in_box(BoxCollisionComponent* box)
 
 	if (fabs(xr) <= halfBox.x && fabs(yr) <= halfBox.y)
 	{
-		box->on_mouse_overlap.invoke(box->get_owner(), box, mousePos);
+		box->on_mouse_overlap.invoke(mousePos);
 		if (!box->is_mouseOverlapping())
 		{
 			box->set_mouseOverlapping(true);
-			box->on_mouse_begin_overlap.invoke(box->get_owner(), box, mousePos);
+			box->on_mouse_begin_overlap.invoke(mousePos);
 		}
 
 		return;
@@ -228,7 +228,7 @@ void CollisionComponentManager::point_in_box(BoxCollisionComponent* box)
 		if (box->is_mouseOverlapping())
 		{
 			box->set_mouseOverlapping(false);
-			box->on_mouse_end_overlap.invoke(box->get_owner(), box, mousePos);
+			box->on_mouse_end_overlap.invoke(mousePos);
 		}
 
 		return;
@@ -249,11 +249,11 @@ void CollisionComponentManager::point_in_circle(CircleCollisionComponent* circle
 
 	if (n <= 1.f)
 	{
-		circle->on_mouse_overlap.invoke(circle->get_owner(), circle, mousePos);
+		circle->on_mouse_overlap.invoke(mousePos);
 		if (!circle->is_mouseOverlapping())
 		{
 			circle->set_mouseOverlapping(true);
-			circle->on_mouse_begin_overlap.invoke(circle->get_owner(), circle, mousePos);
+			circle->on_mouse_begin_overlap.invoke(mousePos);
 		}
 
 		return;
@@ -263,7 +263,7 @@ void CollisionComponentManager::point_in_circle(CircleCollisionComponent* circle
 		if (circle->is_mouseOverlapping())
 		{
 			circle->set_mouseOverlapping(false);
-			circle->on_mouse_end_overlap.invoke(circle->get_owner(), circle, mousePos);
+			circle->on_mouse_end_overlap.invoke(mousePos);
 		}
 
 		return;
@@ -280,16 +280,16 @@ void CollisionComponentManager::update()
 {
 	delete_components();
 
-	for (size_t i = 0; i < components.size(); i++)
+	for (CollisionComponent* comp : components)
 	{
-		if (!components[i] || !components[i]->is_enabled())
+		if (!comp || !comp->is_enabled())
 			continue;
 
-		if (BoxCollisionComponent* box = dynamic_cast<BoxCollisionComponent*>(components[i]))
+		if(BoxCollisionComponent* box = dynamic_cast<BoxCollisionComponent*>(comp))
 		{
 			point_in_box(box);
 		}
-		else if (CircleCollisionComponent* circle = dynamic_cast<CircleCollisionComponent*>(components[i]))
+		else if (CircleCollisionComponent* circle = dynamic_cast<CircleCollisionComponent*>(comp))
 		{
 			point_in_circle(circle);
 		}

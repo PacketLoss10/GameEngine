@@ -1,9 +1,12 @@
 #include "ZSortable.h"
+#include "iostream"
+
+std::vector<ZSortable*> ZSortable::others;
 
 ZSortable::ZSortable(int zOrder) :zOrder(zOrder)
 {
-	others.push_back(zOrder);
-	std::sort(others.begin(), others.end(), [](const int lhs, const int rhs) { return lhs < rhs; });
+	others.push_back(this);
+	std::sort(others.begin(), others.end(), [](const ZSortable* lhs, const ZSortable* rhs) { return lhs->get_zOrder() < rhs->get_zOrder(); });
 }
 
 int ZSortable::get_zOrder() const
@@ -18,16 +21,30 @@ void ZSortable::set_zOrder(int zOrder)
 
 void ZSortable::to_front()
 {
-	if (others.empty())
+	if (others.size() <= 1)
 		return;
 
-	zOrder = others.back();
+	ZSortable* frontmost = others.back();
+	int greatestZ = frontmost->get_zOrder();
+
+	if (this != frontmost)
+	{
+		zOrder = greatestZ + 1;
+		std::sort(others.begin(), others.end(), [](const ZSortable* lhs, const ZSortable* rhs) { return lhs->get_zOrder() < rhs->get_zOrder(); });
+	}
 }
 
 void ZSortable::to_back()
 {
-	if (others.empty())
+	if (others.size() <= 1)
 		return;
 
-	zOrder = others.front();
+	ZSortable* backmost = others.front();
+	int leastZ = backmost->get_zOrder();
+
+	if (this != backmost)
+	{
+		zOrder = leastZ - 1;
+		std::sort(others.begin(), others.end(), [](const ZSortable* lhs, const ZSortable* rhs) { return lhs->get_zOrder() < rhs->get_zOrder(); });
+	}
 }

@@ -14,12 +14,12 @@ Card::Card()
 
 	collision = new BoxCollisionComponent(this);
 	collision->set_size(Vector2(672.f, 936.f));
-	collision->on_overlap.bind(this, &Card::overlap);
-	collision->on_mouse_begin_overlap.bind(this, &Card::mouse_overlap_begin);
-	collision->on_mouse_end_overlap.bind(this, &Card::mouse_overlap_end);
-	collision->on_begin_overlap.bind(this, &Card::overlap_begin); 
-	collision->on_end_overlap.bind(this, &Card::overlap_end);
 	collision->finalise();
+
+	dragDrop = new DragDropComponent(this);
+	dragDrop->set_geometry(collision);
+	dragDrop->on_hover_begin.bind(this, &Card::bring_to_front);
+	dragDrop->finalise();
 
 	set_scale(Vector2(0.25f, 0.25f));
 }
@@ -32,24 +32,11 @@ Card::~Card()
 
 void Card::update_tick()
 {
+	dragDrop->set_layer(sprite->get_zOrder());
 }
 
 void Card::input_tick()
 {
-	if (INPUT.is_button_held(Mouse::M1))
-	{
-		if (collision->is_mouseOverlapping())
-		{
-			if (!grabbed)
-			{
-				grabbed = true;
-				grabbedAt = INPUT.get_mouse_pos() - get_position();
-			}
-			set_position(INPUT.get_mouse_pos() - grabbedAt);
-		}
-	}
-	else grabbed = false;
-
 	if (INPUT.is_button_pressed(Mouse::M2)&&collision->is_mouseOverlapping())
 	{
 		tapped ? untap() : tap();
@@ -68,31 +55,7 @@ void Card::untap()
 	set_forward(Vector2(1.f, 0.f));
 }
 
-void Card::mouse_overlap(Entity*, CollisionComponent*, const Vector2&)
+void Card::bring_to_front(const Vector2&)
 {
 	sprite->to_front();
-}
-
-void Card::mouse_overlap_begin(Entity*, CollisionComponent*, const Vector2&)
-{
-	std::cout << "begin overlap with mouse" << std::endl;
-}
-
-void Card::mouse_overlap_end(Entity*, CollisionComponent*, const Vector2&)
-{
-	std::cout << "end overlap with mouse" << std::endl;
-}
-
-void Card::overlap(Entity*, CollisionComponent*, Entity*, CollisionComponent*)
-{
-}
-
-void Card::overlap_begin(Entity*, CollisionComponent*, Entity*, CollisionComponent*)
-{
-	std::cout << "begin overlap" << std::endl;
-}
-
-void Card::overlap_end(Entity*, CollisionComponent*, Entity*, CollisionComponent*)
-{
-	std::cout << "end overlap" << std::endl;
 }
