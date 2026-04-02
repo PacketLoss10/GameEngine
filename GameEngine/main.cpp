@@ -5,6 +5,7 @@
 #include "CollisionComponentManager.h"
 #include "Renderer.h"
 #include "InputHandler.h"
+#include "Library.h"
 #include "Card.h"
 
 int main()
@@ -12,8 +13,13 @@ int main()
 	Window window = Window(IntVector(1600, 900), "");
 	INPUT.set_activeWindow(&window);
 
+	Library* library = new Library();
+	library->set_position(Vector2(800.f, 600.f));
+	for (int i = 0; i < 60; i++)
+	{
+		library->add_card(new Card("ugin-eye-of-the-storms"), LibraryPosition::Top);
+	}
 	std::vector<Card*> cards;
-	cards.push_back(new Card("ugin-eye-of-the-storms"));
 
 	while (window.is_open())
 	{
@@ -26,9 +32,9 @@ int main()
 			card->input_tick();
 		}
 
-		if (INPUT.is_key_pressed(Keyboard::Space))
+		if (library->get_collision()->is_mouseOverlapping() && INPUT.is_button_pressed(Mouse::M2))
 		{
-			cards.push_back(new Card("ugin-eye-of-the-storms"));
+			cards.push_back(library->draw_card());
 		}
 
 		RENDER_COMPONENT_MANAGER.update();
@@ -38,10 +44,7 @@ int main()
 		UPDATE_DELTA_TIME;
 	}
 
-	for (Card* card : cards)
-	{
-		delete card;
-	}
+	delete library;
 
 	return 0;
 }

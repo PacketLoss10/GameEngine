@@ -4,7 +4,7 @@
 #include "SpriteComponent.h"
 #include "BoxCollisionComponent.h"
 #include "Card.h"
-#include "queue"
+#include <queue>
 
 enum class LibraryPosition
 {
@@ -21,9 +21,9 @@ public:
 	Library();
 	~Library();
 
-	void input_tick() override;
-
 	Card* draw_card();
 	void add_card(Card* card, LibraryPosition at);
 	void shuffle();
+
+	BoxCollisionComponent* get_collision() const { return collision; }
 };

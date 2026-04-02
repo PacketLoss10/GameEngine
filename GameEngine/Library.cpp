@@ -4,7 +4,7 @@
 Library::Library()
 {
 	sprite = new SpriteComponent(this);
-	sprite->set_texture(Texture("back-of-card.png"));
+	sprite->set_texture(Texture("Cards//back-of-card.png"));
 	sprite->set_rect(TextureRect(IntVector(0, 0), IntVector(672, 936)));
 	sprite->set_lit(false);
 	sprite->set_relativePosition(Vector2(-336.f, -468.f));
@@ -21,24 +21,9 @@ Library::~Library()
 {
 	delete sprite;
 	delete collision;
-}
-
-void Library::input_tick()
-{
-	if (INPUT.is_button_pressed(Mouse::M1))
+	for (Card* card : library)
 	{
-		if (collision->is_mouseOverlapping())
-		{
-			draw_card();
-		}
-	}
-
-	if (INPUT.is_button_pressed(Mouse::M2))
-	{
-		if (collision->is_mouseOverlapping())
-		{
-			shuffle();
-		}
+		delete card;
 	}
 }
 
@@ -51,6 +36,7 @@ Card* Library::draw_card()
 
 void Library::add_card(Card* card, LibraryPosition at)
 {
+	card->set_position(get_position());
 	switch (at) 
 	{
 	case LibraryPosition::Top:
@@ -65,6 +51,9 @@ void Library::add_card(Card* card, LibraryPosition at)
 
 void Library::shuffle()
 {
+	if (library.size() <= 1)
+		return;
+		
 	for (int i = 0; i < 1000; i++)
 	{
 		size_t p1 = static_cast<size_t>(rand() % library.size());
