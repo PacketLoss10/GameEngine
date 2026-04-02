@@ -89,7 +89,7 @@
 //	{
 //		for (int dy = -updateDistance; dy <= updateDistance; dy++)
 //		{
-//			if (auto it = chunkMap.find(SimulationChunk::map_point_to_chunk_coords(view) + IVector(dx, dy)); it != chunkMap.end())
+//			if (auto it = chunkMap.find(SimulationChunk::map_point_to_chunk_coords(view) + IntVector(dx, dy)); it != chunkMap.end())
 //			{
 //				for (Actor* actor : it->second)
 //				{
@@ -110,7 +110,7 @@
 //	{
 //		for (int dy = -renderDistance; dy <= renderDistance; dy++)
 //		{
-//			if (auto it = chunkMap.find(SimulationChunk::map_point_to_chunk_coords(view) + IVector(dx, dy)); it != chunkMap.end())
+//			if (auto it = chunkMap.find(SimulationChunk::map_point_to_chunk_coords(view) + IntVector(dx, dy)); it != chunkMap.end())
 //			{
 //				for (Actor* actor : it->second)
 //				{

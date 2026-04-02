@@ -2,8 +2,6 @@
 
 #include "ComponentManager.h"
 #include "RenderComponent.h"
-#include "Sprite.h"
-#include "Light.h"
 
 #define RENDER_COMPONENT_MANAGER RenderComponentManager::instance()
 

@@ -7,6 +7,7 @@ class ZSortable
 {
 private:
 	static std::vector<ZSortable*> others;
+	static bool sorted;
 	int zOrder = 0;
 public:
 	ZSortable(int zOrder);
@@ -16,4 +17,7 @@ public:
 
 	void to_front();
 	void to_back();
+
+	static bool is_sorted();
+	static void set_sorted(bool sorted);
 };

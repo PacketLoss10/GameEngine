@@ -1,15 +1,16 @@
 #pragma once
 
-#include "Transform.h"
+#include "IntVector.h"
+#include <SFML/Graphics/Rect.hpp>
 
 class TextureRect
 {
 private:
-	IVector position = IVector(0, 0);
-	IVector size = IVector(1, 1);
+	IntVector position = IntVector(0, 0);
+	IntVector size = IntVector(1, 1);
 public:
 	TextureRect() = default;
-	TextureRect(IVector position, IVector size);
+	TextureRect(IntVector position, IntVector size);
 	operator sf::IntRect() const
 	{
 		return sf::IntRect(position, size);

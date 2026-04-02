@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Entity.h"
-#include "Sprite.h"
+#include "SpriteComponent.h"
 #include "BoxCollisionComponent.h"
 #include "Card.h"
 #include "queue"
@@ -14,7 +14,7 @@ enum class LibraryPosition
 class Library :public Entity
 {
 private:
-	Sprite* sprite;
+	SpriteComponent* sprite;
 	BoxCollisionComponent* collision;
 	std::deque<Card*> library;
 public:

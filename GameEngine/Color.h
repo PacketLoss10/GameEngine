@@ -1,17 +1,17 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
+#include <SFML/Graphics/Color.hpp>
 
-struct Color
+class Color
 {
 public:
-	unsigned char r = 0;
-	unsigned char g = 0;
-	unsigned char b = 0;
+	unsigned char r = 255;
+	unsigned char g = 255;
+	unsigned char b = 255;
 	unsigned char a = 255;
 
 	Color() = default;
-	Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255) :r(r), g(g), b(b), a(a) {}
+	Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255);
 
 	operator sf::Color() const
 	{

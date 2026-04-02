@@ -3,9 +3,9 @@
 
 Library::Library()
 {
-	sprite = new Sprite(this);
+	sprite = new SpriteComponent(this);
 	sprite->set_texture(Texture("back-of-card.png"));
-	sprite->set_rect(TextureRect(IVector(0, 0), IVector(672, 936)));
+	sprite->set_rect(TextureRect(IntVector(0, 0), IntVector(672, 936)));
 	sprite->set_lit(false);
 	sprite->set_relativePosition(Vector2(-336.f, -468.f));
 	sprite->finalise();

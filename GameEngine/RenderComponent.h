@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "RenderData.h"
 
 class RenderComponent :public Component
 {
@@ -9,4 +10,6 @@ public:
 	virtual ~RenderComponent() = default;
 
 	virtual void finalise() override;
+
+	virtual RenderDataType get_type() const = 0;
 };

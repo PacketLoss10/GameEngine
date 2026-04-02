@@ -86,7 +86,7 @@ void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circl
 
 	for (int i = 0; i < 32; i++)
 	{
-		float t = (2.0f * mth::pi * i) / 32.0f;
+		float t = (2.0f * 3.14159265358979f * i) / 32.0f;
 		if (pointIn(circleA, pointOn(circleB, t)))
 		{
 			circleA->on_overlap.invoke(circleB->get_owner(), circleB);

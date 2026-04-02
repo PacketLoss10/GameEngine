@@ -2,11 +2,13 @@
 #include "iostream"
 
 std::vector<ZSortable*> ZSortable::others;
+bool ZSortable::sorted = false;
 
 ZSortable::ZSortable(int zOrder) :zOrder(zOrder)
 {
 	others.push_back(this);
 	std::sort(others.begin(), others.end(), [](const ZSortable* lhs, const ZSortable* rhs) { return lhs->get_zOrder() < rhs->get_zOrder(); });
+	sorted = false;
 }
 
 int ZSortable::get_zOrder() const
@@ -17,6 +19,7 @@ int ZSortable::get_zOrder() const
 void ZSortable::set_zOrder(int zOrder)
 {
 	this->zOrder = zOrder;
+	sorted = false;
 }
 
 void ZSortable::to_front()
@@ -32,6 +35,8 @@ void ZSortable::to_front()
 		zOrder = greatestZ + 1;
 		std::sort(others.begin(), others.end(), [](const ZSortable* lhs, const ZSortable* rhs) { return lhs->get_zOrder() < rhs->get_zOrder(); });
 	}
+
+	sorted = false;
 }
 
 void ZSortable::to_back()
@@ -47,4 +52,16 @@ void ZSortable::to_back()
 		zOrder = leastZ - 1;
 		std::sort(others.begin(), others.end(), [](const ZSortable* lhs, const ZSortable* rhs) { return lhs->get_zOrder() < rhs->get_zOrder(); });
 	}
+
+	sorted = false;
+}
+
+bool ZSortable::is_sorted()
+{
+	return sorted;
+}
+
+void ZSortable::set_sorted(bool sorted)
+{
+	ZSortable::sorted = sorted;
 }

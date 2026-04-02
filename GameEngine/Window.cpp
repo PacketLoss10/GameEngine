@@ -1,8 +1,9 @@
 #include "Window.h"
+#include "Color.h"
 
-Window::Window(IVector size, std::string title) :title(title)
+Window::Window(IntVector size, std::string title) :title(title)
 {
-	this->size = IVector(std::max(1, std::abs(size.x)), std::max(1, std::abs(size.y)));
+	this->size = IntVector(std::max(1, std::abs(size.x)), std::max(1, std::abs(size.y)));
 	auto windowSize = sf::Vector2u(static_cast<unsigned int>(size.x), static_cast<unsigned int>(size.y));
 	window = sf::RenderWindow(sf::VideoMode(windowSize), title);
 	window.setMaximumSize(windowSize);
@@ -20,7 +21,7 @@ void Window::update()
 
 void Window::start_display()
 {
-	window.clear(sf::Color::White);
+	window.clear(Color(0, 0, 0));
 }
 
 void Window::display(const sf::Drawable& object, sf::Shader* shader)
@@ -38,14 +39,14 @@ void Window::end_display()
 	window.display();
 }
 
-const IVector& Window::get_size() const
+const IntVector& Window::get_size() const
 {
 	return size;
 }
 
-void Window::set_size(const IVector& size)
+void Window::set_size(const IntVector& size)
 {
-	this->size = IVector(std::max(1, std::abs(size.x)), std::max(1, std::abs(size.y)));
+	this->size = IntVector(std::max(1, std::abs(size.x)), std::max(1, std::abs(size.y)));
 	auto windowSize = sf::Vector2u(static_cast<unsigned int>(size.x), static_cast<unsigned int>(size.y));
 	window.setMaximumSize(std::nullopt);
 	window.setMinimumSize(std::nullopt);

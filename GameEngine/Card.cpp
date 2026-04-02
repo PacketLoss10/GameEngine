@@ -4,11 +4,12 @@
 
 Card::Card(std::string id) : id(id)
 {
-	sprite = new Sprite(this);
+	sprite = new SpriteComponent(this);
 	sprite->set_texture(Texture("Cards//" + id + ".png"));
-	sprite->set_rect(TextureRect(IVector(0, 0), IVector(672, 936)));
-	sprite->set_lit(false);
+	sprite->set_rect(TextureRect(IntVector(0, 0), IntVector(672, 936)));
 	sprite->set_relativePosition(Vector2(-336.f, -468.f));
+	SpriteComponent::generate_normal_map(*sprite, 1.f);
+	sprite->set_lit(true);
 	sprite->finalise();
 
 	collision = new BoxCollisionComponent(this);
@@ -38,9 +39,13 @@ void Card::update_tick()
 
 void Card::input_tick()
 {
-	if (INPUT.is_button_pressed(Mouse::M1) && collision->is_mouseOverlapping())
+	if (INPUT.is_button_pressed(Mouse::M2) && collision->is_mouseOverlapping())
 	{
 		tapped ? untap() : tap();
+	}
+	if (INPUT.is_button_pressed(Mouse::M3) && collision->is_mouseOverlapping())
+	{
+		flipped ? unflip() : flip();
 	}
 }
 

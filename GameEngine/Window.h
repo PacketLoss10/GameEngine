@@ -1,16 +1,17 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
-#include "Transform.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include "IntVector.h"
+#include "Vector2.h"
 
 class Window
 {
 private:
 	sf::RenderWindow window;
-	IVector size = IVector(800, 450);
+	IntVector size = IntVector(800, 450);
 	std::string title = "";
 public:
-	Window(IVector size, std::string title);
+	Window(IntVector size, std::string title);
 
 	void update();
 	void start_display();
@@ -18,8 +19,8 @@ public:
 	void display(sf::Vertex* vertex, size_t count, sf::PrimitiveType type, sf::Shader* shader);
 	void end_display();
 
-	const IVector& get_size() const;
-	void set_size(const IVector& size);
+	const IntVector& get_size() const;
+	void set_size(const IntVector& size);
 
 	const std::string& get_title() const;
 	void set_title(const std::string& title);

@@ -1,5 +1,5 @@
 #include "TextureLoader.h"
-#include "Sprite.h"
+#include "NormalMap.h"
 
 TextureLoader::TextureLoader()
 {
@@ -23,28 +23,22 @@ TextureLoader& TextureLoader::instance()
 
 const sf::Texture& TextureLoader::load_texture(const std::string& path, TextureLoadContext context)
 {
-	if (auto it = textureMap.find(path); it != textureMap.end())
+	auto it = textureMap.find(path);
+	if (it != textureMap.end())
 		return it->second;
 
-	if (sf::Texture texture; !texture.loadFromFile(path))
+	sf::Texture texture;
+	if (!texture.loadFromFile(path))
 	{
-		std::cerr << "Failed to load " << path << std::endl;
+		std::cerr << "Failed to load texture: " << path << std::endl;
 		switch (context)
 		{
-		case TextureLoadContext::Texture:
-			return emptyTexture;
-			break;
-		case TextureLoadContext::NormalMap:
-			return emptyNormal;
-			break;
-		default:
-			return emptyTexture;
-			break;
+		case TextureLoadContext::Texture: return emptyTexture;
+		case TextureLoadContext::NormalMap: return emptyNormal;
+		default: return emptyTexture;
 		}
 	}
-	else
-	{
-		auto it = textureMap.emplace(path, std::move(texture)).first;
-		return it->second;
-	}
+
+	auto inserted = textureMap.emplace(path, std::move(texture));
+	return inserted.first->second;
 }

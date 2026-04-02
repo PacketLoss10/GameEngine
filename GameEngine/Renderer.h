@@ -1,10 +1,12 @@
 #pragma once
 
-#include "TextureLoader.h"
+#include <vector>
+#include <array>
+#include <algorithm>
+#include <SFML/Graphics.hpp>
+#include "RenderData.h"
 
 class Window;
-class Light;
-class Sprite;
 
 #define RENDERER Renderer::instance()
 
@@ -12,15 +14,21 @@ class Renderer
 {
 private:
 	sf::Shader shader;
-	std::vector<Sprite*> sprites;
-	std::vector<Light*> lights;
+
+	std::vector<RenderData> renderData;
+	std::vector<LightRenderData> lightData;
+
 	Renderer();
 	Renderer(const Renderer&) = delete;
 	Renderer& operator=(const Renderer&) = delete;
 public:
 	static Renderer& instance();
-	void push(Light* lightData);
-	void push(Sprite* spriteData);
+
+	void push(const SpriteRenderData& data);
+	void push(const PrimitiveRenderData& data);
+	void push(const TextRenderData& data);
+
+	void push(const LightRenderData& data);
+
 	void render(Window& window);
-	sf::Shader* get_shader();
 };

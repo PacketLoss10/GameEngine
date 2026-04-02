@@ -1,6 +1,7 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
+#include <SFML/System/Vector2.hpp>
+#include <cmath>
 
 class Vector2
 {
@@ -42,24 +43,17 @@ public:
 	}
 
 	float dot(const Vector2& rhs) const;
-
 	float cross(const Vector2& rhs) const;
 
 	Vector2 component_wise_mult(const Vector2& rhs) const;
-
 	Vector2 component_wise_div(const Vector2& rhs) const;
 
 	float size() const;
-
 	float size_squared() const;
 
 	Vector2 normalised() const;
-
 	Vector2 perpendicular() const;
 
 	float angle() const;
-
 	Vector2 rotated_by(float angle) const;
-
-	std::string to_string() const;
 };

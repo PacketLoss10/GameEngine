@@ -1,14 +1,14 @@
 #pragma once
 
 #include "Entity.h"
+#include "SpriteComponent.h"
 #include "BoxCollisionComponent.h"
 #include "DragDropComponent.h"
-#include "Sprite.h"
 
 class Card :public Entity
 {
 private:
-	Sprite* sprite;
+	SpriteComponent* sprite;
 	BoxCollisionComponent* collision;
 	DragDropComponent* dragDrop;
 

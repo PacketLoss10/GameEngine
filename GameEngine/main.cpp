@@ -1,29 +1,57 @@
-#include "InputHandler.h"
-#include "CollisionComponentManager.h"
-#include "TickClock.h"
-#include "Color.h"
-#include <SFML/Graphics.hpp>
-#include <cmath>
-#include "PrimitiveBoxShape.h"
-#include "PrimitiveCircleShape.h"
-#include "PrimitiveLineShape.h"
 #include "Window.h"
-#include "Light.h"
-#include "Renderer.h"
 #include "RenderComponentManager.h"
-#include "NavigationComponentManager.h"
 #include "DragDropManager.h"
-#include "NavMesh.h"
-#include "SFML/Network.hpp"
+#include "TickClock.h"
+#include "CollisionComponentManager.h"
+#include "Renderer.h"
+#include "InputHandler.h"
 #include "Card.h"
+
+#include "LightComponent.h"
+#include "PrimitiveBoxComponent.h"
+
+class LightActor :public Entity
+{
+private:
+	LightComponent* light;
+	PrimitiveBoxComponent* box;
+public:
+	LightActor() :Entity()
+	{
+		light = new LightComponent(this);
+		light->set_brightness(0.5f);
+		light->set_color(Color(255, 255, 255));
+		light->set_radius(300.f);
+		light->set_enabled(true);
+		light->finalise();
+
+		box = new PrimitiveBoxComponent(this);
+		box->set_size(Vector2(100.f, 100.f));
+		box->set_lit(false);
+		box->set_fillColor(Color(255, 0, 0));
+		box->finalise();
+	}
+	~LightActor()
+	{
+		delete light;
+		delete box;
+	}
+
+	void update_tick() override
+	{
+		set_position(INPUT.get_mouse_pos());
+	}
+};
 
 int main()
 {
-	Window window = Window(IVector(1600, 900), "");
+	Window window = Window(IntVector(1600, 900), "");
 	INPUT.set_activeWindow(&window);
 
 	std::vector<Card*> cards;
 	cards.push_back(new Card("ugin-eye-of-the-storms"));
+
+	LightActor* light = new LightActor();
 
 	while (window.is_open())
 	{
@@ -35,8 +63,9 @@ int main()
 			card->update_tick();
 			card->input_tick();
 		}
+		light->update_tick();
 
-		if (INPUT.is_button_pressed(Mouse::M3))
+		if (INPUT.is_key_pressed(Keyboard::Space))
 		{
 			cards.push_back(new Card("ugin-eye-of-the-storms"));
 		}
@@ -52,6 +81,7 @@ int main()
 	{
 		delete card;
 	}
+	delete light;
 
 	return 0;
 }

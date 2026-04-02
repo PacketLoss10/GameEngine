@@ -40,17 +40,17 @@ public:
 	const Vector2& get_relativeScale() const;
 	void set_relativeScale(const Vector2& relativeScale);
 
-	const Transform& get_worldTransform() const;
+	Transform get_worldTransform() const;
 
-	const Vector2& get_worldPosition() const;
+	Vector2 get_worldPosition() const;
 	void set_worldPosition(const Vector2& worldPosition);
 
-	const Vector2& get_worldForward() const;
+	Vector2 get_worldForward() const;
 	void set_worldForward(const Vector2& worldForward);
 
 	float get_worldRotation() const;
 	void set_worldRotation(float worldRotation);
 
-	const Vector2& get_worldScale() const;
+	Vector2 get_worldScale() const;
 	void set_worldScale(const Vector2& worldScale);
 };

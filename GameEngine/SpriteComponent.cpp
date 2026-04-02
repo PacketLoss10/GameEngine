@@ -1,8 +1,10 @@
-#include "Sprite.h"
-#include "SFML/Graphics.hpp"
+#include "SpriteComponent.h"
 #include "RenderComponentManager.h"
+#include <iostream>
+#include <filesystem>
+#include <SFML/Graphics/Image.hpp>
 
-void Sprite::generate_normal_map(Sprite& sprite, float value)
+void SpriteComponent::generate_normal_map(SpriteComponent& sprite, float value)
 {
 	const std::string normalMapFilePath = "normalmap_" + sprite.texture.filepath;
 	if (std::filesystem::exists(normalMapFilePath))
@@ -62,47 +64,63 @@ void Sprite::generate_normal_map(Sprite& sprite, float value)
 	}
 }
 
-Sprite::Sprite(Entity* owner): RenderComponent(owner), ZSortable(0)
-{
+SpriteComponent::SpriteComponent(Entity* owner) :RenderComponent(owner), ZSortable(0) {}
 
+RenderDataType SpriteComponent::get_type() const
+{
+	return RenderDataType::Sprite;
 }
 
-const TextureRect& Sprite::get_rect() const
+SpriteRenderData SpriteComponent::build_render_data() const
 {
-	return rect;
+	SpriteRenderData data;
+
+	data.texture = texture;
+	data.rect = rect;
+	data.lighting = LightingData(lit, normal);
+	data.Zorder = get_zOrder();
+	data.transform = get_worldTransform();
+	data.enabled = enabled;
+
+	return data;
 }
 
-void Sprite::set_rect(const TextureRect& rect)
-{
-	this->rect = rect;
-}
-
-const Texture& Sprite::get_texture() const
+const Texture& SpriteComponent::get_texture() const
 {
 	return texture;
 }
 
-void Sprite::set_texture(const Texture& texture)
+void SpriteComponent::set_texture(const Texture& texture)
 {
 	this->texture = texture;
 }
 
-const NormalMap& Sprite::get_normal() const
+const NormalMap& SpriteComponent::get_normal() const
 {
 	return normal;
 }
 
-void Sprite::set_normal(const NormalMap& normal)
+void SpriteComponent::set_normal(const NormalMap& normal)
 {
 	this->normal = normal;
 }
 
-bool Sprite::is_lit() const
+const TextureRect& SpriteComponent::get_rect() const
+{
+	return rect;
+}
+
+void SpriteComponent::set_rect(const TextureRect& rect)
+{
+	this->rect = rect;
+}
+
+bool SpriteComponent::is_lit() const
 {
 	return lit;
 }
 
-void Sprite::set_lit(bool lit)
+void SpriteComponent::set_lit(bool lit)
 {
 	this->lit = lit;
 }

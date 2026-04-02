@@ -68,12 +68,12 @@ void Component::set_relativeScale(const Vector2& relativeScale)
 	relativeTransform.scale = relativeScale;
 }
 
-const Transform& Component::get_worldTransform() const
+Transform Component::get_worldTransform() const
 {
 	return Transform(get_worldPosition(), get_worldForward(), get_worldScale());
 }
 
-const Vector2& Component::get_worldPosition() const
+Vector2 Component::get_worldPosition() const
 {
 	const Transform& ownerTransform = owner->get_transform();
 
@@ -95,7 +95,7 @@ void Component::set_worldPosition(const Vector2& worldPosition)
 	relativeTransform.position = Vector2(local.x / ownerTransform.scale.x, local.y / ownerTransform.scale.y);
 }
 
-const Vector2& Component::get_worldForward() const
+Vector2 Component::get_worldForward() const
 {
 	const Transform& ownerTransform = owner->get_transform();
 
@@ -125,7 +125,7 @@ void Component::set_worldRotation(float worldRotation)
 	set_worldForward(worldForward);
 }
 
-const Vector2& Component::get_worldScale() const
+Vector2 Component::get_worldScale() const
 {
 	const Transform& ownerTransform = owner->get_transform();
 
