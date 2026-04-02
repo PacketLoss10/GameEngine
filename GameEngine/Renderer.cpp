@@ -50,6 +50,9 @@ void Renderer::render(Window& window)
     while (!lights.empty())
     {
         const Light* light = lights.back();
+        lights.pop_back();
+        if(!light->is_enabled())
+			continue;
 
         const Vector2& pos = light->get_worldPosition();
         positions.emplace_back(pos.x, window.get_size().y - pos.y);
@@ -61,12 +64,14 @@ void Renderer::render(Window& window)
 
         brightnesses.push_back(light->get_brightness());
 
-        lights.pop_back();
     }
 
     while (!sprites.empty())
     {
         const Sprite* sprite = sprites.back();
+		sprites.pop_back();
+        if (!sprite->is_enabled())
+            continue;
 
         const sf::Texture& texture = TEXTURE_LOADER.load_texture(sprite->get_texture().filepath, TextureLoadContext::Texture);
 
@@ -97,8 +102,6 @@ void Renderer::render(Window& window)
         {
             window.display(s, nullptr);
         }
-
-        sprites.pop_back();
     }
 
     window.end_display();

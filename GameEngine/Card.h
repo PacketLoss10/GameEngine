@@ -12,9 +12,12 @@ private:
 	BoxCollisionComponent* collision;
 	DragDropComponent* dragDrop;
 
+	std::string id = "";
+
 	bool tapped = false;
+	bool flipped = false;
 public:
-	Card();
+	Card(std::string id);
 	~Card();
 
 	void cull() override {};
@@ -24,5 +27,9 @@ public:
 	void tap();
 	void untap();
 
-	void bring_to_front(const Vector2&);
+	void flip();
+	void unflip();
+
+	void mouse_hover(const Vector2&);
+	void mouse_unhover(const Vector2&);
 };

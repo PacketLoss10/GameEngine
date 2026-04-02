@@ -23,7 +23,7 @@ int main()
 	INPUT.set_activeWindow(&window);
 
 	std::vector<Card*> cards;
-	cards.push_back(new Card());
+	cards.push_back(new Card("ugin-eye-of-the-storms"));
 
 	while (window.is_open())
 	{
@@ -38,7 +38,7 @@ int main()
 
 		if (INPUT.is_button_pressed(Mouse::M3))
 		{
-			cards.push_back(new Card());
+			cards.push_back(new Card("ugin-eye-of-the-storms"));
 		}
 
 		RENDER_COMPONENT_MANAGER.update();
