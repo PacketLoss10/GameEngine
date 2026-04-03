@@ -8,16 +8,14 @@
 #include "InputHandler.h"
 #include "Card.h"
 
+#include <iostream>
 int main()
 {
 	Window window = Window(IntVector(1600, 900), "");
 	INPUT.set_activeWindow(&window);
+	RENDERER.set_activeWindow(&window);
 
-	std::vector<Card*> cards;
-	for (int i = 0; i < 10; i++)
-	{
-		cards.push_back(new Card("ugin-eye-of-the-storms"));
-	}
+	Card* card = new Card("ugin-eye-of-the-storms");
 
 	while (window.is_open())
 	{
@@ -26,22 +24,15 @@ int main()
 
 		if (INPUT.is_key_pressed(Keyboard::Space))
 		{
-			Card* card = cards.back();
 			World::instance().spawn_entity(card);
-			cards.pop_back();
 		}
 
-		RENDER_COMPONENT_MANAGER.update();
-		COLLISION_COMPONENT_MANAGER.update();
-		DRAG_DROP_MANAGER.update();
-		RENDERER.render(window);
+		WORLD.update();
+		RENDERER.render();
 		UPDATE_DELTA_TIME;
 	}
 
-	for (Card* card : cards)
-	{
-		delete card;
-	}
+	delete card;
 
 	return 0;
 }

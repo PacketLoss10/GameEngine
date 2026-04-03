@@ -8,6 +8,8 @@
 #include "SimulationChunk.h"
 #include "Entity.h"
 
+#define WORLD World::instance()
+
 template<typename T>
 concept entitytype = std::is_base_of<Entity, T>::value;
 

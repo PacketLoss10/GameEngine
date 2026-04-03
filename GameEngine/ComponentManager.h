@@ -15,6 +15,7 @@ protected:
 public:
 	void register_component(T* component)
 	{
+		component->set_toDespawn(false);
 		components.push_back(component);
 	}
 	void despawn_components()
@@ -22,12 +23,7 @@ public:
 		components.erase(
 			std::remove_if(components.begin(), components.end(),
 				[](T* component) {
-					if (component->is_toDespawn())
-					{
-						component->set_toDespawn(false);
-						return true;
-					}
-					return false;
+					return component->is_toDespawn();
 				}
 			), components.end()
 		);

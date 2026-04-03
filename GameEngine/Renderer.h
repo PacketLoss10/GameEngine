@@ -13,6 +13,8 @@ class Window;
 class Renderer
 {
 private:
+	Window* activeWindow = nullptr;
+
 	sf::Shader shader;
 
 	std::vector<RenderData> renderData;
@@ -24,11 +26,13 @@ private:
 public:
 	static Renderer& instance();
 
+	void set_activeWindow(Window* activeWindow);
+
 	void push(const SpriteRenderData& data);
 	void push(const PrimitiveRenderData& data);
 	void push(const TextRenderData& data);
 
 	void push(const LightRenderData& data);
 
-	void render(Window& window);
+	void render();
 };

@@ -18,6 +18,11 @@ Renderer& Renderer::instance()
 	return instance;
 }
 
+void Renderer::set_activeWindow(Window* activeWindow)
+{
+	this->activeWindow = activeWindow;
+}
+
 void Renderer::push(const SpriteRenderData& data)
 {
 	if (!data.enabled)
@@ -50,12 +55,15 @@ void Renderer::push(const LightRenderData& data)
 	lightData.push_back(data);
 }
 
-void Renderer::render(Window& window)
+void Renderer::render()
 {
+	if (!activeWindow)
+		return;
+
 	if (renderData.empty() && lightData.empty())
 		return;
 
-	window.start_display();
+	activeWindow->start_display();
 
 	std::sort(renderData.begin(), renderData.end(), [](const RenderData& a, const RenderData& b) { return a.zOrder < b.zOrder; });
 
@@ -72,7 +80,7 @@ void Renderer::render(Window& window)
 		const LightRenderData& light = lightData[i];
 
 		const Vector2& pos = light.position;
-		positions[i] = sf::Glsl::Vec2(pos.x, window.get_size().y - pos.y);
+		positions[i] = sf::Glsl::Vec2(pos.x, activeWindow->get_size().y - pos.y);
 
 		radii[i] = light.radius;
 
@@ -111,11 +119,11 @@ void Renderer::render(Window& window)
 				const sf::Texture& normal = TEXTURE_LOADER.load_texture(spriteData.lighting.normal.filepath, TextureLoadContext::NormalMap);
 				shader.setUniform("u_texture", texture);
 				shader.setUniform("u_normalMap", normal);
-				window.display(sprite, &shader);
+				activeWindow->display(sprite, &shader);
 			}
 			else
 			{
-				window.display(sprite, nullptr);
+				activeWindow->display(sprite, nullptr);
 			}
 			break;
 		}
@@ -152,11 +160,11 @@ void Renderer::render(Window& window)
 
 					shader.setUniform("u_texture", dummyTexture);
 					shader.setUniform("u_normalMap", dummyTexture);
-					window.display(box, &shader);
+					activeWindow->display(box, &shader);
 				}
 				else
 				{
-					window.display(box, nullptr);
+					activeWindow->display(box, nullptr);
 				}
 
 				break;
@@ -188,11 +196,11 @@ void Renderer::render(Window& window)
 
 					shader.setUniform("u_texture", dummyTexture);
 					shader.setUniform("u_normalMap", dummyTexture);
-					window.display(circle, &shader);
+					activeWindow->display(circle, &shader);
 				}
 				else
 				{
-					window.display(circle, nullptr);
+					activeWindow->display(circle, nullptr);
 				}
 
 				break;
@@ -235,11 +243,11 @@ void Renderer::render(Window& window)
 				}
 				shader.setUniform("u_texture", dummyTexture);
 				shader.setUniform("u_normalMap", dummyTexture);
-				window.display(text, &shader);
+				activeWindow->display(text, &shader);
 			}
 			else
 			{
-				window.display(text, nullptr);
+				activeWindow->display(text, nullptr);
 			}
 			break;
 		}
@@ -249,5 +257,5 @@ void Renderer::render(Window& window)
 
 	renderData.clear();
 	lightData.clear();
-	window.end_display();
+	activeWindow->end_display();
 }

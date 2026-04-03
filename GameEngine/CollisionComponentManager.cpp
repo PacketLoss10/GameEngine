@@ -64,22 +64,32 @@ void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circl
 {
 	auto pointOn = [](CircleCollisionComponent* c, float t)
 		{
+			const Vector2& radius = c->get_radius();
+			const Vector2& position = c->get_worldPosition();
+			const float rotation = c->get_worldRotation();
+			const Vector2& scale = c->get_worldScale();
+
 			return Vector2(
-				c->get_worldPosition().x + cosf(c->get_worldRotation()) * c->get_radius().x * c->get_worldScale().x * cosf(t) - sinf(c->get_worldRotation()) * c->get_radius().y * c->get_worldScale().y * sinf(t),
-				c->get_worldPosition().y + sinf(c->get_worldRotation()) * c->get_radius().x * c->get_worldScale().x * cosf(t) + cosf(c->get_worldRotation()) * c->get_radius().y * c->get_worldScale().y * sinf(t)
+				position.x + cosf(rotation) * radius.x * scale.x * cosf(t) - sinf(rotation) * radius.y * scale.y * sinf(t),
+				position.y + sinf(rotation) * radius.x * scale.x * cosf(t) + cosf(rotation) * radius.y * scale.y * sinf(t)
 			);
 		};
 
-	auto pointIn = [](CircleCollisionComponent* c, const Vector2& P)
+	auto pointIn = [](CircleCollisionComponent* c, const Vector2& p)
 		{
-			float ca = cosf(c->get_worldRotation()), sa = sinf(c->get_worldRotation());
-			Vector2 d = P - c->get_worldPosition();
+			const Vector2& radius = c->get_radius();
+			const Vector2& position = c->get_worldPosition();
+			const float rotation = c->get_worldRotation();
+			const Vector2& scale = c->get_worldScale();
+
+			float ca = cosf(rotation), sa = sinf(rotation);
+			Vector2 d = p - position;
 
 			float x = ca * d.x + sa * d.y;
 			float y = -sa * d.x + ca * d.y;
 
-			float nx = x / (c->get_radius().x * c->get_worldScale().x);
-			float ny = y / (c->get_radius().y * c->get_worldScale().y);
+			float nx = x / (radius.x * scale.x);
+			float ny = y / (radius.y * scale.y);
 
 			return (nx * nx + ny * ny) <= 1.0f;
 		};
@@ -122,8 +132,18 @@ void CollisionComponentManager::circle_on_circle(CircleCollisionComponent* circl
 
 void CollisionComponentManager::circle_on_box(CircleCollisionComponent* circle, BoxCollisionComponent* box)
 {
-	Vector2 halfCircle = circle->get_radius().component_wise_mult(circle->get_worldScale());
-	Vector2 halfBox = box->get_size().component_wise_mult(box->get_worldScale()) * 0.5f;
+	const Vector2& circleRadius = circle->get_radius();
+	const Vector2& circlePosition = circle->get_worldPosition();
+	const float circleRotation = circle->get_worldRotation();
+	const Vector2& circleScale = circle->get_worldScale();
+
+	const Vector2& boxSize = box->get_size();
+	const Vector2& boxPosition = box->get_worldPosition();
+	const float boxRotation = box->get_worldRotation();
+	const Vector2& boxScale = box->get_worldScale();
+
+	Vector2 halfCircle = circleRadius.component_wise_mult(circleScale);
+	Vector2 halfBox = boxSize.component_wise_mult(boxScale) * 0.5f;
 
 	Vector2 corners[4] =
 	{
@@ -135,8 +155,8 @@ void CollisionComponentManager::circle_on_box(CircleCollisionComponent* circle, 
 
 	for (int i = 0; i < 4; ++i)
 	{
-		corners[i] = corners[i].rotated_by(box->get_worldRotation()) + box->get_worldPosition() - circle->get_worldPosition();
-		corners[i] = corners[i].rotated_by(-circle->get_worldRotation());
+		corners[i] = corners[i].rotated_by(boxRotation) + boxPosition - circlePosition;
+		corners[i] = corners[i].rotated_by(-circleRotation);
 		corners[i] = corners[i].component_wise_div(halfCircle);
 	}
 
@@ -204,13 +224,18 @@ void CollisionComponentManager::circle_on_box(CircleCollisionComponent* circle, 
 
 void CollisionComponentManager::point_in_box(BoxCollisionComponent* box)
 {
+	const Vector2& size = box->get_size();
+	const Vector2& position = box->get_worldPosition();
+	const Vector2& forward = box->get_worldForward();
+	const Vector2& scale = box->get_worldScale();
+
 	Vector2 mousePos = INPUT.get_mouse_pos();
 
-	Vector2 halfBox = box->get_size().component_wise_mult(box->get_worldScale()) * 0.5f;
-	Vector2 dif = mousePos - box->get_worldPosition();
+	Vector2 halfBox = size.component_wise_mult(scale) * 0.5f;
+	Vector2 dif = mousePos - position;
 
-	float xr = dif.dot(box->get_worldForward());
-	float yr = dif.perpendicular().dot(box->get_worldForward());
+	float xr = dif.dot(forward);
+	float yr = dif.perpendicular().dot(forward);
 
 	if (fabs(xr) <= halfBox.x && fabs(yr) <= halfBox.y)
 	{
@@ -237,13 +262,18 @@ void CollisionComponentManager::point_in_box(BoxCollisionComponent* box)
 
 void CollisionComponentManager::point_in_circle(CircleCollisionComponent* circle)
 {
+	const Vector2& radius = circle->get_radius();
+	const Vector2& position = circle->get_worldPosition();
+	const Vector2& forward = circle->get_worldForward();
+	const Vector2& scale = circle->get_worldScale();
+
 	Vector2 mousePos = INPUT.get_mouse_pos();
 
-	Vector2 halfCircle = circle->get_radius().component_wise_mult(circle->get_worldScale());
-	Vector2 dif = mousePos - circle->get_worldPosition();
+	Vector2 halfCircle = radius.component_wise_mult(scale);
+	Vector2 dif = mousePos - position;
 
-	float xr = dif.dot(circle->get_worldForward());
-	float yr = dif.perpendicular().dot(circle->get_worldForward());
+	float xr = dif.dot(forward);
+	float yr = dif.perpendicular().dot(forward);
 
 	float n = (xr * xr) / (halfCircle.x * halfCircle.x) + (yr * yr) / (halfCircle.y * halfCircle.y);
 

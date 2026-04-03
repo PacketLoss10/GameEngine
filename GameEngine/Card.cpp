@@ -41,7 +41,7 @@ void Card::input_tick()
 	}
 	if (INPUT.is_button_pressed(Mouse::M3) && collision->is_mouseOverlapping())
 	{
-		flipped ? unflip() : flip();
+		despawn();
 	}
 }
 

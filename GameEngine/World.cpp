@@ -1,4 +1,7 @@
 #include "World.h"
+#include "CollisionComponentManager.h"
+#include "DragDropManager.h"
+#include "RenderComponentManager.h"
 
 std::vector<SimulationChunk> World::find_chunks_in_radius(Vector2 origin, float radius) const
 {
@@ -47,12 +50,16 @@ void World::update()
 	//
 	//
 	//
+	COLLISION_COMPONENT_MANAGER.update();
+	DRAG_DROP_MANAGER.update();
+	RENDER_COMPONENT_MANAGER.update();
 	for (Entity* entity : allEntities)
 	{
 		entity->update_tick();
 		entity->input_tick();
 		entity->physics_tick();
 	}
+
 }
 
 void World::spawn_entity(Entity* entity)
@@ -62,6 +69,7 @@ void World::spawn_entity(Entity* entity)
 
 	allEntities.push_back(entity);
 	entity->spawned = true;
+	entity->toDespawn = false;
 	entity->on_spawn.invoke();
 }
 
@@ -76,7 +84,6 @@ void World::despawn_entities()
 				if (entity->toDespawn)
 				{
 					entity->spawned = false;
-					entity->toDespawn = false;
 					entity->on_despawn.invoke();
 					return true;
 				}
