@@ -1,12 +1,17 @@
 #pragma once
 
 #include "Transform.h"
-#include "Window.h"
 
 class Entity;
 
 class Component
 {
+private:
+	virtual void spawn() = 0;
+	void despawn();
+
+	bool toDespawn = false;
+	bool spawned = false;
 protected:
 	Entity* owner = nullptr;
 	bool enabled = true;
@@ -16,11 +21,10 @@ public:
 	Component(Entity* owner);
 	virtual ~Component() = default;
 
-	virtual void finalise() {};
-	virtual void tick() {};
-	virtual void render(Window& window) {};
-
 	Entity* get_owner() const;
+
+	bool is_toDespawn() const;
+	void set_toDespawn(bool toDespawn);
 
 	bool is_enabled() const;
 	void set_enabled(bool enabled);

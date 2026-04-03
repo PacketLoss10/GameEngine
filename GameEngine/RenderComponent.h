@@ -9,7 +9,7 @@ public:
 	RenderComponent(Entity* owner);
 	virtual ~RenderComponent() = default;
 
-	virtual void finalise() override;
+	virtual void spawn() override;
 
 	virtual RenderDataType get_type() const = 0;
 };

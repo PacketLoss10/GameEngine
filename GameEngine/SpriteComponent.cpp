@@ -3,6 +3,7 @@
 #include <iostream>
 #include <filesystem>
 #include <SFML/Graphics/Image.hpp>
+#include <SFML/System/Vector3.hpp>
 
 void SpriteComponent::generate_normal_map(SpriteComponent& sprite, float value)
 {

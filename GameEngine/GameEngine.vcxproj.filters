@@ -75,7 +75,7 @@
     <ClCompile Include="SimulationChunk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WorldSystem.cpp">
+    <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
@@ -124,9 +124,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Library.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DragDropComponent.cpp">
@@ -215,7 +212,7 @@
     <ClInclude Include="SimulationChunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WorldSystem.h">
+    <ClInclude Include="World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoxCollisionComponent.h">
@@ -261,9 +258,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Library.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DragDropComponent.h">

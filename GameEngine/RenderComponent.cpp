@@ -3,7 +3,7 @@
 
 RenderComponent::RenderComponent(Entity* owner) :Component(owner) {}
 
-void RenderComponent::finalise()
+void RenderComponent::spawn()
 {
 	RENDER_COMPONENT_MANAGER.register_component(this);
 }

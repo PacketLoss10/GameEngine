@@ -9,7 +9,7 @@ DragDropManager& DragDropManager::instance()
 
 void DragDropManager::update()
 {
-	delete_components();
+	despawn_components();
 
     const Vector2& mousePos = INPUT.get_mouse_pos();
 

@@ -9,13 +9,10 @@ private:
 	bool mouseOverlapping = false;
 	std::unordered_set<CollisionComponent*> overlaps;
 public:
-	Delegate<Entity*, CollisionComponent*> on_overlap;
-	Delegate<Entity*, CollisionComponent*> on_begin_overlap;
-	Delegate<Entity*, CollisionComponent*> on_end_overlap;
+	CollisionComponent(Entity* owner);
+	virtual ~CollisionComponent() = default;
 
-	Delegate<const Vector2&> on_mouse_overlap;
-	Delegate<const Vector2&> on_mouse_begin_overlap;
-	Delegate<const Vector2&> on_mouse_end_overlap;
+	virtual void spawn() override;
 
 	bool is_overlapping(CollisionComponent* overlap) const;
 	void add_overlap(CollisionComponent* overlap);
@@ -24,8 +21,11 @@ public:
 	bool is_mouseOverlapping() const;
 	void set_mouseOverlapping(bool mouseOverlapping);
 
-	CollisionComponent(Entity* owner);
-	virtual ~CollisionComponent() = default;
+	Delegate<CollisionComponent*, Entity*, CollisionComponent*> on_overlap;
+	Delegate<CollisionComponent*, Entity*, CollisionComponent*> on_begin_overlap;
+	Delegate<CollisionComponent*, Entity*, CollisionComponent*> on_end_overlap;
 
-	virtual void finalise() override;
+	Delegate<CollisionComponent*, const Vector2&> on_mouse_overlap;
+	Delegate<CollisionComponent*, const Vector2&> on_mouse_begin_overlap;
+	Delegate<CollisionComponent*, const Vector2&> on_mouse_end_overlap;
 };

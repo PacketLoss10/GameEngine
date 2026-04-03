@@ -1,19 +1,24 @@
 #pragma once
 
 #include "Transformable.h"
-#include "iostream"
+#include "Delegate.h"
+
+class World;
 
 class Entity :public Transformable
 {
+private:
+	friend class World;
+	friend class Component;
+	bool toDespawn = false;
+	bool spawned = false;
 protected:
-	bool toDelete = false;
+	Delegate<> on_despawn;
+	Delegate<> on_spawn;
 public:
 	virtual ~Entity() = default;
 
-	bool is_toDelete() const;
-	void set_toDelete(bool toDelete);
-
-	virtual void cull();
+	void despawn();
 
 	virtual void update_tick();
 	virtual void physics_tick();

@@ -9,17 +9,14 @@ Card::Card(std::string id) : id(id)
 	sprite->set_rect(TextureRect(IntVector(0, 0), IntVector(672, 936)));
 	sprite->set_relativePosition(Vector2(-336.f, -468.f));
 	sprite->set_lit(false);
-	sprite->finalise();
 
 	collision = new BoxCollisionComponent(this);
 	collision->set_size(Vector2(672.f, 936.f));
-	collision->finalise();
 
 	dragDrop = new DragDropComponent(this);
 	dragDrop->set_geometry(collision);
 	dragDrop->on_hover_begin.bind(this, &Card::mouse_hover);
 	dragDrop->on_hover_end.bind(this, &Card::mouse_unhover);
-	dragDrop->finalise();
 
 	set_scale(Vector2(0.5f, 0.5f));
 }

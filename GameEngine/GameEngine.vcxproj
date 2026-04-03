@@ -148,7 +148,6 @@
     <ClCompile Include="IntVector.cpp" />
     <ClCompile Include="JSONFILE.cpp" />
     <ClCompile Include="JSONOBJECT.cpp" />
-    <ClCompile Include="Library.cpp" />
     <ClCompile Include="LightComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -176,7 +175,7 @@
     <ClCompile Include="Transformable.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="Window.cpp" />
-    <ClCompile Include="WorldSystem.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -196,7 +195,6 @@
     <ClInclude Include="IntVector.h" />
     <ClInclude Include="JSONFILE.h" />
     <ClInclude Include="JSONOBJECT.h" />
-    <ClInclude Include="Library.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="LightComponent.h" />
     <ClInclude Include="NavBlock.h" />
@@ -230,7 +228,7 @@
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Window.h" />
-    <ClInclude Include="WorldSystem.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="NULLNORMAL.png" />

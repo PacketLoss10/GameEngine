@@ -1,66 +1,23 @@
-//#include "SimulationChunk.h"
-//
-//SimulationChunk::SimulationChunk(IntVector coord) :coord(coord) {}
-//
-//bool SimulationChunk::operator==(const SimulationChunk& other) const
-//{
-//	return coord.x == other.get_coord().x && coord.y == other.get_coord().y;
-//}
-//
-//void SimulationChunk::render() const 
-//{
-//	if (!visible) return;
-//
-//	sf::RectangleShape shape = sf::RectangleShape(chunkSize);
-//	shape.setPosition(Vector2(static_cast<float>(coord.x), static_cast<float>(coord.y)));
-//	shape.setFillColor(fillColor);
-//	shape.setOutlineThickness(5);
-//	shape.setOutlineColor(outlineColor);
-//
-//	GAME_WINDOW.render(shape, nullptr);
-//}
-//
-//IntVector SimulationChunk::map_point_to_chunk_coords(const Vector2& point) 
-//{
-//	return IntVector(
-//		static_cast<int>(std::floor(point.x / chunkSize.x)),
-//		static_cast<int>(std::floor(point.y / chunkSize.y))
-//	);
-//}
-//
-//const IntVector& SimulationChunk::get_coord() const 
-//{
-//	return coord; 
-//}
-//
-//const Color& SimulationChunk::get_fillColor() const 
-//{
-//	return fillColor; 
-//}
-//
-//void SimulationChunk::set_fillColor(const Color& new_fillColor) 
-//{
-//	fillColor = new_fillColor; 
-//}
-//
-//const Color& SimulationChunk::get_outlineColor() const 
-//{
-//	return outlineColor; 
-//}
-//
-//void SimulationChunk::set_outlineColor(const Color& new_outlineColor) 
-//{
-//	outlineColor = new_outlineColor; 
-//}
-//
-//bool SimulationChunk::is_visible() const 
-//{
-//	return visible; 
-//}
-//
-//void SimulationChunk::set_visible(bool new_visible) 
-//{
-//	visible = new_visible; 
-//}
-//
-//Vector2 SimulationChunk::chunkSize = Vector2(10000.f, 10000.f);
+#include "SimulationChunk.h"
+
+Vector2 SimulationChunk::chunkSize;
+
+SimulationChunk::SimulationChunk(IntVector coord) :coord(coord) {}
+
+IntVector SimulationChunk::map_to_chunk(const Vector2& position)
+{
+	return IntVector(
+		static_cast<int>(std::floor(position.x / chunkSize.x)),
+		static_cast<int>(std::floor(position.y / chunkSize.y))
+	);
+}
+
+const IntVector& SimulationChunk::get_coord() const
+{
+	return coord;
+}
+
+const Vector2& SimulationChunk::get_chunkSize()
+{
+	return chunkSize;
+}

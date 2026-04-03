@@ -20,7 +20,6 @@ public:
 	Card(std::string id);
 	~Card();
 
-	void cull() override {};
 	void update_tick() override;
 	void input_tick() override;
 

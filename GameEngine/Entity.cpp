@@ -1,31 +1,18 @@
 #include "Entity.h"
+#include "Component.h"
 
-bool Entity::is_toDelete() const
+void Component::spawn()
 {
-	return toDelete;
+	spawned = true;
 }
 
-void Entity::set_toDelete(bool toDelete)
+void Entity::despawn()
 {
-	this->toDelete = toDelete;
+	toDespawn = true;
 }
 
-void Entity::cull()
-{
+void Entity::update_tick() {}
 
-}
+void Entity::physics_tick() {}
 
-void Entity::update_tick()
-{
-
-}
-
-void Entity::physics_tick()
-{
-
-}
-
-void Entity::input_tick()
-{
-
-}
+void Entity::input_tick() {}

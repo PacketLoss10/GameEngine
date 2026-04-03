@@ -1,6 +1,13 @@
 #include "CollisionComponent.h"
 #include "CollisionComponentManager.h"
 
+CollisionComponent::CollisionComponent(Entity* owner) :Component(owner) {}
+
+void CollisionComponent::spawn()
+{
+	COLLISION_COMPONENT_MANAGER.register_component(this);
+}
+
 bool CollisionComponent::is_overlapping(CollisionComponent* overlap) const
 {
 	return overlaps.contains(overlap);
@@ -25,10 +32,3 @@ void CollisionComponent::set_mouseOverlapping(bool mouseOverlapping)
 {
 	this->mouseOverlapping = mouseOverlapping;
 }
-
-void CollisionComponent::finalise()
-{
-	COLLISION_COMPONENT_MANAGER.register_component(this);
-}
-
-CollisionComponent::CollisionComponent(Entity* owner) :Component(owner) {}

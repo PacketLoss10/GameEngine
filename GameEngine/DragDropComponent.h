@@ -15,18 +15,10 @@ private:
 	Vector2 dragStartEntityPos;
 	Vector2 dragOffset;
 public:
-	Delegate<const Vector2&> on_drag;
-	Delegate<const Vector2&> on_drag_begin;
-	Delegate<const Vector2&> on_drag_end;
-
-	Delegate<const Vector2&> on_hover;
-	Delegate<const Vector2&> on_hover_begin;
-	Delegate<const Vector2&> on_hover_end;
-
 	DragDropComponent(Entity* owner);
 	virtual ~DragDropComponent() = default;
 
-	virtual void finalise() override;
+	virtual void spawn() override;
 
 	CollisionComponent* get_geometry() const;
 	void set_geometry(CollisionComponent* geometry);
@@ -42,4 +34,12 @@ public:
 
 	const Vector2& get_dragOffset() const;
 	void set_dragOffset(const Vector2& dragOffset);
+
+	Delegate<const Vector2&> on_drag;
+	Delegate<const Vector2&> on_drag_begin;
+	Delegate<const Vector2&> on_drag_end;
+
+	Delegate<const Vector2&> on_hover;
+	Delegate<const Vector2&> on_hover_begin;
+	Delegate<const Vector2&> on_hover_end;
 };

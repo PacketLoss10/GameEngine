@@ -1,11 +1,33 @@
 #include "Component.h"
 #include "Entity.h"
 
-Component::Component(Entity* owner) :owner(owner) {}
+void Component::despawn() 
+{
+	toDespawn = true;
+}
+
+Component::Component(Entity* owner) :owner(owner)
+{
+	if (!owner)
+		return;
+
+	owner->on_spawn.bind(this, &Component::spawn);
+	owner->on_despawn.bind(this, &Component::despawn);
+}
 
 Entity* Component::get_owner() const
 {
 	return owner;
+}
+
+bool Component::is_toDespawn() const
+{
+	return toDespawn;
+}
+
+void Component::set_toDespawn(bool toDespawn)
+{
+	this->toDespawn = toDespawn;
 }
 
 bool Component::is_enabled() const

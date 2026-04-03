@@ -13,7 +13,7 @@ RenderComponentManager& RenderComponentManager::instance()
 
 void RenderComponentManager::update()
 {
-	delete_components();
+	despawn_components();
 
 	for (RenderComponent* component : components)
 	{

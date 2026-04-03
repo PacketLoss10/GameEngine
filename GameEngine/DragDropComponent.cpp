@@ -3,7 +3,7 @@
 
 DragDropComponent::DragDropComponent(Entity* owner) :Component(owner) {}
 
-void DragDropComponent::finalise()
+void DragDropComponent::spawn()
 {
 	DRAG_DROP_MANAGER.register_component(this);
 }

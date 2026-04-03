@@ -5,11 +5,6 @@
 class Color
 {
 public:
-	unsigned char r = 255;
-	unsigned char g = 255;
-	unsigned char b = 255;
-	unsigned char a = 255;
-
 	Color() = default;
 	Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255);
 
@@ -17,4 +12,9 @@ public:
 	{
 		return sf::Color(static_cast<std::uint8_t>(r), static_cast<std::uint8_t>(g), static_cast<std::uint8_t>(b), static_cast<std::uint8_t>(a));
 	}
+
+	unsigned char r = 255;
+	unsigned char g = 255;
+	unsigned char b = 255;
+	unsigned char a = 255;
 };

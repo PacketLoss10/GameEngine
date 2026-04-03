@@ -5,37 +5,32 @@
 #include "vector"
 
 template<typename T>
-concept IsComponent = std::is_base_of<Component, T>::value;
+concept componenttype = std::is_base_of<Component, T>::value;
 
-template<IsComponent T>
+template<componenttype T>
 class ComponentManager
 {
 protected:
 	std::vector<T*> components;
-	bool debugMode = false;
 public:
 	void register_component(T* component)
 	{
 		components.push_back(component);
 	}
-	void delete_components()
+	void despawn_components()
 	{
 		components.erase(
 			std::remove_if(components.begin(), components.end(),
-				[](T* component)
-				{
-					return !component;
+				[](T* component) {
+					if (component->is_toDespawn())
+					{
+						component->set_toDespawn(false);
+						return true;
+					}
+					return false;
 				}
 			), components.end()
 		);
-	}
-	void enable_debug()
-	{
-		debugMode = true;
-	}
-	void disable_debug()
-	{
-		debugMode = false;
 	}
 	size_t get_components_count() const
 	{
