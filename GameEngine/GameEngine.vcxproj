@@ -142,11 +142,14 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="CommandZone.cpp" />
     <ClCompile Include="ComponentManager.cpp" />
+    <ClCompile Include="CreateSpriteMessage.cpp" />
     <ClCompile Include="Delegate.cpp" />
     <ClCompile Include="DragDropComponent.cpp" />
     <ClCompile Include="DragDropManager.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exile.cpp" />
+    <ClCompile Include="GameMessage.cpp" />
+    <ClCompile Include="GameServer.cpp" />
     <ClCompile Include="Graveyard.cpp" />
     <ClCompile Include="Hand.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -158,6 +161,7 @@
     <ClCompile Include="LightComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="MoveSpriteMessage.cpp" />
     <ClCompile Include="NavBlock.cpp" />
     <ClCompile Include="NavigationComponent.cpp" />
     <ClCompile Include="NavigationComponentManager.cpp" />
@@ -166,11 +170,13 @@
     <ClCompile Include="PathFinder.cpp" />
     <ClCompile Include="PrimitiveBoxComponent.cpp" />
     <ClCompile Include="PrimitiveCircleComponent.cpp" />
+    <ClCompile Include="RegisterMessage.cpp" />
     <ClCompile Include="RenderComponentManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="TextComponent.cpp" />
+    <ClCompile Include="TextMessage.cpp" />
     <ClCompile Include="ZSortable.cpp" />
     <ClCompile Include="SimulationChunk.cpp" />
     <ClCompile Include="SLObject.cpp" />
@@ -188,6 +194,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BoxCollisionComponent.h" />
+    <ClInclude Include="ByteArray.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardFactory.h" />
     <ClInclude Include="CardZone.h" />
@@ -197,11 +204,14 @@
     <ClInclude Include="Color.h" />
     <ClInclude Include="CommandZone.h" />
     <ClInclude Include="ComponentManager.h" />
+    <ClInclude Include="CreateSpriteMessage.h" />
     <ClInclude Include="Delegate.h" />
     <ClInclude Include="DragDropComponent.h" />
     <ClInclude Include="DragDropManager.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exile.h" />
+    <ClInclude Include="GameMessage.h" />
+    <ClInclude Include="GameServer.h" />
     <ClInclude Include="Graveyard.h" />
     <ClInclude Include="Hand.h" />
     <ClInclude Include="InputHandler.h" />
@@ -212,6 +222,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="Library.h" />
     <ClInclude Include="LightComponent.h" />
+    <ClInclude Include="MoveSpriteMessage.h" />
     <ClInclude Include="NavBlock.h" />
     <ClInclude Include="NavigationComponent.h" />
     <ClInclude Include="NavigationComponentManager.h">
@@ -223,6 +234,7 @@
     <ClInclude Include="PathFinder.h" />
     <ClInclude Include="PrimitiveBoxComponent.h" />
     <ClInclude Include="PrimitiveCircleComponent.h" />
+    <ClInclude Include="RegisterMessage.h" />
     <ClInclude Include="RenderComponentManager.h">
       <SubType>
       </SubType>
@@ -232,6 +244,7 @@
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="TextComponent.h" />
+    <ClInclude Include="TextMessage.h" />
     <ClInclude Include="ZSortable.h" />
     <ClInclude Include="SimulationChunk.h" />
     <ClInclude Include="SLObject.h" />
@@ -245,13 +258,6 @@
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="World.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="NULLNORMAL.png" />
-    <Image Include="NULLTEXTURE.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="CORESHADER.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
