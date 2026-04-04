@@ -8,6 +8,10 @@
 #include "InputHandler.h"
 #include "Card.h"
 #include "Library.h"
+#include "Graveyard.h"
+#include "Exile.h"
+#include "CommandZone.h"
+#include "CardFactory.h"
 
 int main()
 {
@@ -15,12 +19,26 @@ int main()
 	INPUT.set_activeWindow(&window);
 	RENDERER.set_activeWindow(&window);
 
-	Library* library1 = new Library();
-	library1->set_position(Vector2(1465.f, 730.f));
-	Library* library2 = new Library();
-	library2->set_position(Vector2(135.f, 730.f));
-	WORLD.spawn_entity(library1);
-	WORLD.spawn_entity(library2);
+	CardFactory factory;
+
+	Library* library = new Library();
+	library->set_position(Vector2(1020.f, 730.f));
+	WORLD.spawn_entity(library);
+
+	Graveyard* graveyard = new Graveyard();
+	graveyard->set_position(Vector2(1240.f, 730.f));
+	WORLD.spawn_entity(graveyard);
+
+	Exile* exile = new Exile();
+	exile->set_position(Vector2(1460.f, 730.f));
+	WORLD.spawn_entity(exile);
+
+	CommandZone* commandZone = new CommandZone();
+	commandZone->set_position(Vector2(1460.f, 400.f));
+	WORLD.spawn_entity(commandZone);
+
+	factory.create_deck("infect-deck", library, commandZone);
+	library->shuffle();
 
 	while (window.is_open())
 	{
@@ -32,8 +50,10 @@ int main()
 		UPDATE_DELTA_TIME;
 	}
 
-	delete library1;
-	delete library2;
+	delete library;
+	delete graveyard;
+	delete exile;
+	delete commandZone;
 
 	return 0;
 }

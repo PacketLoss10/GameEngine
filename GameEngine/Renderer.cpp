@@ -223,6 +223,8 @@ void Renderer::render()
 
 			sf::Text text(font, textData.text, textData.characterSize);
 
+			if (textData.autoCenter)
+				text.setOrigin(text.getLocalBounds().position + text.getLocalBounds().size / 2.f);
 			text.setPosition(textData.transform.position);
 			text.setRotation(sf::radians(std::atan2f(textData.transform.forward.y, textData.transform.forward.x)));
 			text.setScale(textData.transform.scale);

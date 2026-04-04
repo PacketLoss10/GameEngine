@@ -11,6 +11,7 @@ private:
 	std::string text = "";
 	std::string fontFilepath = "";
 	int characterSize = 0;
+	bool autoCenter = false;
 	Color fillColor = Color();
 	Color outlineColor = Color();
 	float outlineThickness = 0.f;
@@ -30,6 +31,9 @@ public:
 
 	int get_characterSize() const;
 	void set_characterSize(int characterSize);
+
+	bool is_autoCenter() const;
+	void set_autoCenter(bool autoCenter);
 
 	const Color& get_fillColor() const;
 	void set_fillColor(const Color& fillColor);

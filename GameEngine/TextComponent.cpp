@@ -14,6 +14,7 @@ TextRenderData TextComponent::build_render_data() const
 	data.text = text;
 	data.fontFilepath = fontFilepath;
 	data.characterSize = characterSize;
+	data.autoCenter = autoCenter;
 	data.fillColor = fillColor;
 	data.outlineColor = outlineColor;
 	data.outlineThickness = outlineThickness;
@@ -53,6 +54,16 @@ int TextComponent::get_characterSize() const
 void TextComponent::set_characterSize(int characterSize)
 {
 	this->characterSize = characterSize;
+}
+
+bool TextComponent::is_autoCenter() const
+{
+	return autoCenter;
+}
+
+void TextComponent::set_autoCenter(bool autoCenter)
+{
+	this->autoCenter = autoCenter;
 }
 
 const Color& TextComponent::get_fillColor() const

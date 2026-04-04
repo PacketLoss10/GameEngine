@@ -1,39 +1,22 @@
 #pragma once
 
-#include "Entity.h"
-#include "queue"
+#include "CardZone.h"
 
-class Card;
-class SpriteComponent;
-class BoxCollisionComponent;
-class PrimitiveBoxComponent;
-class TextComponent;
-class DragDropComponent;
-
-class Library :public Entity
+enum class LibraryPosition
 {
-private:
-	SpriteComponent* sprite;
-	BoxCollisionComponent* collision;
-	PrimitiveBoxComponent* outline;
-	TextComponent* label;
-	DragDropComponent* dragDrop;
+	Top, Bottom
+};
 
-	std::deque<Card*> cards;
+class Library :public CardZone
+{
 public:
 	Library();
 	~Library();
 
-	Card* draw_card();
-	void place_card(Card* card);
+	void input_tick() override;
 
-	void mouse_hover();
-	void mouse_unhover();
-	void drag_begin(const Vector2&);
+	void add_card(Card* card) override;
+	Card* remove_card() override;
 
-	SpriteComponent* get_sprite() const;
-	BoxCollisionComponent* get_collision() const;
-	PrimitiveBoxComponent* get_outline() const;
-	TextComponent* get_label() const;
-	DragDropComponent* get_dragDrop() const;
+	void shuffle();
 };

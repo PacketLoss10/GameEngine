@@ -70,6 +70,7 @@ struct TextRenderData
 	std::string text = "";
 	std::string fontFilepath = "";
 	int characterSize = 0;
+	bool autoCenter = false;
 	Color fillColor = Color();
 	Color outlineColor = Color();
 	float outlineThickness = 1.f;

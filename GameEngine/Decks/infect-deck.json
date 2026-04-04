@@ -1,0 +1,365 @@
+{
+  "cards": [
+    {
+      "front": "agathas-soul-cauldron.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "agent-frank-horrigan.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "arcane-signet.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "assassins-trophy.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "atomize.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "blightsteel-colossus.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "bojuka-bog.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "broodheart-engine.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "cankerbloom.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "command-tower.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "conduit-of-worlds.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "core-prowler.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "cranial-archive.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "creakwood-liege.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "culling-ritual.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "cultivate.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "deadbridge-chant.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "deathreap-ritual.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "deathrite-shaman.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "demonic-tutor.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "dread-tiller.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "drown-in-ichor.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "exploration.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "explosive-vegetation.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "field-of-the-dead.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "flensermite.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "forest.png",
+      "back": "back-of-card.png",
+      "count": 15
+    },
+    {
+      "front": "gaeas-blessing.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "glissa-herald-of-predation.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "glissas-retriever.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "golgari-charm.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "golgari-locket.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "golgari-rot-farm.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "golgari-signet.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "grafted-exoskeleton.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "hand-of-the-praetors.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "harmonize.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "hunters-prowess.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "ichor-rats.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "ichorclaw-myr.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "implement-of-ferocity.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "inkmoth-nexus.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "jungle-hollow.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "karns-bastion.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "lightning-greaves.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "nights-whisper.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "phyresis.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "phyrexian-swarmlord.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "rampant-growth.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "ramunap-excavator.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "revitalizing-repast.png",
+      "back": "old-growth-grove.png",
+      "count": 1
+    },
+    {
+      "front": "rogues-passage.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "scute-swarm.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "shifting-woodland.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "skithiryx-the-blight-dragon.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "sol-ring.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "swamp.png",
+      "back": "back-of-card.png",
+      "count": 15
+    },
+    {
+      "front": "tainted-strike.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "tear-asunder.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "thirsting-roots.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "triumph-of-the-hordes.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "underground-mortuary.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "undergrowth-recon.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "vampiric-tutor.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "viridian-corrupter.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "vorinclex-monstrous-raider.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "vraska-betrayals-sting.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "whisper-of-the-dross.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "whispersilk-cloak.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "woodland-cemetery.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+    {
+      "front": "yavimaya-elder.png",
+      "back": "back-of-card.png",
+      "count": 1
+    },
+
+    {
+      "front": "the-gitrog-monster.png",
+      "back": "back-of-card.png",
+      "count": 1
+    }
+  ]
+}
