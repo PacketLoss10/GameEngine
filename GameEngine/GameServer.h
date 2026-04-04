@@ -12,7 +12,7 @@ class GameMessage;
 class GameServer
 {
 private:
-	GameServer();
+	GameServer() = default;
 	GameServer(const GameServer&) = delete;
 	GameServer& operator==(const GameServer&) = delete;
 

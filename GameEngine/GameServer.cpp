@@ -168,11 +168,8 @@ void GameServer::send_message_to_client(sf::TcpSocket* client, const GameMessage
 	}
 }
 
-int main()
+GameServer& GameServer::instance()
 {
-	std::thread udp_thread(&GameServer::udp_start, &GAME_SERVER);
-	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	GAME_SERVER.tcp_start();
-	udp_thread.join();
-	return 0;
+	static GameServer instance;
+	return instance;
 }

@@ -1,9 +1,6 @@
 #include "Window.h"
 #include "World.h"
-#include "RenderComponentManager.h"
-#include "DragDropManager.h"
 #include "TickClock.h"
-#include "CollisionComponentManager.h"
 #include "Renderer.h"
 #include "InputHandler.h"
 #include "Card.h"
@@ -12,9 +9,15 @@
 #include "Exile.h"
 #include "CommandZone.h"
 #include "CardFactory.h"
+#include "GameServer.h"
 
 int main()
 {
+	std::thread udp_thread(&GameServer::udp_start, &GAME_SERVER);
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	std::thread tcp_thread(&GameServer::tcp_start, &GAME_SERVER);
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
+
 	Window window = Window(IntVector(1600, 900), "");
 	INPUT.set_activeWindow(&window);
 	RENDERER.set_activeWindow(&window);
@@ -54,6 +57,9 @@ int main()
 	delete graveyard;
 	delete exile;
 	delete commandZone;
+
+	udp_thread.join();
+	tcp_thread.join();
 
 	return 0;
 }
