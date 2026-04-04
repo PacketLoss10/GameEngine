@@ -14,7 +14,7 @@ public:
 	SpriteComponent(Entity* owner);
 	virtual ~SpriteComponent() = default;
 
-	static void generate_normal_map(SpriteComponent& sprite, float value);
+	static void generate_normal_map(SpriteComponent& sprite, float value, const std::string& folder, const std::string& name = "");
 
 	RenderDataType get_type() const override;
 	SpriteRenderData build_render_data() const;

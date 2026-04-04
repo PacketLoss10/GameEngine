@@ -11,8 +11,15 @@ private:
 public:
 	TextureRect() = default;
 	TextureRect(IntVector position, IntVector size);
+
 	operator sf::IntRect() const
 	{
 		return sf::IntRect(position, size);
 	}
+
+	const IntVector& get_position() const;
+	void set_position(const IntVector& position);
+
+	const IntVector& get_size() const;
+	void set_size(const IntVector& size);
 };

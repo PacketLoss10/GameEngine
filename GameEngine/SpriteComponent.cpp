@@ -5,11 +5,26 @@
 #include <SFML/Graphics/Image.hpp>
 #include <SFML/System/Vector3.hpp>
 
-void SpriteComponent::generate_normal_map(SpriteComponent& sprite, float value)
+void SpriteComponent::generate_normal_map(SpriteComponent& sprite, float value, const std::string& folder, const std::string& name)
 {
-	const std::string normalMapFilePath = "normalmap_" + sprite.texture.filepath;
-	if (std::filesystem::exists(normalMapFilePath))
-		sprite.normal.filepath = normalMapFilePath;
+	if (!std::filesystem::exists(folder))
+	{
+		std::cerr << "Failed to open folder: " << folder << std::endl;
+		return;
+	}
+
+	const std::string defaultNormalMapName = "normalmap_" + sprite.texture.filepath;
+	std::string normalMapFilepath;
+	if (name == "")
+		normalMapFilepath = folder + "//" + defaultNormalMapName;
+	else 
+		normalMapFilepath = folder + "//" + name;
+
+	if (std::filesystem::exists(normalMapFilepath))
+	{
+		sprite.normal.filepath = normalMapFilepath;
+		return;
+	}
 
 	sf::Image image;
 	if (!image.loadFromFile(sprite.texture.filepath))
@@ -55,13 +70,15 @@ void SpriteComponent::generate_normal_map(SpriteComponent& sprite, float value)
 		}
 	}
 
-	if (!normalImage.saveToFile(normalMapFilePath))
+	if (!normalImage.saveToFile(normalMapFilepath))
 	{
-		std::cerr << "Failed to save normal map to " << normalMapFilePath << std::endl;
+		std::cerr << "Failed to save normal map to " << normalMapFilepath << std::endl;
+		return;
 	}
 	else
 	{
-		sprite.normal.filepath = normalMapFilePath;
+		sprite.normal.filepath = normalMapFilepath;
+		return;
 	}
 }
 

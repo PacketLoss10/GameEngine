@@ -3,6 +3,7 @@
 #include "LightComponent.h"
 #include "PrimitiveBoxComponent.h"
 #include "PrimitiveCircleComponent.h"
+#include "TextComponent.h"
 #include "Renderer.h"
 
 RenderComponentManager& RenderComponentManager::instance()
@@ -35,6 +36,10 @@ void RenderComponentManager::update()
 		else if (PrimitiveCircleComponent* circle = dynamic_cast<PrimitiveCircleComponent*>(component))
 		{
 			RENDERER.push(circle->build_render_data());
+		}
+		else if (TextComponent* text = dynamic_cast<TextComponent*>(component))
+		{
+			RENDERER.push(text->build_render_data());
 		}
 	}
 }

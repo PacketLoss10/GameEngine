@@ -14,6 +14,7 @@ PrimitiveRenderData PrimitiveCircleComponent::build_render_data() const
 	data.type = PrimitiveType::Circle;
 	data.fillColor = fillColor;
 	data.outlineColor = outlineColor;
+	data.outlineThickness = outlineThickness;
 	data.lighting = LightingData(lit, NormalMap());
 	data.zOrder = get_zOrder();
 	data.circleRadius = radius;
@@ -51,6 +52,16 @@ const Color& PrimitiveCircleComponent::get_outlineColor() const
 void PrimitiveCircleComponent::set_outlineColor(const Color& outlineColor)
 {
 	this->outlineColor = outlineColor;
+}
+
+float PrimitiveCircleComponent::get_outlineThickness() const
+{
+	return outlineThickness;
+}
+
+void PrimitiveCircleComponent::set_outlineThickness(float outlineThickness)
+{
+	this->outlineThickness = outlineThickness;
 }
 
 bool PrimitiveCircleComponent::is_lit() const

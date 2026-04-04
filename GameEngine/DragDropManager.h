@@ -17,4 +17,7 @@ private:
 public:
 	static DragDropManager& instance();
 	void update();
+
+	Entity* get_selected_entity() const;
+	void set_dragged(DragDropComponent* comp);
 };

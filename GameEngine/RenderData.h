@@ -54,6 +54,7 @@ struct PrimitiveRenderData
 	PrimitiveType type = PrimitiveType::Box;
 	Color fillColor = Color(0, 0, 0, 0);
 	Color outlineColor = Color(255, 255, 255, 255);
+	float outlineThickness = 1.f;
 	LightingData lighting = LightingData();
 	int zOrder = 0;
 
@@ -71,6 +72,7 @@ struct TextRenderData
 	int characterSize = 0;
 	Color fillColor = Color();
 	Color outlineColor = Color();
+	float outlineThickness = 1.f;
 	LightingData lighting = LightingData();
 	int zOrder = 0;
 

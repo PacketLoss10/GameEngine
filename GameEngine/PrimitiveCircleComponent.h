@@ -2,7 +2,6 @@
 
 #include "RenderComponent.h"
 #include "ZSortable.h"
-#include "Vector2.h"
 #include "Color.h"
 
 class PrimitiveCircleComponent :public RenderComponent, public ZSortable
@@ -11,6 +10,7 @@ private:
 	Vector2 radius = Vector2();
 	Color fillColor = Color();
 	Color outlineColor = Color();
+	float outlineThickness = 1.f;
 	bool lit = false;
 public:
 	PrimitiveCircleComponent(Entity* owner);
@@ -27,6 +27,9 @@ public:
 
 	const Color& get_outlineColor() const;
 	void set_outlineColor(const Color& outlineColor);
+
+	float get_outlineThickness() const;
+	void set_outlineThickness(float outlineThickness);
 
 	bool is_lit() const;
 	void set_lit(bool lit);

@@ -14,6 +14,7 @@ PrimitiveRenderData PrimitiveBoxComponent::build_render_data() const
 	data.type = PrimitiveType::Box;
 	data.fillColor = fillColor;
 	data.outlineColor = outlineColor;
+	data.outlineThickness = outlineThickness;
 	data.lighting = LightingData(lit, NormalMap());
 	data.zOrder = get_zOrder();
 	data.boxSize = size;
@@ -51,6 +52,16 @@ const Color& PrimitiveBoxComponent::get_outlineColor() const
 void PrimitiveBoxComponent::set_outlineColor(const Color& outlineColor)
 {
 	this->outlineColor = outlineColor;
+}
+
+float PrimitiveBoxComponent::get_outlineThickness() const
+{
+	return outlineThickness;
+}
+
+void PrimitiveBoxComponent::set_outlineThickness(float outlineThickness)
+{
+	this->outlineThickness = outlineThickness;
 }
 
 bool PrimitiveBoxComponent::is_lit() const

@@ -60,8 +60,8 @@ void Renderer::render()
 	if (!activeWindow)
 		return;
 
-	if (renderData.empty() && lightData.empty())
-		return;
+	//if (renderData.empty() && lightData.empty())
+	//	return;
 
 	activeWindow->start_display();
 
@@ -145,7 +145,7 @@ void Renderer::render()
 
 				box.setFillColor(primitiveData.fillColor);
 				box.setOutlineColor(primitiveData.outlineColor);
-				box.setOutlineThickness(1.f);
+				box.setOutlineThickness(primitiveData.outlineThickness);
 
 				if (primitiveData.lighting.lit)
 				{
@@ -181,7 +181,7 @@ void Renderer::render()
 
 				circle.setFillColor(primitiveData.fillColor);
 				circle.setOutlineColor(primitiveData.outlineColor);
-				circle.setOutlineThickness(1.f);
+				circle.setOutlineThickness(primitiveData.outlineThickness);
 
 				if (primitiveData.lighting.lit)
 				{
@@ -229,7 +229,7 @@ void Renderer::render()
 
 			text.setFillColor(textData.fillColor);
 			text.setOutlineColor(textData.outlineColor);
-			text.setOutlineThickness(1.f);
+			text.setOutlineThickness(textData.outlineThickness);
 
 			if (textData.lighting.lit)
 			{

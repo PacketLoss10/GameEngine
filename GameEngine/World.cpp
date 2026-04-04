@@ -32,10 +32,8 @@ World& World::instance()
 
 void World::update()
 {
-	// DESPAWNING ENTITIES WITH "toDespawn" FLAG
 	despawn_entities();
 
-	// REBUILD CHUNK MAP
 	chunkMap.clear();
 	for (Entity* entity : allEntities)
 	{
@@ -46,20 +44,20 @@ void World::update()
 		chunkMap[chunk].push_back(entity);
 	}
 
-	// UPDATES
-	//
-	//
-	//
-	COLLISION_COMPONENT_MANAGER.update();
-	DRAG_DROP_MANAGER.update();
-	RENDER_COMPONENT_MANAGER.update();
-	for (Entity* entity : allEntities)
+	std::vector<Entity*> entitiesToUpdate = allEntities;
+
+	for (Entity* entity : entitiesToUpdate)
 	{
+		if (!entity)
+			continue;
+
 		entity->update_tick();
 		entity->input_tick();
 		entity->physics_tick();
 	}
-
+	COLLISION_COMPONENT_MANAGER.update();
+	DRAG_DROP_MANAGER.update();
+	RENDER_COMPONENT_MANAGER.update();
 }
 
 void World::spawn_entity(Entity* entity)

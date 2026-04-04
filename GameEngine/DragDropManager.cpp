@@ -36,18 +36,18 @@ void DragDropManager::update()
     {
         if (hovered)
         {
-            hovered->on_hover_end.invoke(mousePos);
+            hovered->on_hover_end.invoke();
         }
         if (newTopHovered)
         {
-            newTopHovered->on_hover_begin.invoke(mousePos);
+            newTopHovered->on_hover_begin.invoke();
         }
         hovered = newTopHovered;
     }
 
     if (hovered)
     {
-        hovered->on_hover.invoke(mousePos);
+        hovered->on_hover.invoke();
     }
 
     bool pressed = INPUT.is_button_pressed(Mouse::M1);
@@ -65,7 +65,9 @@ void DragDropManager::update()
     if (dragging && held)
     {
         Vector2 targetPos = mousePos - dragging->get_dragOffset();
-        dragging->get_owner()->set_position(targetPos);
+        if (dragging->is_draggable())
+            dragging->get_owner()->set_position(targetPos);
+
         dragging->on_drag.invoke(mousePos);
     }
 
@@ -74,4 +76,17 @@ void DragDropManager::update()
         dragging->on_drag_end.invoke(mousePos);
         dragging = nullptr;
     }
+}
+
+Entity* DragDropManager::get_selected_entity() const
+{
+    if (!hovered)
+        return nullptr;
+
+    return hovered->get_owner();
+}
+
+void DragDropManager::set_dragged(DragDropComponent* comp)
+{
+    dragging = comp;
 }

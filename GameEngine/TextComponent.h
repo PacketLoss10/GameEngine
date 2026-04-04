@@ -3,24 +3,33 @@
 #include "RenderComponent.h"
 #include "ZSortable.h"
 #include "Color.h"
+#include <string>
 
-class PrimitiveBoxComponent :public RenderComponent, public ZSortable
+class TextComponent :public RenderComponent, public ZSortable
 {
 private:
-	Vector2 size = Vector2();
+	std::string text = "";
+	std::string fontFilepath = "";
+	int characterSize = 0;
 	Color fillColor = Color();
 	Color outlineColor = Color();
 	float outlineThickness = 0.f;
 	bool lit = false;
 public:
-	PrimitiveBoxComponent(Entity* owner);
-	virtual ~PrimitiveBoxComponent() = default;
+	TextComponent(Entity* owner);
+	virtual ~TextComponent() = default;
 
 	RenderDataType get_type() const override;
-	PrimitiveRenderData build_render_data() const;
+	TextRenderData build_render_data() const;
 
-	const Vector2& get_size() const;
-	void set_size(const Vector2& size);
+	const std::string& get_text() const;
+	void set_text(const std::string& text);
+
+	const std::string& get_fontFilepath() const;
+	void set_fontFilepath(const std::string& fontFilepath);
+
+	int get_characterSize() const;
+	void set_characterSize(int characterSize);
 
 	const Color& get_fillColor() const;
 	void set_fillColor(const Color& fillColor);

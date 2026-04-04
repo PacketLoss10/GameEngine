@@ -148,6 +148,7 @@
     <ClCompile Include="IntVector.cpp" />
     <ClCompile Include="JSONFILE.cpp" />
     <ClCompile Include="JSONOBJECT.cpp" />
+    <ClCompile Include="Library.cpp" />
     <ClCompile Include="LightComponent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
+    <ClCompile Include="TextComponent.cpp" />
     <ClCompile Include="ZSortable.cpp" />
     <ClCompile Include="SimulationChunk.cpp" />
     <ClCompile Include="SLObject.cpp" />
@@ -196,6 +198,7 @@
     <ClInclude Include="JSONFILE.h" />
     <ClInclude Include="JSONOBJECT.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Library.h" />
     <ClInclude Include="LightComponent.h" />
     <ClInclude Include="NavBlock.h" />
     <ClInclude Include="NavigationComponent.h" />
@@ -216,6 +219,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="SpriteComponent.h" />
+    <ClInclude Include="TextComponent.h" />
     <ClInclude Include="ZSortable.h" />
     <ClInclude Include="SimulationChunk.h" />
     <ClInclude Include="SLObject.h" />

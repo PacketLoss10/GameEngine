@@ -8,6 +8,11 @@ void DragDropComponent::spawn()
 	DRAG_DROP_MANAGER.register_component(this);
 }
 
+bool DragDropComponent::is_selected() const
+{
+	return DRAG_DROP_MANAGER.get_selected_entity() == owner;
+}
+
 CollisionComponent* DragDropComponent::get_geometry() const
 {
 	return geometry;
@@ -26,6 +31,21 @@ int DragDropComponent::get_layer() const
 void DragDropComponent::set_layer(int layer)
 {
 	this->layer = layer;
+}
+
+bool DragDropComponent::is_draggable() const
+{
+	return draggable;
+}
+
+void DragDropComponent::set_draggable(bool draggable)
+{
+	this->draggable = draggable;
+}
+
+void DragDropComponent::drag_this()
+{
+	DRAG_DROP_MANAGER.set_dragged(this);
 }
 
 const Vector2& DragDropComponent::get_dragStartMousePos() const
