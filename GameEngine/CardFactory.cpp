@@ -22,13 +22,13 @@ void CardFactory::create_deck(const std::string& deckName, Library* library, Com
 		return;
 	}
 
-	if (!std::filesystem::exists("Decks//" + deckName + ".json"))
+	if (!std::filesystem::exists("Assets//Data//Decks//" + deckName + ".json"))
 	{
 		std::cerr << "Failed to load deck: " << deckName << std::endl;
 		return;
 	}
 
-	std::ifstream file("Decks//" + deckName + ".json");
+	std::ifstream file("Assets//Data//Decks//" + deckName + ".json");
 	nlohmann::json data = nlohmann::json::parse(file);
 
 	for (auto entry = data["cards"].begin(); entry < data["cards"].end() - 1; entry++)

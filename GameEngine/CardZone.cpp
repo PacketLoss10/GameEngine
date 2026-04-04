@@ -4,7 +4,7 @@
 CardZone::CardZone() :Entity()
 {
 	sprite = new SpriteComponent(this);
-	sprite->set_texture(Texture("Cards//back-of-card.png"));
+	sprite->set_texture(Texture("Assets//Sprites//Cards//back-of-card.png"));
 	sprite->set_rect(TextureRect(IntVector(0, 0), IntVector(672, 936)));
 	sprite->set_relativePosition(Vector2(-336.f, -468.f));
 	sprite->set_enabled(false);
@@ -21,7 +21,7 @@ CardZone::CardZone() :Entity()
 
 	label = new TextComponent(this);
 	label->set_text("CARD ZONE");
-	label->set_fontFilepath("font.ttf");
+	label->set_fontFilepath("Assets//Fonts//font.ttf");
 	label->set_characterSize(100);
 	label->set_fillColor(Color(255, 255, 255, 255));
 	label->set_outlineThickness(0.f);

@@ -5,7 +5,7 @@
 
 Renderer::Renderer()
 {
-	if (!shader.loadFromFile("CORESHADER.frag", sf::Shader::Type::Fragment))
+	if (!shader.loadFromFile("Assets//Shaders//CORESHADER.frag", sf::Shader::Type::Fragment))
 	{
 		std::cerr << "Failed to load core shader" << std::endl;
 		return;

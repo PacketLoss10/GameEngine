@@ -7,7 +7,7 @@
 Card::Card(std::string front, std::string back) : front(front), back(back)
 {
 	sprite = new SpriteComponent(this);
-	sprite->set_texture(Texture("Cards//" + front));
+	sprite->set_texture(Texture("Assets//Sprites//Cards//" + front));
 	sprite->set_rect(TextureRect(IntVector(0, 0), IntVector(672, 936)));
 	sprite->set_relativePosition(Vector2(-336.f, -468.f));
 
@@ -62,13 +62,13 @@ void Card::untap()
 void Card::flip()
 {
 	flipped = true;
-	sprite->set_texture(Texture("Cards//" + back));
+	sprite->set_texture(Texture("Assets//Sprites//Cards//" + back));
 }
 
 void Card::unflip()
 {
 	flipped = false;
-	sprite->set_texture(Texture("Cards//" + front));
+	sprite->set_texture(Texture("Assets//Sprites//Cards//" + front));
 }
 
 void Card::zoom()

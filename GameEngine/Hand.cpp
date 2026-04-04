@@ -14,7 +14,7 @@ Hand::Hand()
 
 	label = new TextComponent(this);
 	label->set_text("Hand");
-	label->set_fontFilepath("font.ttf");
+	label->set_fontFilepath("Assets//Fonts//font.ttf");
 	label->set_characterSize(100);
 	label->set_fillColor(Color(255, 255, 255, 255));
 	label->set_outlineThickness(0.f);
